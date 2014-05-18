@@ -1,0 +1,258 @@
+<include file="Public/header" />
+<div class="content">
+        <div class="detail">
+                <div class="other-i logo">
+                </div>
+                <form class="search" action="__SELF__" method="get">
+                        <i class="other-i ww" style="position: absolute;top:5px;left:5px;">
+                        </i>
+                        <input class="index-input-s" type="text" name="username" id="txtKey" <?php if($display) echo 'value="'.$data[ 'username']. '"'?>
+                        />
+                        <input class="other-i button-s" type="submit" value="" />
+                </form>
+                <div class="clf">
+                </div>
+                <notempty name="data">
+                <div class="result">
+                        <div class="left f-green f-size-14">
+                                <div class=" warn-ico">
+                                        <i class="other-i warning-green">
+                                        </i>
+                                </div>
+                                <p>
+                                        安全等级：安全
+                                </p>
+                        </div>
+                        <div class="right">
+                                <div class="r-t">
+                                        <ul>
+                                                <span class="f-green f-size-14">
+                                                        <strong>
+                                                                <a href="{$data['rateurl']}" class='nametz' target="_blank" style='color:green;'>{$data['username']}</a>
+                                                        </strong>
+                                                </span>
+                                                <a target="_blank" href="http://amos.alicdn.com/msg.aw?v=2&uid={$data['username']}&site=cntaobao&s=1&charset=utf-8">
+                                                <img border="0" src="http://amos.alicdn.com/online.aw?v=2&uid={$data['username']}&site=cntaobao&s=1&charset=utf-8" alt="点击这里给我发消息" />
+                                                </a>
+                                                <?php if(!empty($data['is_seller'])):?>
+                                                <span class="other-i safe">
+                                                        <div class="info-block info-block-first">
+                                                                <div class="xiaobao-box">
+                                                                        <div class="xiaobao1">
+                                                                        </div>
+                                                                        <div class="desc">
+                                                                                <div class="title">
+                                                                                        卖家已向消费者承诺：
+                                                                                </div>
+                                                                                <ul>
+                                                                                        <li>
+                                                                                                <span class="xiaofei">
+                                                                                                </span>
+                                                                                                <a href="http://www.taobao.com/go/act/315/xb_20100707.php#rushi" title="卖家承诺消费者保障服务" target="_blank">消费者保障</a>
+                                                                                        </li>
+                                                                                </ul>
+                                                                        </div>
+                                                                        <div class="charge">
+                                                                                卖家当前保证金余额
+                                                                                <span>
+                                                                                        {$data.deposit}
+                                                                                </span>
+                                                                                元
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </span>
+                                                <?php  endif;?>
+                                                <!--<span class="other-i tmall"></span>-->
+                                        </ul>
+                                        <ul class="f-size-12 f-gray">
+                                                <li>
+                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i good"></span><font>好评</font><p style="color: red; font-weight: bold;text-align:center;"><?php echo $data['score'][0][0]+ $data['score'][1][0]+$data['score'][2][0]+$data['score'][3][0];?></p></a>
+                                                </li>
+                                                <li>
+                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i normal"></span><font>中评</font><p style="color: #F5CC04; font-weight: bold;text-align:center;"><?php echo $data['score'][0][1]+ $data['score'][1][1]+$data['score'][2][1]+$data['score'][3][1];?></p></a>
+                                                </li>
+                                                <li>
+                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i bad"></span><font>差评</font><p style="color: black; font-weight: bold;text-align:center;"><?php echo $data['score'][0][2]+ $data['score'][1][2]+$data['score'][2][2]+$data['score'][3][2];?></p></a>
+                                                </li>
+                                                <!-- <li><a href="http://favorite.taobao.com/collect_item_relation---33454965-0.htm" target="_blank"><span class="other-n"></span><font>收藏</font><p style="color: #67bbfe; font-weight: bold;text-align:center;">2901</p></a></li> -->
+                                        </ul>
+                                </div>
+                                <div class="r-c">
+                                        <ul>
+                                                <li>
+                                                        <span>
+                                                                实名认证：
+                                                        </span>
+                                                        <font>
+                                                                支付宝认证
+                                                        </font>
+                                                </li>
+                                                <li>
+                                                        <span>
+                                                                主营行业：
+                                                        </span>
+                                                        <font>
+                                                                {$data['zhuying']}
+                                                        </font>
+                                                </li>
+                                        </ul>
+                                        <ul>
+                                                <li>
+                                                        <span>
+                                                                所在地区：
+                                                        </span>
+                                                        <font>
+                                                                {$data['area']}
+                                                        </font>
+                                                </li>
+                                                <li>
+                                                        <span>
+                                                                主营占比：
+                                                        </span>
+                                                        <font>
+                                                                {$data['zhanbi']}
+                                                        </font>
+                                                </li>
+                                        </ul>
+                                        <ul>
+                                                <li>
+                                                        <span>
+                                                                注册时间：
+                                                        </span>
+                                                        <font>
+                                                                <?php echo date( 'Y-m-d H:i:s',$data[ 'regTime']);?>
+                                                        </font>
+                                                        <br>
+                                                        <span style="font-size:12px;color:green;">
+                                                        </span>
+                                                </li>
+                                        </ul>
+                                        <div class="clf">
+                                                <span>
+                                                        详细信息：
+                                                </span>
+                                                <font>
+                                                        <a href="{$data['rateurl']}" target="_blank">{$data['rateurl']}</a>
+                                                </font>
+                                        </div>
+                                </div>
+                                <div class="r-b">
+                                        <ul class="u">
+                                                <li>
+                                                        <strong>
+                                                                买家信用
+                                                        </strong>
+                                                        　
+                                                        <span class="msg-blue-u" style="font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;display:none;">
+                                                                加载中...
+                                                        </span>
+                                                </li>
+                                                <li>
+                                                        <a href="{$data['rateurl']}" target="_blank"><img src="{$data['bscore_img']}" border="0"/></a>
+                                                        <span>
+                                                                &nbsp;
+                                                                <b style="color:#333;">
+                                                                        <?php echo $data[ 'bscore'] ?>
+                                                                </b>
+                                                                （
+                                                                <?php echo isset($data[ 'is_buyer']) ? $data[ 'haopinglv'] :0?>
+                                                                        ）
+                                                        </span>
+                                                        <img border="0" align="absmiddle" class="rank" src="http://img01.taobaocdn.com/tps/i1/T1GYuIXcRkXXXXXXXX-16-16.png">
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#3C3C3C">最近一周：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_buyer']) ? $data['score'][0][0] :0?>点　中评：<?php echo isset($data['is_buyer']) ? $data['score'][0][1] :0?>点　差评：<?php echo isset($data['is_buyer']) ? $data['score'][0][2] :0?>点"><?php echo isset($data['is_buyer']) ?array_sum($data['score'][0]) : 0; ?>点</font></a>
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#666666">最近一月：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_buyer']) ? $data['score'][1][0] :0?>点　中评：<?php echo isset($data['is_buyer']) ? $data['score'][1][1] :0?>点　差评：<?php echo isset($data['is_buyer']) ? $data['score'][1][2] :0?>点"><?php echo isset($data['is_buyer']) ?array_sum($data['score'][1]) : 0; ?>点</font></a>
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#828282">最近半年：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_buyer']) ? $data['score'][2][0] :0?>点　中评：<?php echo isset($data['is_buyer']) ? $data['score'][2][1] :0?>点　差评：<?php echo isset($data['is_buyer']) ? $data['score'][2][2] :0?>点"><?php echo isset($data['is_buyer']) ?array_sum($data['score'][2]) : 0; ?>点</font></a>
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#9D9D9D">半年以前：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_buyer']) ? $data['score'][3][0] :0?>点　中评：<?php echo isset($data['is_buyer']) ? $data['score'][3][1] :0?>点　差评：<?php echo isset($data['is_buyer']) ? $data['score'][3][2] :0?>点"><?php echo isset($data['is_buyer']) ?array_sum($data['score'][3]) : 0; ?>点</font></a>
+                                                </li>
+                                                <!--<li class="f-size-12 f-green">（此帐号已开通淘宝店，买家信用明细无法查询！）</li>-->
+                                        </ul>
+                                        <ul class="u">
+                                                <li>
+                                                        <strong>
+                                                                卖家信用
+                                                        </strong>
+                                                        　
+                                                        <a class="mini-dsr" href="{$data['rateurl']}" target="_blank" style="font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;">
+                                                        <span class="mini-dsr-wrap dsr-wrap-left"></span>
+                                                        <span class="dsr-title">描述</span>
+                                                        <span class="dsr-num red">{$data['dongtai'][0]}</span>
+                                                        <span class="dsr-split"></span>
+                                                        <span class="dsr-title">服务</span>
+                                                        <span class="dsr-num red">{$data['dongtai'][1]}</span>
+                                                        <span class="dsr-split"></span>
+                                                        <span class="dsr-title">物流</span>
+                                                        <span class="dsr-num red">{$data['dongtai'][2]}</span>
+                                                        <span class="mini-dsr-wrap dsr-wrap-right"></span>
+                                                        </a>
+                                                </li>
+                                                <li>
+                                                        <a href="{$data['rateurl']}" target="_blank"><img src="{$data['sscore_img']}" border="0"/></a>
+                                                        <span>
+                                                                &nbsp;
+                                                                <b style="color:#333;">
+                                                                        <?php echo $data[ 'sscore'];?>
+                                                                </b>
+                                                                (
+                                                                <?php echo isset($data[ 'is_seller']) ? $data[ 'haopinglv'] :0?>
+                                                                        )
+                                                        </span>
+                                                        <font>
+                                                                <a href="{$data['rateurl']}" target="_blank">查看店铺</a>
+                                                        </font>
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#3C3C3C">最近一周：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_seller']) ? $data['score'][0][0] :0?>点　中评：<?php echo isset($data['is_seller']) ? $data['score'][0][1] :0?>点　差评：<?php echo isset($data['is_seller']) ? $data['score'][0][2] :0?>点"><?php echo isset($data['is_seller']) ?array_sum($data['score'][0]) : 0; ?>点</font></a>
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#666666">最近一月：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_seller']) ? $data['score'][1][0] :0?>点　中评：<?php echo isset($data['is_seller']) ? $data['score'][1][1] :0?>点　差评：<?php echo isset($data['is_seller']) ? $data['score'][1][2] :0?>点"><?php echo isset($data['is_seller']) ?array_sum($data['score'][1]) : 0; ?>点</font></a>
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#828282">最近半年：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_seller']) ? $data['score'][2][0] :0?>点　中评：<?php echo isset($data['is_seller']) ? $data['score'][2][1] :0?>点　差评：<?php echo isset($data['is_seller']) ? $data['score'][2][2] :0?>点"><?php echo isset($data['is_seller']) ?array_sum($data['score'][2]) : 0; ?>点</font></a>
+                                                </li>
+                                                <li>
+                                                        <a class='tzlj' href="{$data['rateurl']}"><span style="color:#9D9D9D">半年以前：</span><font style='color:#246f9b;font-weight: bold;' title="好评：<?php echo isset($data['is_seller']) ? $data['score'][3][0] :0?>点　中评：<?php echo isset($data['is_seller']) ? $data['score'][3][1] :0?>点　差评：<?php echo isset($data['is_seller']) ? $data['score'][3][2] :0?>点"><?php echo isset($data['is_seller']) ?array_sum($data['score'][3]) : 0; ?>点</font></a>
+                                                </li>
+                                                <!--<li class="f-size-12 f-green"></li>-->
+                                        </ul>
+                                        <div class="clf">
+                                        </div>
+                                        <!--<div class="position-info other-i msg-green">
+                                        <ul>
+                                        <li><span>描述相符：</span><font></font></li>
+                                        <li><span>服务态度：</span><font></font></li>
+                                        <li><span>发货速度：</span><font></font></li>
+                                        </ul>
+                                        </div>
+                                        <div class="position-info other-i msg-blue">
+                                        <ul>
+                                        <li><span>加载中</span><font>...</font></li>
+                                        </ul>
+                                        </div>-->
+                                </div>
+                        </div>
+                </div>
+                </notempty>
+        </div>
+</div>
+<script>
+        
+	/*下拉safe style*/
+$('.safe').hover(function(){
+	$(".info-block").css('display','block');
+});
+$('.safe').mouseleave(function (){
+	$(".info-block").css('display','none');
+});
+
+					
+</script>
+<include file="Public/footer" />

@@ -1,0 +1,197 @@
+
+.button-s {
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    float: left;
+    margin-left: 20px;
+}
+.index-input-s {
+    border: 2px solid #F59B29;
+    color: #B2B2B2;
+    float: left;
+    font-size: 22px;
+    font-weight: bold;
+    height: 22px;
+    padding-bottom: 7px;
+    padding-left: 50px;
+    padding-top: 10px;
+    width: 330px;
+}
+.search .input-ico {
+    background: url("../images/input-ico.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: block;
+    height: 33px;
+    left: 5px;
+    position: absolute;
+    text-indent: -9999px;
+    top: 5px;
+    width: 30px;
+}
+.clf {
+    clear: both;
+}
+.header {
+    background: url("../images/header-background.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    height: 103px;
+    width: 100%;
+}
+.header .detail {
+    margin: 0 auto;
+    padding: 20px 0 20px 150px;
+    width: 960px;
+}
+.header .detail ul li {
+    float: left;
+    margin-right: 50px;
+    text-indent: -9999px;
+}
+.content {
+    background-color: #F4F4F4;
+    width: 100%;
+}
+.content .detail {
+    margin: 0 auto;
+    padding-bottom: 40px;
+    padding-top: 140px;
+    position: relative;
+    width: 750px;
+}
+.content .logo {
+    float: left;
+    left: 20px;
+    position: absolute;
+    top: 23px;
+}
+.content .search {
+    float: left;
+    left: 190px;
+    position: absolute;
+    top: 40px;
+}
+.k_progress {
+    border: 1px solid #A2A2FF;
+    display: block;
+    float: left;
+    height: 14px;
+    line-height: 14px;
+    overflow: hidden;
+    position: relative;
+}
+.k_ProgressText {
+    float: left;
+    height: 100%;
+    padding-left: 10px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 1001;
+}
+.k_ProgressItem {
+    background-color: #D7D7FF;
+    height: 100%;
+    width: 100%;
+}
+.ProgressTextBox {
+    height: 24px;
+    line-height: 26px;
+    overflow: hidden;
+    padding-top: 10px;
+}
+#GetResultState {
+    color: #FF0000;
+    float: left;
+    padding-left: 10px;
+}
+.ProgressState {
+    float: left;
+    padding-left: 5px;
+}
+.Action {
+    float: left;
+    padding-left: 10px;
+}
+#ResultBox {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#ResultBox ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#ResultBox ul li {
+    border-bottom: 1px dashed #C0C0C0;
+    color: #666666;
+    height: 25px;
+    line-height: 25px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+#ResultBox .s1, #ResultBox .s2, #ResultBox .s3, #ResultBox .s4, #ResultBox .s5, #ResultBox .s6 {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 5px;
+}
+#ResultBox .s1 {
+    float: left;
+    width: 60px;
+}
+#ResultBox .s2 {
+    float: left;
+    width: 120px;
+}
+#ResultBox .s3 {
+    float: left;
+    text-align: right;
+    width: 50px;
+}
+#ResultBox .s4 {
+    float: left;
+    text-align: right;
+    width: 90px;
+}
+#ResultBox .s5 {
+    float: left;
+    padding-left: 45px;
+    width: 160px;
+}
+#ResultBox .s6 {
+    overflow: hidden;
+}
+#PageCount {
+    color: #FF0000;
+    font-weight: bold;
+}
+#PageNow {
+    color: #FF0000;
+    font-weight: bold;
+}
+.liIsMy {
+    background-color: #FFD7C4;
+}
+.liShowColor {
+    background-color: #F4F8FF;
+}
+.headTitle {
+    background-color: #F2F2F2;
+    color: #000000;
+    font-weight: bold;
+}
+#ResultBox .H {
+    color: #FF2900;
+}
+.Action img {
+    cursor: pointer;
+}
+.k_progress {
+    margin-top: 5px;
+    width: 280px;
+}
+img {
+    vertical-align: middle;
+}

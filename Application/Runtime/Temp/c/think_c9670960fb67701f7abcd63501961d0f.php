@@ -1,0 +1,3 @@
+<?php
+//000000000000387ea05e34211f5fb114eae70de22393s:46:"SELECT * FROM `taobao_config` ORDER BY id ASC ";
+?>

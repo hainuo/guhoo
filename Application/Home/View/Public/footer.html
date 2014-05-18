@@ -1,0 +1,74 @@
+	<div class="beautiful">{:showAd('siteFooter')}</div>
+<!-- 联接 -->
+<div class="two_link" >
+	<div style="margin: 0px auto; color: rgb(102, 102, 102); width: 790px;">
+	<p>淘宝买家信誉的好处： </p>
+	1、当买家一周信用点数超出20点，有可能这个号已经被淘宝列入黑名单，所以他再拍的东西，就有可能被列为炒作，卖家有降权危险。 <br>
+	2、注册时间小于30天的，容易给他人中评、差评，或有可能是骗子，请谨慎交易！ <br>
+	3、如果买家给他人中评或差评过多的，或喜欢随随便便就给他人中、差评的买家。请谨慎交易！免得惹来不必要的麻烦。<br>
+	4、每一次查询要大麦都会生成一个记录,方面其他用户查看。详情请点击买家<a target="_blank" href="/Index/getHistory.html" title='历史查询记录'>历史查询记录</a>或<a target="_blank" title='淘宝隐形降权查询' href="/Index/getWeight.html">淘宝隐形降权查询</a>
+	</div>
+</div>
+<!-- 尾巴 -->
+<div class="footer">
+
+
+	<div class="detail">
+		<table class="number" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+			<div class="total">
+				<img width="88" height="31" src="__PUBLIC__/images/total.png" />
+			</div>
+			<div class="numbers" clear="left">
+				{$count}
+			</div>
+			<div class="once">
+				<img width="16" height="27" src="__PUBLIC__/images/once.png" />
+			</div>
+				</td>
+			</tr>
+		</table>
+		<div class="font">
+			<p class="first">
+				<a target="_blank" href="#">联系我们</a> | <a href='javascript:void(0);'>加入收藏</a> | <a href="#">添加桌面</a>
+			</p>
+			<p>
+				{:C('beian')}
+			</p>
+			<p>
+				{:C('footer_code')}{:C('siteCount')}
+			</p>
+		</div>
+	</div>
+
+</div>
+
+<!-- 加入收藏 -->
+<script>
+$(function(){
+	$(".font .first a:eq(1)").click(function(){
+			Favorite(__SELF__,'{$title}');
+	});
+
+});
+Favorite = function Favorite(sURL, sTitle) {
+	try {
+		window.external.addFavorite(sURL, sTitle);
+	}
+	catch (e) {
+
+		try {
+			window.sidebar.addPanel(sTitle, sURL, "");
+		}
+
+		catch (e) {
+			alert("加入收藏失败,请手动添加.");
+		}
+
+    }
+}
+</script>
+{:C('baidu_share_code')}
+</body>
+</html>

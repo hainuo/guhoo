@@ -1,0 +1,89 @@
+                    
+    <div class="sidebar" id="sidebar">
+    <notempty name='users'>
+    <h2>管理员列表</h2>
+    
+        <ul>
+            <!--li><a href="#" class="selected">Main page</a></li>
+            <li><a href="#">Template settings</a></li>
+            <li><a href="#">Add page</a></li>
+            <li><a href="#">Edit section</a></li>
+            <li><a href="#">Templates</a></li-->
+            <volist name="users" id="vo">
+            <li><a href="#" id="user—{$vo.name}">{$vo.name}&nbsp;&nbsp;&nbsp;<img src="__PUBLIC__/images/edit.png" onclick="changePwd({$vo.id})" alt="修改密码" border="0" class="changPwd"  />   &nbsp;&nbsp;&nbsp;<img src="__PUBLIC__/images/trash.gif" alt="删除用户" onclick="delUser({$vo.id})" border="0" /></a> </li>
+            </volist>
+            <li><a href="#" id="addUser">新增用户</a></li>
+            <script type="text/javascript">
+				$("#addUser").click(function(event) {
+				 	 $.ligerDialog.open({ height: 400, url: '{:U('/Admin/Index/userManage')}?type=add', width: 550, showMax: true, showToggle: true, showMin: true, isResize: true, slide: false, title: '添加用户' }); 
+				});
+				function changePwd(id){
+					if (parseInt(id)) {
+						$.ligerDialog.open({
+							width:550,height:400,url:'{:U('/Admin/Index/userManage/')}?type=change'+'&userId='+id,showMin:true,showToggle:true,showMax:true,isResize:true,slide:false,title:'编辑用户'
+						})
+					};
+				}
+				function delUser(id){
+					if (parseInt(id)) {
+							$.ligerDialog.open({ url: 'about:blank', title:'你确定删除这个用户吗？', height: 50,width: 200, buttons: [ { text: '确定', onclick: function (item, dialog) { dialog.setUrl('{:U("/Admin/Index/userManage")}?type=del'+'&userId='+id) } }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ] });
+
+					};
+				}
+            </script>
+        </ul>
+    </notempty>
+    <notempty name='links'>
+    <h2>友情链接</h2>
+        <ul>
+        	<volist name="links" id="vo">
+            <li><a href="#" title="{$vo.url}" ><assign name="image" value="$vo.image" />    <empty name='image'>{$vo.name}<else /> <img src="{$image}" width="90px"> </empty>&nbsp;&nbsp;&nbsp;<img src="__PUBLIC__/images/edit.png"  alt="修改链接" border="0" onclick="changeLink({$vo.id})"  />  &nbsp;&nbsp;&nbsp; <img src="__PUBLIC__/images/trash.gif"  alt="删除链接" border="0" onclick="delLink({$vo.id})"  /></a></li>
+            </volist>
+<!--             <li><a href="#">Templates</a></li>
+            <li><a href="#">Clients</a></li>
+            <li><a href="#">Docs and info</a></li> -->
+            <li><a href="#" id="addLink">新增链接</a></li>
+        </ul> 
+        <script type="text/javascript">
+        $('#addLink').click(function(event) {
+            $.ligerDialog.open({ url:'{:U('Admin/Index/linkManage/')}?type=add', title:'新增链接',isResize:true,width:550,height:600});
+        });
+        function changeLink(id){
+            if (parseInt(id)) {
+                $.ligerDialog.open( { url:'{:U('Admin/Index/linkManage/')}?type=change&id='+id, title:'编辑链接',isResize:true,width:550,height:600});
+            };
+        }
+        function delLink(id){
+                    if (parseInt(id)) {
+                            $.ligerDialog.open({ url: 'about:blank', title:'你确定删除这个链接吗？', height: 180,width: 500, buttons: [ { text: '确定', onclick: function (item, dialog) { dialog.setUrl('{:U("/Admin/Index/linkManage")}?type=del&id='+id) } }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ] });
+
+                    };
+                }        
+        </script>
+    </notempty>
+    {/* <notempty name="configs" >
+    <h2>系统配置</h2>
+    
+        <ul>
+        <volist name="configs" id="vo">
+        	<eq name="i" value='1'>
+            <li><span type="{$vo.name}">{$vo.remark} : &nbsp;&nbsp;{$vo.value}秒</span></li>
+            </eq>
+        </volist>
+<!--             <li><a href="#">Add users</a></li>
+            <li><a href="#">Manage users</a></li>
+            <li><a href="#">Help</a></li> -->
+        </ul>   
+    </notempty>     */}
+    <h2>管理团队</h2> 
+    <div class="sidebar_section_text">
+    <literal>
+    UI NAME    : Panelo - Free Admin<br />
+    PHPVersion : Hainuo<br />
+      siter    : Zangtao<br />
+    Program    : Hainuo<br />
+      Q Q      : 399709335
+      </literal>
+    </div>         
+    
+    </div>             

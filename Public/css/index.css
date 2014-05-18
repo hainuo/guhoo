@@ -1,0 +1,98 @@
+/* ::::: http://www.yaodamai.com/Static/css/main-ico.css ::::: */
+
+* { margin: 0px; padding: 0px; }
+a { text-decoration: none; }
+a:hover { color: rgb(224, 120, 0); text-decoration: underline; }
+li { list-style: none outside none; }
+body { font-family: "微软雅黑","华文细黑",Arial,Helvetica,sans-serif; }
+.beautiful { width: 960px; margin: 0px auto; padding-bottom: 10px; }
+.numbers-i { background: url('../../images/numbers.png') no-repeat scroll 0% 0% transparent; display: block; text-indent: -9999px; }
+.numbers-i.wh { height: 38px; width: 23px; }
+.numbers-i.n0 { background-position: 0px 0px; }
+.numbers-i.n1 { background-position: -27px 0px; }
+.numbers-i.n2 { background-position: -54px 0px; }
+.numbers-i.n5 { background-position: -135px 0px; }
+.numbers-i.n7 { background-position: -189px 0px; }
+.header-i { background-attachment: fixed; display: block; }
+.header-i.deafult { background: url('../../images/header-deafult.png') no-repeat scroll 0% 0% transparent; }
+.header-i.click,.header-i.hover { background: url('../../images/header-click.png') no-repeat scroll 0% 0% transparent; }
+.header-i.i1 { background-position: 0px 0px; width: 146px; height: 61px; }
+.header-i.i2 { background-position: -172px 0px; width: 119px; height: 61px; }
+.header-i.i3 { background-position: -345px 0px; width: 87px; height: 61px; }
+.header-i.i4 { background-position: -518px 0px; width: 58px; height: 61px; }
+.header-i.i5 { background-position: -660px 0px; width: 88px; height: 61px; }
+.header-i.i6 { background-position: -811px 0px; width: 60px; height: 61px; }
+.other-i { background: url('../../images/other-i.png') no-repeat scroll 0% 0% transparent; display: inline-block; }
+.other-i.button-s { background-position: -252px -174px; width: 143px; height: 41px; }
+.other-i.button-s:hover { background-position: -404px -174px; width: 143px; height: 41px; }
+.other-i.ww { background-position: -497px -36px; width: 27px; height: 32px; }
+.two_link { font-size: 13px; width: 100%; }
+.two_link p { text-align: center; font-size: 14px; }
+.two_link a { color: rgb(68, 68, 68); }
+#bdshare { width: 480px; height: 25px; padding-left: 270px; }
+.footer { height: 180px; width: 100%; }
+.footer .detail { width: 750px; margin: 20px auto; text-align: center; font-size: 12px; }
+.footer .detail .first { margin-top: 20px; }
+.footer .detail p { margin-top: 10px; }
+.footer .number { height: 40px; margin: 0px auto; }
+.footer .number i, .footer .number img { float: left; }
+.footer .number .total { float: left; margin-top: 5px; margin-right: 10px; }
+.footer .number .once { float: left; margin-top: 10px; margin-left: 10px; }
+.footer .numbers { float: left; }
+.footer .font, a { color: gray; }
+.header { height: 95px; width: 100%; }
+.header .detail { width: 1220px; margin: 0px auto; padding: 20px 0px 20px 280px; }
+.header .detail ul li { margin-right: 37px; float: left; text-indent: -9999px; }
+.header_logo { display: block; background: url('../../images/other-i.png') no-repeat scroll 0% 0% transparent; width: 122px; height: 60px; }
+.button-s { border: medium none; cursor: pointer; margin-left: 20px; float: left; display: block; }
+.index-input-s { border-top: 3px solid rgb(51, 51, 51); float: left; width: 330px; height: 20px; font-size: 22px; font-weight: bold; color: rgb(178, 178, 178); padding-left: 50px; padding-top: 10px; padding-bottom: 7px; }
+.content { background-image: url('../../images/index-background.jpg'); height: 265px; width: 100%; }
+.content.bg { background-size: cover; background-position: 50% 50%; background-repeat: no-repeat; }
+.content .detail { position: relative; width: 750px; margin: 0px auto; }
+.content .search { position: absolute; top: 130px; left: 100px; }
+.more_ico { position: absolute; top: 0px; right: 164px; width: 40px; background: url('../../images/select.png') no-repeat scroll -262px 1px transparent; height: 42px; cursor: pointer; }
+.ceng_three { height: 123px; left: 1px; position: absolute; background: none repeat scroll 0% 0% white; border: 1px solid rgb(221, 221, 221); width: 343px; top: 41px; display: none; }
+.index-input-three { border: 1px dashed rgb(221, 221, 221); color: rgb(178, 178, 178); float: left; font-size: 18px; font-weight: bold; height: 22px; padding-bottom: 7px; padding-left: 50px; padding-top: 10px; width: 290px; }
+/* ::::: http://bdimg.share.baidu.com/static/css/bdsstyle.css?cdnversion=20131219 ::::: */
+
+#bdshare ul, #bdshare_s ul, #bdshare ul li, #bdshare_s ul li, #bdshare_l_c ul li, #bdshare_m_c ul li, #bdshare_pop ul, #bdshare_pop ul li { list-style: none outside none; margin: 0px; padding: 0px; }
+#bdshare { z-index: 999999; padding-bottom: 2px; font-size: 12px; float: left; text-align: left ! important; }
+#bdshare a, #bdshare_s a, #bdshare_pop a { text-decoration: none; cursor: pointer; }
+#bdshare a:hover, #bdshare_s a:hover, #bdshare_pop a:hover { color: rgb(51, 51, 51); opacity: 0.8; }
+#bdshare h6, #bdshare_s h6 { width: 100%; font: 700 14px/22px '宋体'; text-indent: 0.5em; border-top: 1px solid rgb(251, 251, 251); border-bottom: 1px solid rgb(242, 241, 241); background-color: rgb(246, 246, 246); float: left; padding: 5px 0px; margin: 0px; }
+#bdshare ul, #bdshare_s ul { width: 98%; float: left; padding: 8px 0px; margin-left: 2px; overflow: hidden; }
+#bdshare ul li, #bdshare_s ul li { width: 47%; float: left; margin: 4px 2px; }
+#bdshare ul li a, #bdshare_s ul li a { color: rgb(86, 86, 86); font: 12px '宋体'; display: block; width: 98%; padding: 6px 0px; text-indent: 2.4em; border: 1px solid rgb(255, 255, 255); }
+#bdshare ul li a:hover, #bdshare_s ul li a:hover { background-color: rgb(243, 243, 243); border: 1px solid rgb(238, 238, 238); }
+#bdshare p, #bdshare_s p { width: 100%; height: 21px; font: 12px '宋体'; border-top: 1px solid rgb(242, 241, 241); background-color: rgb(248, 248, 248); float: left; padding: 0px; margin: 0px; }
+#bdshare p a, #bdshare_s p a { width: auto; text-align: right; float: right; padding: 0px 5px; }
+#bdshare_l { width: 212px; position: absolute; top: 0px; background: none repeat scroll 0% 0% rgb(255, 255, 255); text-align: left; }
+#bdshare_l_c { width: 210px; float: left; border: 1px solid rgb(233, 233, 233); text-align: left; }
+#bdshare_l_c ul li { width: 47%; height: 26px; float: left; margin: 2px; }
+#bdshare_l_c ul li a { background: url('../../images/is.png') no-repeat scroll 0% 0% transparent; height: auto ! important; }
+#bdshare_l, #bdshare_m { z-index: 99999; }
+#bdshare_l_c p a.goWebsite, #bdshare_m_c p a.goWebsite, #bdshare_pop p a.goWebsite { text-align: right; background: url('../../images/pi.gif') no-repeat scroll 0px center transparent; line-height: 16px; padding-left: 12px; color: rgb(140, 140, 140); }
+#bdshare_l_c p a.goWebsite:hover, #bdshare_m_c p a.goWebsite:hover, #bdshare_pop p a.goWebsite:hover { color: rgb(0, 169, 224); }
+span.bds_more { background: url('../images/is.png') no-repeat scroll 0px 5px transparent ! important; }
+span.bds_more, .bds_tools a { display: block; font-family: '宋体',Arial; height: 16px; float: left; cursor: pointer; padding-top: 6px; padding-bottom: 3px; padding-left: 22px; }
+.bds_tools a { background: url('../images/is.png') no-repeat scroll 0% 0% transparent; }
+.bds_more { background-image: url('../images/is.png') ! important; background-position: 0px 4px ! important; }
+.bdshare_b a.shareCount, .bds_tools a.shareCount, .bds_tools_32 a.shareCount, .bds_tools_24 a.shareCount { float: left; background: url('../images/sc.png') no-repeat scroll 0% 0% transparent ! important; margin: 0px; padding: 0px 0px 0px 5px; text-align: center; color: rgb(69, 69, 69); font-family: '宋体' ! important; }
+.bds_tools a.shareCount { width: 37px; height: 16px; background-position: 0px -30px ! important; margin-top: 5px; overflow: hidden; font-size: 12px; line-height: 16px; }
+.bds_tools a.shareCount:hover { color: rgb(69, 69, 69) ! important; background-position: -42px -30px ! important; opacity: 1 ! important; }
+.bds_qzone { background-position: 0px -75px ! important; }
+.bds_tsina { background-position: 0px -115px ! important; }
+.bds_bdhome { background-position: 0px -155px ! important; }
+.bds_renren { background-position: 0px -195px ! important; }
+.bds_tqq { background-position: 0px -235px ! important; }
+.bds_kaixin001 { background-position: 0px -275px ! important; }
+.bds_tqf { background-position: 0px -315px ! important; }
+.bds_douban { background-position: 0px -395px ! important; }
+.bds_tsohu { background-position: 0px -435px ! important; }
+.bds_tieba { background-position: 0px -595px ! important; }
+.bds_t163 { background-position: 0px -715px ! important; }
+.bds_thx { background-position: 0px -1829px ! important; }
+.bds_mshare { background-position: 0px -2070px ! important; }
+.bds_bdxc { background-position: 0px -2190px ! important; }
+.bds_sqq { background-position: 0px -2230px ! important; }
+.bds_bdysc { background-position: 0px -2550px ! important; }

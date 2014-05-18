@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Panelo - Free Admin Template</title>
+
+<!-- jQuery file -->
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__PUBLIC__/css/jquery.validator.css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery.validator.js"></script>
+<script type="text/javascript" src="__PUBLIC__/local/zh_CN.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
+<style type="text/css">
+    td {height: 50px  ; vertical-align: baseline;line-height: 35px;}
+    td.left {width: 100px;}
+    #errorLabelContainer { text-align: center;line-height: 35px;font-family: sans-serif serif 微软雅黑;}
+    input.loginform_input{width: 180px;}
+    #loginpanelwrap{margin: 0px;}
+</style>
+</head>
+<body>
+
+<div id="loginpanelwrap">
+    
+    <div class="loginheader">
+    <div class="logintitle"><a href="#"><empty name='data'> User  Add <else />  更改用户{$data.remark} 的属性 </empty> </a></div>
+    </div>
+<form action="__SELF__" method="post" name="user">
+    <div class="loginform">
+        <table align="center" cellpadding="0" cellspacing="0" class="l-table-edit">
+        <empty name='data'>
+        <tr><td class="left" class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="remark" name="remark" data-rule="required;" /></td><td></td></tr>
+        <else />
+        <tr><td class="left" class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="remark" name="remark" value="{$data.remark}" data-rule="required;length[1~, true]" /><input type="hidden" name="id" value="{$data.id}"><input type="hidden" name="name" value="{$data.name}"> </td><td></td></tr>        
+        </empty>
+        <tr><td class="left"  class="l-table-edit-td">value</td><td  class="l-table-edit-td"><textarea cols="30" rows="5" data-rule="required;length[2~]" name="value">{$data.value|stripslashes }</textarea><td></td></tr>
+        <tr><td class="left"  class="l-table-edit-td">name</td><td  class="l-table-edit-td">{$data.name}<td></td></tr>
+        </table>
+        <div class="loginform_row">
+        <input type="submit" class="loginform_submit"  value="<empty name='data'>增加<else /> 修改</empty>" />
+        <input type="reset" class="loginform_reset " onclick="frameElement.dialog.close()"  value="取消" />
+        </div>    
+        <div class="clear"></div>
+    </div>
+</form> 
+</div>        
+</body>
+</html>

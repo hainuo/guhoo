@@ -1,0 +1,99 @@
+﻿
+*{margin: 0px 0px;padding: 0px 0px;} 
+a{text-decoration: none;}
+a:hover{color:rgb(224,120,0);text-decoration: underline;}
+li {list-style: none;}
+body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
+
+
+.f-red{color:red;}
+.f-yellow{color:#C94;}
+.f-gray{color:gray;}
+.f-green{color:green;}
+
+.f-size-14{font-size: 14px;}
+.f-size-12{font-size: 12px;}
+
+.f-l{float:left;}
+
+.beautiful{width:960px;margin:0 auto;padding-bottom:10px;}
+
+.numbers-i{background: url(/Public/images/numbers.png) no-repeat;display:block;text-indent: -9999px;}
+.numbers-i.wh{height: 38px;width:23px;}
+.numbers-i.n0{background-position: 0px 0px;}
+.numbers-i.n1{background-position: -27px 0px;}
+.numbers-i.n2{background-position: -54px 0px;}
+.numbers-i.n3{background-position: -81px 0px;}
+.numbers-i.n4{background-position: -108px 0px;}
+.numbers-i.n5{background-position: -135px 0px;}
+.numbers-i.n6{background-position: -162px 0px;}
+.numbers-i.n7{background-position: -189px 0px;}
+.numbers-i.n8{background-position: -216px 0px;}
+.numbers-i.n9{background-position: -243px 0px;}
+
+.header-i{background-attachment:fixed;display:block}
+.header-i.deafult{background: url(/Public/images/header-deafult.png) no-repeat;}
+.header-i.hover{background: url(/Public/images/header-hover.png) no-repeat;}
+.header-i.click{background: url(/Public/images/header-click.png) no-repeat;}
+.header-i.i1{background-position: 0px 0px;width:146px;height: 61px;}
+.header-i.i2{background-position: -172px 0px;width:119px;height: 61px;}
+.header-i.i3{background-position: -345px 0px;width:87px;height: 61px;}
+.header-i.i4{background-position: -518px 0px;width:58px;height: 61px;}
+.header-i.i5{background-position: -660px 0px;width:88px;height: 61px;}
+.header-i.i6{background-position: -811px 0px;width:60px;height: 61px;}
+
+.other-i{background: url(/Public/images/other-i.png) no-repeat;display: inline-block;}
+.other-i.logo{background-position: 0px 0px;width:122px;height: 60px;}
+
+.other-i.good{background-position: -370px -8px;width:15px;height: 15px;}
+.other-i.normal{background-position: -432px -8px;width:16px;height: 15px;}
+.other-i.bad{background-position: -491px -8px;width:20px;height: 15px;}
+
+.other-i.level-1{background-position: -158px -47px;width:15px;height: 13px;}
+.other-i.level-2{background-position: -194px -47px;width:15px;height: 13px;}
+.other-i.level-3{background-position: -230px -41px;width:16px;height: 16px;}
+.other-i.level-4{background-position: -267px -43px;width:16px;height: 16px;}
+.other-i.level-5{background-position: -304px -47px;width:15px;height: 13px;}
+
+.other-i.vip-1{background-position: -341px -47px;width:14px;height: 13px;}
+.other-i.vip-2{background-position: -377px -47px;width:14px;height: 13px;}
+.other-i.vip-3{background-position: -414px -47px;width:14px;height: 13px;}
+.other-i.vip-5{background-position: -450px -47px;width:14px;height: 13px;}
+
+.other-i.msg-green{background-position: -2px -71px;width:87px;height: 84px;}
+.other-i.msg-blue{background-position: -104px -71px;width:87px;height: 84px;}
+
+.other-i.warning-red{background-position: -202px -80px;width:74px;height: 74px;}
+.other-i.warning-yellow{background-position: -294px -80px;width:74px;height: 74px;}
+.other-i.warning-gray{background-position: -387px -80px;width:74px;height: 74px;}
+.other-i.warning-green{background-position: -478px -80px;width:74px;height: 74px;}
+
+.other-i.num-1{background-position: -2px -168px;width:52px;height: 52px;}
+.other-i.num-2{background-position: -65px -168px;width:52px;height: 52px;}
+.other-i.num-3{background-position: -127px -168px;width:52px;height: 52px;}
+.other-i.num-4{background-position: -190px -168px;width:52px;height: 52px;}
+
+.other-i.button-s{background-position: -252px -174px;width:143px;height: 41px;}
+.other-i.button-s:hover{background-position: -404px -174px;width:143px;height: 41px;}
+
+.other-i.ww{background-position: -497px -36px;width:27px;height: 32px;}
+.other-i.safe {background: url("/Public/images/other-n.png") no-repeat scroll -245px -4px transparent;height: 19px;width: 20px;}
+.other-i.tmall{background-position: -308px -7px;width:16px;height: 16px;}
+
+
+.two_link{font-size: 13px; width:100%}
+.two_link p{text-align: center; font-size: 14px;}
+.two_link a{color:#444444}
+/*baidu分享*/
+#bdshare{width: 480px;height: 25px;padding-left: 270px;}
+
+.footer{height:180px;width:100%;}
+.footer .detail{width:750px;margin:20px auto;text-align: center;font-size: 12px;}
+.footer .detail .first{margin-top: 20px;}
+.footer .detail p{margin-top: 10px;}
+.footer .number{height: 40px;margin: 0px auto;}
+.footer .number i,.footer .number img{float: left;}
+.footer .number .total{float: left;margin-top: 5px;margin-right: 10px;}
+.footer .number .once{float: left;margin-top: 10px;margin-left: 10px;}
+.footer .numbers{float: left;}
+.footer .font,a{color:gray;}

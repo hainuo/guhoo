@@ -1,0 +1,129 @@
+<include file="Public/header" />
+<style>
+.content .result{width: 100%;border: #c9c9c9 solid 1px;height: auto;background: white;position: relative;}
+.result .even{background-color: #f9f9f9}
+.result .odd{background-color: #fff}
+.result .r-h{border-bottom: 2px solid #d3d3d3;height: 74px;width: 100%;background-color:#ececec;}
+.result .r-h ul{padding-left:20px;height: 36px;line-height: 36px;}
+.result .r-h li{width:33%;float: left;overflow: hidden;}
+.result .r-h .u2{clear: both;color: #7f7b7b;font-size: 18px;}
+.result .r-h font{color:#f28f21;}
+.result .r-h span{font-weight: bold;}
+.result .r-info{padding-left: 20px;font-size: 12px;height: 37px;line-height: 37px;}
+
+.list {width: 100%;}
+.list thead tr th{background-color: #f9f9f9;height: 37px;}
+.list tr td{height: 65px;border-bottom: 1px solid #e5e5e4;}
+.list tr{font-size: 12px;text-align:center}
+.list tbody tr:hover{background: #fff8ec;border-bottom: 1px solid #e5dfd4;}
+.list .t1{font-size: 24px;font-weight: bold;color: #afafaf;}
+.list .t5{font-size: 24px;font-weight: bold;color: #f28813;}
+.list .c-down{color: #ff0000}
+.list .c-top,.list .c-ok{color: green}
+.list .un a{color: #0077e9}
+.list .un a:hover{color: #f28813}
+.list .time{color:#a2a2a2;}
+.list .pl{color: #666666}
+.result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
+
+
+</style>
+
+	<div class="content" >
+		<div class="detail">
+			<div class="other-i logo">
+			</div>
+			<form class="search" action="/Index/getWeight.html" method="get">
+				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
+				<input class="index-input-s" type="text" id="txtKey" name="username" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
+				<input class="other-i button-s" id = 'btn' type="submit" value=""/>
+			</form>
+			<div class="clf"></div>
+
+			<div class="result">
+            <empty name='userInfo'>  
+                请输入正确的淘宝账号！
+            <else />            
+				<div class="r-h">
+					<ul><li><span>淘宝帐号：</span><font style="color:#0077e9">{$userInfo.username}</font></li><li>一共<font>{$data['goodsNum']}</font>宝贝</li><li><a href="{$userInfo.url}">[进入店铺]</a></li></ul>
+					<ul class="u2"><li>卖家好评率：<font>{$userInfo.haopinglv}</font></li><li>描述相符：<font>{$userInfo['dongtai'][0]}</font>分</li><li><!--高于同行业：<font>74.98%</font>--></li></ul>
+				</div>
+				<div class="r-info">
+					权重差值是什么意思？&nbsp;&nbsp;商品被隐形降权了怎么处理？<font>要大麦《淘宝隐性降权查询结果》说明</font>
+				</div>
+				<table class="list" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>顺序</th>     
+							<th>商品名称</th>
+							<th>销量/点评</th>
+							<th>价格</th>
+							<th>实际排名</th>
+                            <th>理论排名</th>                            
+							<th>权重差值</th>
+							<th>商品权重状态</th>
+						</tr>
+					</thead>
+                    <assign name='itemList' value="$data['itemList']" />
+                    <empty name='itemList'>
+                        <tbody>
+                            <tr><td colspan="6"> 该用户没有宝贝 </td></tr>
+                        </tbody>
+                    <else />
+					<tbody>
+                        <volist name="itemList" id="v" >
+						<tr>
+                            <td width="5%" class="t1">{$i}</td>
+                            <td class="un" width="30%"><a href="{$v.href}" target="_blank">{$v.title}</a></td>
+                            <td width="15%"><p>最近成交{$v.tradenum}笔</p><p>点评<a href="{$v.commendHref}" target="_blank">{$v.commend}</a>条</td>
+                            <td width="10%">￥{$v.currentPrice}</td>
+                            <td>{$v.xl_index}</td>
+                            <td>{$v.index2}</td>
+                            <td width="10%" class="t5">{$v.index3}</td>
+                            <td class="time" width="23%">
+                            <assign name='index3' value='$v.index3' />
+                            <egt name='index3' value='20'>
+                            	<font class="c-top">商品获得了提权</font>
+                            <else />
+                           	 	<egt name='index3' value='-10'>
+                           	 		<font class="c-ok">良好</font>
+                           	 	<else />
+                            		<font class="c-down">商品可能已经被隐性降权</font>
+                            	</egt>
+                            </egt>
+                            </td>
+                        </tr>                    
+                        </volist>                  
+
+<!--            循环模板
+						<tr>
+                            <td width="12%" class="t1">'+i+'</td>
+                            <td class="un" width="30%"><a href="'+msg.itemList[i]['href']+'" target="_blank">'+msg.itemList[i]['tip']+'</a></td>
+                            <td width="15%"><p>最近成交'+msg.itemList[i]['tradeNum']+'笔</p><p>点评1条</td>
+                            <td width="10%">￥'+msg.itemList[i]['currentPrice']+'</td>
+                            <td width="10%" class="t5">aaa</td>
+                            <td class="time" width="23%"><font class="c-ok">良好</font></td>
+                        </tr>
+-->
+					</tbody>       
+                </empty>
+				</table>
+				<div class="page"><!-- 在测试中没有设置好分页显示方式  所以 不设置分页信息 -->
+									</div>
+			</empty><!-- end userInfo -->
+            </div>
+		</div>
+	</div>
+	<script> 
+		$('.list font').mouseover(function(){
+			var obj = $(this);
+			if (obj.hasClass('c-top')){
+			  obj.attr('title','商品状态优异，您的宝贝获得了提权！');
+			}else if(obj.hasClass('c-down')){
+			  obj.attr('title','商品可能由于整体销量排名等等因素，造成了单商品隐性降权，虽不影响整体店铺运营，但还需要加油哦！');
+			}else if(obj.hasClass('c-ok')){
+			  obj.attr('title','商品状态良好，宝贝稳定正常.');
+			}
+		});
+	</script>
+<include file="Public/footer" />

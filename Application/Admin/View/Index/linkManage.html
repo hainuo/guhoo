@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Panelo - Free Admin Template</title>
+
+<!-- jQuery file -->
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="__PUBLIC__/css/jquery.validator.css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery.validator.js"></script>
+<script type="text/javascript" src="__PUBLIC__/local/zh_CN.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
+<style type="text/css">
+    td {height: 50px  ; vertical-align: baseline;line-height: 35px;}
+    td.left {width: 100px;}
+    #errorLabelContainer { text-align: center;line-height: 35px;font-family: sans-serif serif 微软雅黑;}
+    input.loginform_input{width: 180px;}
+    #loginpanelwrap{margin: 0px;}
+</style>
+</head>
+<body>
+
+<div id="loginpanelwrap">
+    
+    <div class="loginheader">
+    <div class="logintitle"><a href="#"><empty name='data'> 新增链接 <else />  更改用户{$data.name} 的地址  </empty> </a></div>
+    </div>
+    <div id="errorLabelContainer" class="l-text-invalid" style="display:none">
+</div>
+<form action="__SELF__" method="post" name="link"  enctype="multipart/form-data">
+    <div class="loginform">
+        <table align="center" cellpadding="0" cellspacing="0" class="l-table-edit">
+        <empty name='data'>
+        <tr><td class="left" class="l-table-edit-td">name</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="name" name="name" data-rule="required;length[1~35, true]" /></td><td></td></tr>
+        <else />
+        <tr><td class="left" class="l-table-edit-td">name</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="name" name="name" value="{$data.name}" readonly /><input type="hidden" name="id" value="{$data.id}"> </td><td></td></tr>        
+        </empty>
+        <tr><td class="left"  class="l-table-edit-td">url</td><td  class="l-table-edit-td"><input type="text" class="loginform_input" id="url" name="url" value="<notempty name='data'>{$data.url}</notempty>" data-rule="url：required;url;remote[{:U('/Admin/Index/linkManage/type/checkUrl')}, url, id]" /></td><td><notempty name='data'><input type="hidden" name="id" value="{$data.id}"></notempty></td></tr>
+        <tr><td class="left"  class="l-table-edit-td">image</td><td  class="l-table-edit-td"><assign name="image" value="$data.image" /><empty name='image'><input type="file" name="image" class="loginform_input"  onchange="" /><else /><img src="{$data.image}" width="90px"> </empty></td><td></td></tr>
+        <tr><td></td><td><notempty name="image"><input type="checkbox" name="delImg" /> 删除链接 </notempty></td><td></td></tr>
+        </table>
+        <div class="loginform_row"><img id="goal" border="0" /></div>
+        <div class="loginform_row">
+        <input type="submit" class="loginform_submit"  value="<empty name='data'>增加<else /> 修改</empty>" />
+        <input type="reset" class="loginform_reset " onclick="frameElement.dialog.close()" value="取消" />
+        </div>    
+        <div class="clear"></div>
+    </div>
+</form> 
+<div>
+    <script type="text/javascript">
+
+    //$('input[type="file"]').change(function(event) {
+        //alert($('input[type="file"]').val());
+        //$("img#goal").src=$('input[type="file"]').val();
+  //  });
+        
+    </script>
+</div>
+</div>  
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<include file="Public/header" />
+<style>
+
+.content .result{width: 100%;border: #f2f2f2 solid 1px;height: auto;background: white;position: relative;}
+.result .even{background-color: #f9f9f9}
+.result .odd{background-color: #fff}
+
+.list {width: 100%;border: 1px solid #c9c9c9;}
+.list thead tr th{background-color: #ececec;height: 37px;border-bottom: 2px solid #d3d3d3;}
+.list tr td{height: 41px;border-bottom: 1px solid #e5e5e4;font-size: 12px;text-align:center}
+.list tbody tr:hover{background: #fff8ec;border-bottom: 1px solid #e5dfd4;}
+.list .un a{color: #0077e9}
+.list .un a:hover{color: #f28813}
+.list .time{color:#a2a2a2;}
+.list .pl{color: #666666}
+.result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
+
+</style>
+	<div class="content" >
+		<div class="detail">
+			<div class="other-i logo">
+			</div>
+			<form class="search" method="get" action="/Index/getWeight.html">
+				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
+				<input class="index-input-s" type="text" id="txtKey" name="username" value="输入淘宝帐号" /><input class="other-i button-s" type="submit" value=""/>
+			</form>
+			<div class="clf"></div>
+			<div class="result">
+				<table class="list" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+                            <th>数字id</th>
+							<th>淘宝店铺</th>
+							<th>卖家好评率</th>
+							<th>商品数量</th>
+							<th>最后查询时间</th>
+						</tr>
+					</thead>
+					<tbody>
+<noempty name='list'>
+<volist name='list' id='vo' key='k'>
+<tr class="{($k%2)?'even':'odd'}">
+    <td>{$vo.sellerId}</td>
+    <td class="un"><a href="/Index/getMember/username/{$vo.username}.html" target="_blank">{$vo.username}</a></td>
+	<td>{$vo.haopinglv}</td>
+							<td><a href="/Index/getWeight/username/{$vo.username}.html" target="_blank">{$vo.goodNum}</a></td>
+							<td class="time">{$vo.create_time}</td>
+						</tr>
+</volist>
+</noempty>
+                    </tbody>
+				</table>
+				<div class="page">
+					 {$page}
+                 </div>
+			</div>
+		</div>
+	</div>
+
+<include file="Public/footer" />
