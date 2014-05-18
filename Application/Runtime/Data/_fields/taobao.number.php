@@ -1,1 +1,0 @@
-a:5:{i:0;s:4:"name";i:1;s:3:"val";i:2;s:2:"id";s:3:"_pk";s:2:"id";s:5:"_type";a:3:{s:4:"name";s:11:"varchar(16)";s:3:"val";s:19:"bigint(20) unsigned";s:2:"id";s:11:"smallint(6)";}}

@@ -1,3 +1,0 @@
-<?php
-//000000000000d8998269b4b94dacc6034a3e10db719cs:44:"SELECT * FROM `taobao_link` ORDER BY id ASC ";
-?>
