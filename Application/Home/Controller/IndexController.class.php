@@ -10,7 +10,7 @@ class IndexController extends Controller {
 	 */
 	public function index(){
 
-		$this->redirect('getMember');
+		$this->redirect('getMember/');
 	}
 	/**
 	 * IndexController::getMember()
@@ -247,7 +247,11 @@ class IndexController extends Controller {
             $page=1;//直接定义死这一项，粉兔兔中读取数据库中数据时就是使用的这一方法，
             if(is_array($list))foreach ($list as $k => $v) {
                     $list[$k]['index2'] = $k + 1 + $pagesize * ($page - 1);
-                    $list[$k]['index3'] = $list[$k] ['index2']-$list[$k]['xl_index'];
+                    if($list[$k]['tradenum'] != 0)//销量为0时因为没有可比性，所以没有隐形降权值
+                        $list[$k]['index3'] = $list[$k] ['index2']-$list[$k]['xl_index'];
+                    else
+                        $list[$k]['index3']=0;
+
             }
         return $list;
         //return $this->assign('data',$list);

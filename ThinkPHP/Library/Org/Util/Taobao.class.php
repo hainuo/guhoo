@@ -45,10 +45,10 @@ class Taobao {
         $__call = 'jsonp' . ($__r + 1);
         //\Think\Log::record('记录getRank开始','WARN');
         //按销量排名的，实际排名
-        $urlType=1;//因为算法更改，不在需要RQurl进行操作了。
+        $urlType=0;//因为算法更改，不在需要XLurl进行操作了。
         //$XLurl= 'http://search1.taobao.com/itemlist/default.htm?cat=0&s=' . $pageStart . '&sort=biz30day&as=0&viewIndex=1&commend=all&atype=b&nick='.urlencode($username) .'&style=list&tid=0&isnew=2&json=on&tid=0&data-key=s&data-value='.$pageStart.'&module=page&&_input_charset=utf-8&json=on&_ksTS='.$__t.'_'.$__r.'&callback='.$__call;
-        $XLurl='http://search1.taobao.com/itemlist/default.htm?_input_charset=utf-8&json=on&cat=0&sort=biz30day&viewIndex=1&as=1&atype=b&s='.$pageStart.'&nick='.urlencode($username).'&style=list&same_info=1&tid=0&isnew=2&pSize='.$pagesize.'&data-key=s&data-value='.$pageStart.'&data-action&module=page&_ksTS='.$__t.'_'.$__r.'&callback='.$__call;
-        $RQurl= 'http://search1.taobao.com/itemlist/default.htm?cat=0&s=' . $pageStart . '&sort=coefp&as=0&viewIndex=1&commend=all&atype=b&nick='.urlencode($username) .'&style=list&tid=0&isnew=2&json=on&tid=0&data-key=s&data-value='.$pageStart.'&module=page&&_input_charset=utf-8&json=on&_ksTS='.$__t.'_'.$__r.'&callback='.$__call;
+        $XLurl='http://search1.taobao.com/itemlist/default.htm?cat=0&s='.$pageStart.'&sort=coefp&as=0&viewIndex=1&commend=all&atype=b&nick='.urlencode($username).'&style=list&tid=0&isnew=2&pSize='.$pagesize.'&data-key=s&data-value='.$pageStart.'&data-action&module=page&_input_charset=utf-8&json=on&_ksTS='.$__t.'_'.$__r.'&callback='.$__call;
+        $RQurl= 'http://search1.taobao.com/itemlist/default.htm?cat=0&s=' . $pageStart . '&sort=coefp&as=0&viewIndex=1&commend=all&atype=b&nick='.urlencode($username).'&style=list&tid=0&isnew=2&json=on&tid=0&data-key=s&data-value='.$pageStart.'&module=page&&_input_charset=utf-8&json=on&_ksTS='.$__t.'_'.$__r.'&callback='.$__call;
         $url=$urlType?$XLurl:$RQurl;//urlType 为真是选择销量排名，为假时选择人气排名
         //trace($url,'url获取地址');
         //\Think\Log::record('url已经获取到了'.$url,'WARN');
@@ -190,8 +190,8 @@ class Taobao {
         if($member['is_seller']==1){
             $member['deposit']=$this->getDeposit($html);
             $member['url']=$this->getShopUrl($html);
-            if(preg_match('/userId":[\s]*"(\d+)/',$html,$sellerId))
-                $matches['sellerId']=$sellerId['1']?$sellerId['1']:$member['uid'];
+            if(preg_match('data-item-id="(\d+)',$html,$sellerId))
+                $member['sellerId']=$sellerId['1']?$sellerId['1']:$member['sid'];
 
             }
         

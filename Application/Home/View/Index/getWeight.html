@@ -75,22 +75,25 @@
 						<tr>
                             <td width="5%" class="t1">{$i}</td>
                             <td class="un" width="30%"><a href="{$v.href}" target="_blank">{$v.title}</a></td>
-                            <td width="15%"><p>最近成交{$v.tradenum}笔</p><p>点评<a href="{$v.commendHref}" target="_blank">{$v.commend}</a>条</td>
+                            <td width="10%"><p>最近成交{$v.tradenum}笔</p><p>点评<a href="{$v.commendHref}" target="_blank">{$v.commend}</a>条</td>
                             <td width="10%">￥{$v.currentPrice}</td>
                             <td>{$v.xl_index}</td>
                             <td>{$v.index2}</td>
                             <td width="10%" class="t5">{$v.index3}</td>
-                            <td class="time" width="23%">
-                            <assign name='index3' value='$v.index3' />
-                            <egt name='index3' value='20'>
-                            	<font class="c-top">商品获得了提权</font>
+                            <td class="time" width="15%">
+                            <eq name="v.tradenum" value='0'>
+                            	<font class="c-ok"> 正常</font>
                             <else />
-                           	 	<egt name='index3' value='-10'>
-                           	 		<font class="c-ok">良好</font>
-                           	 	<else />
-                            		<font class="c-down">商品可能已经被隐性降权</font>
+                            	<egt name='v.index3' value='0' >
+                            		<font class="c-ok"> 良好 </font>
+                            	<else />
+                            		<egt name="v.index3" value="-50">
+                            			<font class="c-down"> 商品可能已被隐性降权 </font>
+                            		<else />
+                            			<font class="c-down"> 商品已经被降权 </font>
+                            		</egt>
                             	</egt>
-                            </egt>
+                            </eq>
                             </td>
                         </tr>                    
                         </volist>                  
