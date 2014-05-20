@@ -20,7 +20,7 @@ class IndexController extends Controller {
 	public function getMember() {
         $userName=I('request.username');
         if(preg_match('/\?.*=/',__SELF__,$url)){
-            $url="/getMember/username/".$userName;
+            $url="/index/getMember/username/".$userName;
             $this->redirect($url);
         }
 		if($userName){
@@ -51,7 +51,7 @@ class IndexController extends Controller {
     public function getWeight(){
         $userName=I('request.username');        
         if(preg_match('/\?.*=/',__SELF__,$url)){
-            $url="/getWeight/username/".$userName;
+            $url="/index/getWeight/username/".$userName;
             $this->redirect($url);
         }
         $page=I('get.page');
