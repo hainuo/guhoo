@@ -72,7 +72,7 @@ C($config);//重新加载一遍配置文件
 					if (IS_POST && $linkModel->autoCheckToken($_POST)) {
 						$linkInfo = array('name' => $name, 'url'=>$url);
 						if(!empty($_FILES))
-							$info=$this->upload();
+							$info=$this->upload('link');
 						if($info){
 							$image = '/Public/Uploads' . $info["savepath"] . $info["savename"];
 							$linkInfo['image']=$image;
@@ -82,22 +82,25 @@ C($config);//重新加载一遍配置文件
 
 						$result=$linkModel->data($linkInfo)->add();
 						if($info && $result)
-							$this->success('图片上传成功','javascript:frameElement.dialog.close()');
+							$this->success('图片上传成功','javascript:parent.location.reload();');
 						elseif($result) {
-							$this->error('图片失败,请检查/Public/Uploads/link/是否有写权限','javascript:frameElement.dialog.close()');
+							$this->error('图片失败,请检查/Public/Uploads/link/是否有写权限','javascript:parent.location.reload();');
 						}else
-							$this->error('添加失败','javascript:frameElement.dialog.close()');
+							$this->error('添加失败','javascript:parent.location.reload();');
 
 					}else
 						$this->display();
 					break;
 				case 'del':
-					if($id)
+					if($id){
+						$info=$linkModel->where('id='.$id)->find();
+						unlink(WEBROOT .$info['image']);
 						$result=$linkModel->where('id='.$id)->delete();
+					}
 					if($result)
-						$this->success('删除成功','javascript:frameElement.dialog.close()');
+						$this->success('删除成功','javascript:parent.location.reload();');
 					else
-						$this->error('删除失败','javascript:frameElement.dialog.close()');
+						$this->error('删除失败','javascript:parent.location.reload();');
 					break;
 				case 'change':
 					if(IS_POST && $linkModel->autoCheckToken($_POST)){
@@ -106,31 +109,33 @@ C($config);//重新加载一遍配置文件
 							$data=$linkModel->where('id='.$id)->find();
 							$image=$data['image'];
 							//\Think\Log::write('地址'.WEBROOT . $image.THINK_PATH);
-							if($delImg) {
-								unlink(WEBROOT . $image);
-								$image='';
-								$linkInfo['image']='';
-							}
 						}
+					    if($delImg) {
+							unlink(WEBROOT . $image);
+							$image='';
+							$linkInfo['image']='';
+						}						
 						if(!empty($_FILES) ){
-							if($image)unlink(WEBROOT . $image);
-							$info=$this->upload();
-						}
-						if(!empty($info)){
-							$image = '/Public/Uploads' . $info["savepath"] . $info["savename"];
-							//\Think\Log::write('链接修改时，链接'.$id.$name.'上传文件路径'.$image.'\r\s  '.serialize($info));
-						}
-						if($info)
-							$linkInfo['image']=$image;
+							if($image)
+								unlink(WEBROOT . $image);
+							$info=$this->upload('link');
+							if(!empty($info)){
+								$image = '/Public/Uploads' . $info["savepath"] . $info["savename"];
+								//\Think\Log::write('链接修改时，链接'.$id.$name.'上传文件路径'.$image.'\r\s  '.serialize($info));
+							}
+							if($image)
+								$linkInfo['image']=$image;
+						}else 
+							$info='';
 						$result=$linkModel->data($linkInfo)->save();
-						if($result && $info)
-							$this->success('图片修改成功,信息修改成功','javascript:frameElement.dialog.close()');
+						if($result && !empty($info))
+							$this->success('图片修改成功,信息修改成功','javascript:parent.location.reload();');
+						elseif($result && (!empty($_FILES)) )
+							$this->success('图片上传失败，其他信息修改成功','javascript:parent.location.reload();');
 						elseif($result && $delImg)
-							$this->error('图片删除成功','javascript:frameElement.dialog.close()');
-						elseif($result)
-							$this->error('图片上传失败，其他信息修改成功','javascript:frameElement.dialog.close()');
+							$this->error('图片删除成功，其他信息修改成功','javascript:parent.location.reload();');
 						else
-							$this->error('图片上传失败','javascript:frameElement.dialog.close()');
+							$this->error('图片操作失败，信息修改出错','javascript:parent.location.reload();');
 					}else{
 						$data=$linkModel->where('id='.$id)->find();
 						$this->assign('data',$data);
@@ -171,30 +176,32 @@ C($config);//重新加载一遍配置文件
 						$data = array();
 					$data['id']=$id;
 					$data['url']=$url;
-					$data['remark']=$remark;
+					$data['remark']=$remark;  
 					$data['name']=$name;
-					if($delImg && $image)
+					if($delImg && $image){
 						unlink(WEBROOT.$image);
+						$image='';
+						$data['image']='';
+					}
 					if(!empty($_FILES)){
 						if($image)
 							unlink(WEBROOT.$image);
-						$info=$this->upload();
-					}
-					if($info){
-						$image='/Public/Uploads' . $info["savepath"] . $info["savename"];
-						$data['image']=$image;
-					}
-
+						$info=$this->upload('ad');
+						if($info){
+							$image='/Public/Uploads' . $info["savepath"] . $info["savename"];
+							$data['image']=$image;
+						}
+					}else
+						$info='';//没有图片时，强制定义为空，以便确认返回结果
 					$result=$adModel->data($data)->save();
-
-					if($result && $info)
-							$this->success('图片修改成功,广告修改成功','javascript:frameElement.dialog.close()');
+						if($result && (!empty($info)))
+							$this->success('图片修改成功,信息修改成功','javascript:parent.location.reload();');
+						elseif($result && (!empty($_FILES)) )
+							$this->success('图片上传失败，其他信息修改成功','javascript:parent.location.reload();');
 						elseif($result && $delImg)
-							$this->error('图片删除成功','javascript:frameElement.dialog.close()');
-						elseif($result)
-							$this->error('图片上传失败，文字信息修改成功','javascript:frameElement.dialog.close()');
+							$this->error('图片删除成功，其他信息修改成功','javascript:parent.location.reload();');
 						else
-							$this->error('操作失败','javascript:frameElement.dialog.close()');
+							$this->error('图片操作失败，信息修改出错','javascript:parent.location.reload();');
 
 				}else{
 					if($data)
@@ -217,19 +224,19 @@ C($config);//重新加载一遍配置文件
 		if(session('name')&&session('logged')){
 			switch ($type) {
 				case 'add':
-					$this->error('操作已经禁用','javascript:frameElement.dialog.close()');
+					$this->error('操作已经禁用','javascript:parent.location.reload();');
 					break;
 				case 'del':
-					$this->error('操作已经禁用','javascript:frameElement.dialog.close()');
+					$this->error('操作已经禁用','javascript:parent.location.reload();');
 					break;
 				case 'change':
 					if (IS_POST && $configModel->autoCheckToken($_POST)) {
 						$configInfo = array('id' => $id,  'value'=>addslashes($value),'remark'=>$remark);
 						$result=$configModel->data($configInfo)->save();
 						if($result)
-							$this->success('修改成功','javascript:frameElement.dialog.close()');
+							$this->success('修改成功','javascript:parent.location.reload();');
 						else
-							$this->error('操作出错','javascript:frameElement.dialog.close()');
+							$this->error('操作出错','javascript:parent.location.reload();');
 					}else{
 						if($id){
 							$data=$configModel->where('id='.$id)->find();
@@ -237,12 +244,12 @@ C($config);//重新加载一遍配置文件
 								$this->assign('data',$data);
 							$this->display();
 						}else
-							$this->error('操作已经禁用','javascript:frameElement.dialog.close()');
+							$this->error('操作已经禁用','javascript:parent.location.reload();');
 					}
 					break;
 				
 				default:
-					$this->error('操作已经禁用','javascript:frameElement.dialog.close()');
+					$this->error('操作已经禁用','javascript:parent.location.reload();');
 					break;
 			}
 		}
@@ -262,7 +269,7 @@ C($config);//重新加载一遍配置文件
 						if($password==$rePassword){
 							$result=$userModel->data(array('name'=>$userName,'password'=>md5($password) ) )->add();
 							if($result)
-								$this->success('添加成功','javascript:frameElement.dialog.close()');
+								$this->success('添加成功','javascript:parent.location.reload();');
 							else
 								$this->error('添加失败，请重新添加');
 						}
@@ -272,14 +279,14 @@ C($config);//重新加载一遍配置文件
 				case 'del':
 					if($userId)
 						$data=$userModel->where('id='.$userId)->select();
-					if($data['name']==session('name'))
-						$this->error('不能删除自己','javascript:frameElement.dialog.close()');
+					if($data && $data['name']==session('name'))
+						$this->error('不能删除自己','javascript:parent.location.reload();');
 					else
 						$result=$userModel->where('id='.$userId)->delete();
 					if($result)
-						$this->success('删除成功','javascript:frameElement.dialog.close()');
+						$this->success('删除成功','javascript:parent.location.reload();');
 					else
-						$this->error('操作失败','javascript:frameElement.dialog.close()');
+						$this->error('操作失败','javascript:parent.location.reload();');
 					break;
 				case 'change':
 					if(IS_POST && $userModel->autoCheckToken($_POST)){
@@ -292,18 +299,18 @@ C($config);//重新加载一遍配置文件
 											);
 							$result=$userModel->data($userInfo)->save();
 							if($result)
-								$this->success('修改密码成功','javascript:frameElement.dialog.close()');
+								$this->success('修改密码成功','javascript:parent.location.reload();');
 							else
-								$this->error('修改失败','javascript:frameElement.dialog.close()');
+								$this->error('修改失败','javascript:parent.location.reload();');
 						}else
-							$this->error('操作出错','javascript:frameElement.dialog.close()');
+							$this->error('操作出错','javascript:parent.location.reload();');
 					}else{
 						$data=$userModel->where('id='.$userId)->find();
 						if($data){
 							$this->assign('data',$data);
 							$this->display();
 						}else{
-							$this->error('操作出错','javascript:frameElement.dialog.close()');
+							$this->error('操作出错','javascript:parent.location.reload();');
 						}
 					}
 					break;
@@ -341,11 +348,11 @@ C($config);//重新加载一遍配置文件
 		session('logged',null);
 		$this->success('成功退出系统','login.html');
 	}
-	public function upload(){
+	public function upload($dirname){
 
 		$config = array(
-		    'maxSize'    =>    3145728,  
-		    'savePath'   =>    '/link/',  
+		    'maxSize'    =>    100*1024*1024,  //单位是b
+		    'savePath'   =>    '/'.$dirname.'/',  
 		    'saveName'   =>    array('date','Y-m-d-H-i-s'),  
 		    'rootPath'   =>    WEBROOT.'/Public/Uploads/',
 		    'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'), 
@@ -354,7 +361,6 @@ C($config);//重新加载一遍配置文件
 		);
 		$upload = new \Think\Upload($config);// 		
 	    $info   =   $upload->upload();   
-
 	    if(!$info) {
 	   		$return=false;// 上传错误提示错误信息  如果目录不可写也会出现无法上传的情况，请检查目录权限
 	   		\Think\Log::write(serialize($info));

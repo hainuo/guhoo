@@ -33,14 +33,14 @@
     <div class="loginform">
         <table align="center" cellpadding="0" cellspacing="0" class="l-table-edit">
         <empty name='data'>
-            <tr><td class="left" class="l-table-edit-td">name</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="name" name="name" data-rule="required;length[1~35, true]" /></td><td></td></tr>
+            <tr><td class="left" class="l-table-edit-td">name</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="name" name="name" data-rule="length[1~35, true]" /></td><td></td></tr>
         <else />
-            <tr><td class="left" class="l-table-edit-td">name</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="name" name="name" value="{$data.name}" data-rule="required;length[1~35, true]" /><br />name用来展示在前台，友好信息</td><td></td></tr>  
+            <tr><td class="left" class="l-table-edit-td">name</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="name" name="name" value="{$data.name}" data-rule="length[1~35, true]" /><br clear="all" />name用来展示在前台，友好信息</td><td></td></tr>  
         </empty>
-        <tr><td class="left"  class="l-table-edit-td">url</td><td  class="l-table-edit-td"><input type="text" class="loginform_input" id="url" name="url" value="<notempty name='data'>{$data.url}</notempty>" data-rule="url：required;url;" /></td><td><notempty name='data'><input type="hidden" name="id" value="{$data.id}"></notempty></td></tr>
+        <tr><td class="left"  class="l-table-edit-td">url</td><td  class="l-table-edit-td"><input type="text" class="loginform_input" id="url" name="url" value="<notempty name='data'>{$data.url}</notempty>" data-rule="url;" /></td><td><notempty name='data'><input type="hidden" name="id" value="{$data.id}"></notempty></td></tr>
         <notempty name="data.image"><tr><td></td><td><input type="checkbox" name="delImg" /> 删除图片 </td><td></td></tr></notempty>
         <tr><td class="left"  class="l-table-edit-td">image</td><td  class="l-table-edit-td"><assign name="image" value="$data.image" /><empty name='image'><input type="file" name="image" class="loginform_input"  onchange="" /><else /><a href="{$data.image}" target="_blank"><img src="{$data.image}" width="90px" ></a> </empty></td><td></td></tr>
-        <tr><td class="left"  class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><textarea name="remark" data-rule="required;length[1~, true]" cols="30" rows="5">{$data.remark}</textarea><br />此处填写广告位址</td><td></td></tr>
+        <tr><td class="left"  class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><textarea name="remark" data-rule="required;length[1~, true]" cols="30" rows="5">{$data.remark}</textarea><br />此处填写广告位址，需要图片尺寸，<br>图片大小不能超过5M，remark信息最好不要清空。</td><td></td></tr>
         </table>
         <div class="loginform_row"><img id="goal" border="0" /></div>
         <div class="loginform_row">

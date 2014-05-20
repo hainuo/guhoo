@@ -39,7 +39,8 @@
         </empty>
         <tr><td class="left"  class="l-table-edit-td">url</td><td  class="l-table-edit-td"><input type="text" class="loginform_input" id="url" name="url" value="<notempty name='data'>{$data.url}</notempty>" data-rule="url：required;url;remote[{:U('/Admin/Index/linkManage/type/checkUrl')}, url, id]" /></td><td><notempty name='data'><input type="hidden" name="id" value="{$data.id}"></notempty></td></tr>
         <tr><td class="left"  class="l-table-edit-td">image</td><td  class="l-table-edit-td"><assign name="image" value="$data.image" /><empty name='image'><input type="file" name="image" class="loginform_input"  onchange="" /><else /><img src="{$data.image}" width="90px"> </empty></td><td></td></tr>
-        <tr><td></td><td><notempty name="image"><input type="checkbox" name="delImg" /> 删除链接 </notempty></td><td></td></tr>
+        <tr><td></td><td><notempty name="image"><input type="checkbox" name="delImg" /> 删除图片 </notempty></td><td></td></tr>
+        <tr><td></td><td>图片大小 宽90px高20px  大小不能超过5M</td><td></td></tr>
         </table>
         <div class="loginform_row"><img id="goal" border="0" /></div>
         <div class="loginform_row">

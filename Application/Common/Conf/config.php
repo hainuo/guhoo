@@ -9,13 +9,12 @@ return array(
 	'DB_PWD'    => 'root', // 密码
 	'DB_PORT'   => 3306, // 端口
 	'DB_PREFIX' => 'taobao_', // 数据库表前缀 
-	'SHOW_PAGE_TRACE' =>true, 
     'DEFAULT_MODULE'     => 'Home', //默认模块
     'DEFAULT_CONTROLLER'    =>  'Index',//默认控制器
     'DEFAULT_ACTION'        =>  'index', // 默认操作名称
     'MODULE_ALLOW_LIST'    =>    array('Home','Admin'),
     'URL_MODEL'          => '2', //URL模式
-    'URL_CASE_INSENSITIVE' =>true, // 默认false 表示URL区分大小写 true则表示不区分大小写
+    'URL_CASE_INSENSITIVE' =>false, // 默认false 表示URL区分大小写 true则表示不区分大小写
     'URL_HTML_SUFFIX'       =>  'html',  // URL伪静态后缀设置
     //数据库缓存和数据缓存 需要进一步对数据进行设置
     'DB_SQL_BUILD_CACHE'    =>  true, 
