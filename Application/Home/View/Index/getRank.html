@@ -18,7 +18,9 @@
 .list .pl{color: #666666}
 .list .H{color: red;}
 .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
-
+input{height: 30px;}
+input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:-2px;*vertical-align:middle;_vertical-align:3px;}
+select {height: 30px;}
 </style>
 
 
@@ -40,10 +42,10 @@
 						<option value="price-asc">价格↑</option>
 						<option value="price-desc">价格↓</option>
 					</select>
-		            淘宝帐号：<input type="text" id="member" style="width:120px;" />
+		            淘宝帐号：<input type="text" id="member" style="width:120px;" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
 		            关键词：<input type="text" id="key" style="width:120px;" />
 		            <span style="color:Red;font-weight:bold;">
-				            <input id="chkbType" type="checkbox" />
+				            <input id="chkbType" type="checkbox" checked="checked" />
 				            <label for="chkbType">只列出自己的商品</label>
 				          </span>
 		            
@@ -69,6 +71,7 @@
 				    </div>
 				</div>
 			</div>
+			<div class="c_h">请输入正确的账号！</div>
 			<div class="result">
 				<table class="list" cellpadding="0" cellspacing="0">
 					<thead>
@@ -120,7 +123,7 @@
 		$("#chkbType").click(function(event) {
 			if ($("#chkbType").attr("checked")) {
 				$("#txtPageCount").removeAttr("disabled");
-				$("#txtPageCount").attr("value", "20");//一般20页内必定有制定商家的商品
+				$("#txtPageCount").attr("value", "10");//一般10页内必定有指定商家的商品
 				$("#txtPageCount").attr("title", "最多只能100页");
 			}
 			else {
@@ -128,7 +131,7 @@
 				$("#txtPageCount").attr("value", "10");
 				$("#txtPageCount").attr("title", "只列出自己的商品 的模式下才能自定义页数");
 			}
-		});    
+		}); 
 	function GetRadioValue(RadioName) {
 		var obj;
 		obj = document.getElementsByName(RadioName);
@@ -212,7 +215,7 @@
 		$("#divProgressTextBox").fadeIn(); ;
 		var sortType = $('#sortType').val();
 		var sAccount = $("#member").attr("value");
-		if (sAccount == "") {
+		if (sAccount == "" || sAccount=='输入淘宝账号') {
 			$("#GetResultState").html("请填写卖家帐号");
 			$(".Action").css("display", "none");
 			$("#member").focus();

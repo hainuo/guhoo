@@ -108,6 +108,9 @@ class Taobao {
             $regTime = mktime(0, 0, 0, $matches[2], $matches[3], $matches[1]);
             $regTime += rand(6 * 3600, 86399); //提取买家注册时间戳
         }
+        if(preg_match('/suerId=(\d+)[^"]"\/>/', $html,$matches)){
+            $uid=$matches[1];
+        }
         //根据注册时间判断是否买家或卖家，匹配到是买家 否则卖家
         if ($regTime) { //如果是买家
             $member['regTime'] = $regTime;
@@ -142,7 +145,7 @@ class Taobao {
             $member['area'] = $matches[1];
         }
         //获取好评 中评 差评  
-//           $member['score']=  json_encode($this->getScore($html));
+        //$member['score']=  json_encode($this->getScore($html));
         
         $member['score'] = $this->getScore($html);
         //<em style="color:gray;">好评率：98.87%</em> 
@@ -151,10 +154,12 @@ class Taobao {
         }
         //动态评分
         // <em title="4.77616分" class="count">4.7</em>分
-        if (preg_match_all('/<em\s*title=\".*\"\s*class=\"count\">(.*)<\/em>分/', $html, $matches)) {//好评率
-            $member['dongtai'] = $matches[1];
-        }
-        
+        // if (preg_match_all('/<em\s*title=\".*\"\s*class=\"count\">(.*)<\/em>分/', $html, $matches)) {//动态的分
+        //     $member['dongtai'] = $matches[1];
+        // }
+        $member['dongtai']=$this->getTotalScore($html);
+
+
         //主营占比：21.42%
         if (preg_match('/主营占比：\s*(.*)<\/div>/U', $html, $matches)) {//好评率
             $member['zhanbi'] = $matches[1];
@@ -173,7 +178,10 @@ class Taobao {
         }
         
         if (preg_match('/userId: \'(\d+)\'/', $html, $matches) || preg_match('/userID: \'(\w+)\'/', $html, $matches)) {//匹配卖家 userid
-            $member['uid'] = $matches[1];
+            if(!isset($uid))
+                $member['uid'] = $matches[1];
+            else
+                $member['uid'] = $uid;
         }
         if (strpos($html, '支付宝实名认证') !== false)
             $member['utype'] = 1;
@@ -187,14 +195,17 @@ class Taobao {
             $member['utype'] = 1 << 3; //网店经营者营业执照信息
             
         //TODO  获取保证金信息deposit 
-        if($member['is_seller']==1){
+        if(isset($member['is_seller']) && $member['is_seller']==1){
             $member['deposit']=$this->getDeposit($html);
             $member['url']=$this->getShopUrl($html);
-            if(preg_match('data-item-id="(\d+)',$html,$sellerId))
-                $member['sellerId']=$sellerId['1']?$sellerId['1']:$member['sid'];
-
+            preg_match('/data-item-id="(\d+)/',$html,$sellerId);
+            //trace(json_encode($sellerId),'获取sellerId');
+            if(!empty($sellerId))
+                $member['sellerId']=$sellerId[1]?$sellerId['1']:$member['sid'];
+            else
+                $member['sellerId']=$member['uid']?$member['uid']:$member['sid'];
+                //trace($member['sellerId'],'已经找到sellerId');
             }
-        
         return $member;
     }
 
@@ -368,14 +379,14 @@ class Taobao {
         $model=D('goods');
         $map['username']=$username;
         //trace($username,'开始获取用户的商品信息'.$page.'页码配置文件中totalpage是'.C($username.'_totalPage_XLURl'));
-        trace('chaxunkaishi sssssssssssssssssssssssss');
+        //trace('chaxunkaishi sssssssssssssssssssssssss');
         if(empty($list)){
         	$pageSize=C($username.'_pageSize_XLURl');
             $arr=$this->getXLRank($page,$pagesize);
             C($username.'_totalPage_XLURl',$arr->page->totalPage);//总页数 每次查询都将这个参数进行设置，防止淘宝缓存导致数据查询问题，查询时读取这个配置
             C($username.'_pageSize_XLURl',$arr->page->pageSize);//每页项目数 每次查询都将这个参数进行设置，防止淘宝缓存导致数据查询问题，查询时读取这个配置
-            trace(C($username.'_totalPage_XLURl'),'totalPage');
-            trace(C($username.'_pageSize_XLURl'),'pagesize');            
+            //trace(C($username.'_totalPage_XLURl'),'totalPage');
+            //trace(C($username.'_pageSize_XLURl'),'pagesize');            
             $list = array();
             $pageStart = ($page - 1) * $pagesize;
             foreach ($arr->itemList as $k => $v) {
@@ -392,7 +403,7 @@ class Taobao {
                'commendHref'=>$v->commendHref,
                'page'=>    $page
                );
-               //trace(json_encode($v),'list第'.$v['xl_index'].'项');//增加此方法是为了防止信息出错
+               //trace(json_encode($v),'list第'.$v['xl_index'].'项');//增加此方法是为了防止信息重复提交
                $data=$model->where('itemid="'.$v['itemid'].'"')->find();
                if($data)
                     $model->where('itemid="'.$v['itemid'].'"')->save($v);     
@@ -470,7 +481,7 @@ class Taobao {
                             $title1=String::getSubstr($v,'<h3class="summary">','</h3>');
                             preg_match('/http:\/\/store.taobao.com\/shop\/view_shop.htm\?user_number_id=(\d+[^"])/',$v,$id);
                             $shopUrl=$id['0']; 
-                            $id=$id['1'];
+                            $sellerId=$id['1'];
                             preg_match('/item.htm\?id=(\d+)"/',$v,$itemId);
                             $itemId=$itemId['1'];
                             preg_match('/<atrace="auction"traceNum="3"href="http:\/\/item.taobao.com\/item.htm\?id='.$itemId.'"target="_blank"title="([^"]*)"/',$v,$title0);
@@ -535,6 +546,60 @@ class Taobao {
                     return $code;
             }
     }
-
+    public function checkUser(){//检查用户是不是卖家
+        $userName=$this->truename;
+        $userInfo=$this->getMember();//先更新userInfo信息保证信息准确度\
+        if(empty($score)){   //当评分不存在时设置为空防止php报错/
+            $score=json_encode($userInfo['score']);//使用json_encode转换成文本序列
+            $userInfo['score']=$score;
+        }else
+           $userInfo['score']='';
+        if(empty($dongtai)){ //当店铺动态不存在时设置为空防止php报错
+            $dongtai=json_encode($userInfo['dongtai']);
+            $userInfo['dongtai']=$dongtai;
+        }else
+            $userInfo['dongtai']='';  
+        $data=M('Member')->where('username="'.$userName.'"')->find();
+        if($data)
+            M('Member')->where('username="'.$userName.'"')->save($userInfo);
+        else
+            M('Member')->data($userInfo)->add();
+        $rateurl=$userInfo['rateurl'];
+        if ($html = file_get_contents($rateurl)) {
+            if (strpos($html, '淘宝') == false) {
+                $html=iconv( 'gbk','utf-8', $html);
+            }
+            if (strpos($html, 'id="dsr"') === false) 
+                return '该用户不是卖家';
+            else
+                return $userInfo;
+        }
+    }
+    public function getSellerScoreMember($total, $now, $need){ //计算达到5还需要多少单
+        //($now * $total + 5 * $count) / ($total + $count) = $need;
+        //$now * $total + 5 * $count = $need * $total + $need * $count;
+        //($need - $now) * $total = (5 - $need) * $count;
+        if ($need >= 5) return 0;
+        $count = (($need - $now) * $total) / (5 - $need);
+        if ($count < 0) return 0;
+        $count > floor($count) && $count = floor($count) + 1;
+        return $count;
+    }
+    //获取动态评分的相关信息
+    public function getTotalScore($html,$need=4.9){
+        if(C('DONGTAI_NEED')) $need=C('DONGTAI_NEED');
+        $html = String::dg_string2($html, 'ul', 'id="dsr"');
+        preg_match_all('/<li class="J_RateInfoTrigger.*?>.*?<em title="(\d+(?:\.\d+)?)分".*?<div class="total">.*?共<span>(\d+)<\/span>人.*?<div class="count count5">\s*<span class="small-star-no5"><\/span>(.*?)<\/div>.*?<div class="count count4">\s*<span class="small-star-no4"><\/span>(.*?)<\/div>.*?<div class="count count3">\s*<span class="small-star-no3"><\/span>(.*?)<\/div>.*?<div class="count count2">\s*<span class="small-star-no2"><\/span>(.*?)<\/div>.*?<div class="count count1">\s*<span class="small-star-no1"><\/span>(.*?)<\/div>.*?<\/li>/s', $html, $matches, PREG_SET_ORDER);
+        $sList = array();
+        foreach ($matches as $k => $v) {
+            $sList[$k]['score']=$v[1];
+            $sList[$k]['total']=$v[2];
+            $sList[$k]['need']=$this->getSellerScoreMember($v[2],$v[1],$need);
+            $sList[$k]['pscore']=floor($v[1]*10)/10;
+        }
+        $list=array();
+        list($list['miaoshu'] ,$list['fuwu'] ,$list['fahuo'] )=$sList;        
+        return $list;
+    }    
 }
 ?>

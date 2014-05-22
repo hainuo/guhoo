@@ -1,6 +1,11 @@
 <include file="Public/header" />
-<div class="content">
-        <div class="detail">
+<style type="text/css">
+.backpicture{height: 350px;width: auto;margin: 0px auto;background: url(__PUBLIC__/images/member.jpg) no-repeat;}
+.backpicture .detail{position: relative;top: 150px;}
+
+</style>
+<div class="content <empty name="userInfo">backpicture</empty>">
+        <div class="detail ">
                 <div class="other-i logo">
                 </div>
                 <form class="search" action="__SELF__" method="get">
@@ -88,6 +93,7 @@
                                                                 支付宝认证
                                                         </font>
                                                 </li>
+<notempty name='data.zhuying'>
                                                 <li>
                                                         <span>
                                                                 主营行业：
@@ -96,8 +102,10 @@
                                                                 {$data['zhuying']}
                                                         </font>
                                                 </li>
+</notempty> 
                                         </ul>
                                         <ul>
+<notempty name="data.area">
                                                 <li>
                                                         <span>
                                                                 所在地区：
@@ -106,6 +114,8 @@
                                                                 {$data['area']}
                                                         </font>
                                                 </li>
+</notempty>
+<notempty name='data.zhanbi'>
                                                 <li>
                                                         <span>
                                                                 主营占比：
@@ -114,6 +124,7 @@
                                                                 {$data['zhanbi']}
                                                         </font>
                                                 </li>
+</notempty>                                                
                                         </ul>
                                         <ul>
                                                 <li>
@@ -128,6 +139,14 @@
                                                         </span>
                                                 </li>
                                         </ul>
+                                        <div class="clf">
+                                                <span>
+                                                        查看商品：
+                                                </span>
+                                                <font>
+                                                        <a href="/Index/getWeight/username/{$data.username}.html" target="_blank">http://{$Think.server.HTTP_HOST}/username/{$data.username}.html</a>
+                                                </font>
+                                        </div>                                        
                                         <div class="clf">
                                                 <span>
                                                         详细信息：
@@ -175,6 +194,9 @@
                                                 </li>
                                                 <!--<li class="f-size-12 f-green">（此帐号已开通淘宝店，买家信用明细无法查询！）</li>-->
                                         </ul>
+                                        <empty name='data.is_seller'>
+                                        该用户不是卖家！
+                                        <else />
                                         <ul class="u">
                                                 <li>
                                                         <strong>
@@ -223,6 +245,7 @@
                                                 </li>
                                                 <!--<li class="f-size-12 f-green"></li>-->
                                         </ul>
+                                        </empty>
                                         <div class="clf">
                                         </div>
                                         <!--<div class="position-info other-i msg-green">

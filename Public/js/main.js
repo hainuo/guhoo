@@ -63,18 +63,18 @@ $(function(){
 // 			$('.numbers').prepend('<i class="numbers-i wh n'+num[len-k-1]+'"></i>');
 // 			i++;
 // 			if (i%3==0 && i!=len)
-// 				$('.numbers').prepend('<img src="/Static/images/Comma.png" />');
+// 				$('.numbers').prepend('<img src="/Public/images/Comma.png" />');
 // 		}
 		
 // 	});
 // 	setTimeout(getSearchNum,6000);
 // }
 
-//function get_rate(){
-//	$.get('/TaobaoLook/get_rate?username='+$('#txtKey').val(),{},function(request){
-//		$('.msg-blue-u').html(request);
-//	});
-//}
+function get_rate(){
+	$.get('/TaobaoLook/get_rate?username='+$('#txtKey').val(),{},function(request){
+		$('.msg-blue-u').html(request);
+	});
+}
 
 /*获取URL制定参数*/
 function request(paras){ 

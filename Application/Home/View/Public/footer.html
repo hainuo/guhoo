@@ -6,7 +6,7 @@
 	1、当买家一周信用点数超出20点，有可能这个号已经被淘宝列入黑名单，所以他再拍的东西，就有可能被列为炒作，卖家有降权危险。 <br>
 	2、注册时间小于30天的，容易给他人中评、差评，或有可能是骗子，请谨慎交易！ <br>
 	3、如果买家给他人中评或差评过多的，或喜欢随随便便就给他人中、差评的买家。请谨慎交易！免得惹来不必要的麻烦。<br>
-	4、每一次查询要大麦都会生成一个记录,方面其他用户查看。详情请点击买家<a target="_blank" href="/Index/getHistory.html" title='历史查询记录'>历史查询记录</a>或<a target="_blank" title='淘宝隐形降权查询' href="/Index/getWeight.html">淘宝隐形降权查询</a>
+	4、每一次查询本站都会生成一个记录,方面其他用户查看。详情请点击买家<a target="_blank" href="/Index/getHistory.html" title='历史查询记录'>历史查询记录</a>或<a target="_blank" title='淘宝隐形降权查询' href="/Index/getWeight.html">淘宝隐形降权查询</a>
 	</div>
 </div>
 <!-- 尾巴 -->
@@ -29,21 +29,28 @@
 				</td>
 			</tr>
 		</table>
+		<div id="bdshare">{:C('baidu_share_code')}</div>		
 		<div class="font">
+							{:showLink()}
 			<p class="first">
-				<a target="_blank" href="#">联系我们</a> | <a href='javascript:void(0);'>加入收藏</a> | <a href="#">添加桌面</a>
-			</p>
-			<p>
-				{:C('beian')}
+				<a target="_blank" href="#">联系我们</a> | <a href='javascript:void(0);'>加入收藏</a> | <a href="#">添加桌面</a><a id="goTopBtn" style="display: none; right: 50px;"></a>
 			</p>
 			<p>
 				{:C('footer_code')}
 			</p>
+			<p>
+				{:C('beian')}
+			</p>				
 		</div>
 	</div>
-	{:showLink()}
+	<div class="history">
+		<h4>最近查询</h4>
+		<ul class="historyUl">
+			{:showLastHistory()}
+		</ul>
+	</div>
 </div>
-
+<a id="goTopBtn" ></a>
 <!-- 加入收藏 -->
 <script>
 $(function(){
@@ -68,7 +75,25 @@ Favorite = function Favorite(sURL, sTitle) {
 
     }
 }
+function bindGoTop() {
+    $(window).scroll(function () {
+        var sc = $(window).scrollTop();
+        //var rwidth=$(window).width()
+        if (sc > 0) {
+            $("#goTopBtn").css("display", "block");
+            $("#goTopBtn").css("right", "50px")
+        } else {
+            $("#goTopBtn").css("display", "none");
+        }
+    })
+
+    $("#goTopBtn").click(function () {
+        var sc = $(window).scrollTop();
+        $('body,html').animate({scrollTop: 0}, 500);
+    });
+}
+bindGoTop();
 </script>
-{:C('baidu_share_code')}
+
 </body>
 </html>

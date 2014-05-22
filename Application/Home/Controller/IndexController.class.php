@@ -23,13 +23,14 @@ class IndexController extends Controller {
             $url="/Index/getMember/username/".$userName;
             $this->redirect($url);
         }
-		if($userName){
+		if($userName && ($userName != '输入淘宝帐号')){
 			if($cache=S($userName.'-userInfo'))
                 $userInfo=$cache;
             else
                 $userInfo=$this->getUserInfo($userName);
 
             $this->assign('data',$userInfo);
+            $this->assign('userInfo',$userInfo);
             $this->assign('display','1');//用于显示用户信息模块
             //TODO display 设置值是因为在测试中发现tp模板中无法对username的值判断空，所以设置了，可以进行修改，但必须更改模板中相关代码
 		}else{
@@ -111,7 +112,32 @@ class IndexController extends Controller {
             $this->display();
             }
     }
-    
+    //动态评分页面
+    public function getDongtai(){
+        $userName=I('request.username');        
+        if(preg_match('/\?.*=/',__SELF__,$url)){
+            $url="/Index/getDongtai/username/".$userName;
+            $this->redirect($url);
+        }        
+        if($userName && ($userName != '输入淘宝帐号')){
+            $Taobao=new \Org\Util\Taobao($userName);
+            $checked=$Taobao->checkUser();
+            if($checked!='该用户不是卖家'){
+                //数据转换  将data.score 转换成序列 使用json_decode转换成数组
+                $score=json_decode($checked['score']);
+                $checked['score']=$score;
+                    
+                $dongtai=json_decode($checked['dongtai']);
+                $checked['dongtai']=$dongtai;                
+            }
+            $this->assign('userInfo',$checked);
+            $this->assign('data',$checked);            
+        }
+        $this->assign('count',$this->getTotalCount());
+        $this->seo();
+        $this->display();
+    }
+    //快递查询页面
     public function getExpress(){
         $this->assign('count',$this->getTotalCount());
         $this->seo();
@@ -145,7 +171,16 @@ class IndexController extends Controller {
         //trace(serialize($count),'总次数数据');
         $count['val'] +=1;
         $nuberModel->save($count);
-        return $count['val'];
+        //return $count['val'];
+        $code='';
+        $val=str_split($count['val']);
+        foreach($val as $k=>$v){
+            $code .='<i class="numbers-i wh n'.$v.'"></i>';
+            if($k!=0 && $k%3==0)
+                $code .='<img src="/Public/images/Comma.png" />';
+        }
+        return $code;
+
     }
     
     /**
@@ -165,9 +200,14 @@ class IndexController extends Controller {
                 if($list)
                     $goodNum=count($list);
                 else{
-                    $page=$taobao->getXLRank()->page;
-                    $list=$this->getAllGoodS($userName,$page->totalPage,$page->pageSize);
-                    $goodNum=count($list);
+                        $pageData=$taobao->getXLRank();
+                        if(isset($pageData) && is_object($pageData)){
+                            $page=$pageData->page;
+                            $list=$this->getAllGoodS($userName,$page->totalPage,$page->pageSize);
+                            $goodNum=count($list);
+                        }else{
+                            $goodNum=0;
+                        }
                     }
                 if(!empty($data)){
                     //trace('username='.$map['username'].'存在','信息');
@@ -180,22 +220,33 @@ class IndexController extends Controller {
 //  我这里反其道行之，先判断前面两个条件是否达成  如果有一个不行则直接读取淘宝数据，并插入数据库  如果有更好的方法请修改，并测试通过。
             if(empty($data) || $time-$expTime > 0)
                 {
-                    if(!empty($data))//数据过期时进行删除操作 
-                        $model->where($map)->delete();                    
-                    $data=$taobao->getMember();
+                    //if(!empty($data))//数据过期时进行删除操作   过期数据不再删除，而是直接更新 减少一个sql查询
+                    //    $model->where($map)->delete();                    
+                    $tbdata=$taobao->getMember();
                     //trace(json_encode($data),'输出data序列化数据');
-                    if($data){
+                    if($tbdata ){
                         //trace('创建数据库数据','信息');//跟踪方法测试是否数据准确
-                        $data['goodNum']=$goodNum;//创建商品数量栏
-                        $map=$data;//新变量，防止下面对data进行修改时，往模板中赋值出错。
+                        $tbdata['goodNum']=$goodNum;//创建商品数量栏
+                        $map=$tbdata;//新变量，防止下面对data进行修改时，往模板中赋值出错。
                         
-                        $score=json_encode($data['score']);//使用json_encode转换成文本序列
-                        $data['score']=$score;
-                                               
-                        $dongtai=json_encode($data['dongtai']);
-                        $data['dongtai']=$dongtai;
+                        if(empty($score)){   //当评分不存在时设置为空防止php报错/
+                            $score=json_encode($tbdata['score']);//使用json_encode转换成文本序列
+                            $tbdata['score']=$score;
+                        }else
+                            $tbdata['score']='';
+                        if(empty($dongtai)){ //当店铺动态不存在时设置为空防止php报错
+                            $dongtai=json_encode($tbdata['dongtai']);
+                            $tbdata['dongtai']=$dongtai;
+                        }else
+                            $tbdata['dongtai']='';     
                         //trace(json_encode($data),'data');
-                        $model->add($data);
+                        //先查询是否存在这个用户数据，没有则插入，有责更新
+                        if (!empty($data)) {
+                            $model->where('username="'.$userName.'"')->save($tbdata);
+                        } else {
+                            $model->add($tbdata);
+                        }
+                        
                         return $map;
                     }
                     else

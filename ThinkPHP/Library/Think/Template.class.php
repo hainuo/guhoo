@@ -560,6 +560,7 @@ class  Template {
             $args = explode('=',$varArray[$i],2);
             //模板函数过滤
             $fun = strtolower(trim($args[0]));
+var_dump($fun);
             switch($fun) {
             case 'default':  // 特殊模板函数
                 $name = '(isset('.$name.') && ('.$name.' !== ""))?('.$name.'):'.$args[1];

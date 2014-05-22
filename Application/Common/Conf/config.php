@@ -1,6 +1,7 @@
 <?php
 return array(
 	//'配置项'=>'配置值'
+    'SHOW_PAGE_TRACE'=>true,//显示页面调试信息
     //'RUNTIME_LITE_FILE'=> APP_PATH.'lite.php',  
 	'DB_TYPE'   => 'mysql', // 数据库类型
 	'DB_HOST'   => 'localhost', // 服务器地址

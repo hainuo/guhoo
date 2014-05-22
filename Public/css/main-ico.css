@@ -36,11 +36,13 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 .header-i.hover{background: url(/Public/images/header-hover.png) no-repeat;}
 .header-i.click{background: url(/Public/images/header-click.png) no-repeat;}
 .header-i.i1{background-position: 0px 0px;width:146px;height: 61px;}
-.header-i.i2{background-position: -172px 0px;width:119px;height: 61px;}
-.header-i.i3{background-position: -345px 0px;width:87px;height: 61px;}
-.header-i.i4{background-position: -518px 0px;width:58px;height: 61px;}
-.header-i.i5{background-position: -660px 0px;width:88px;height: 61px;}
-.header-i.i6{background-position: -811px 0px;width:60px;height: 61px;}
+.header-i.i2{background-position: -155px 0px;width:140px;height: 61px;}
+.header-i.i3{background-position: -330px 0px;width:90px;height: 61px;}
+.header-i.i4{background-position: -470px 0px;width:125px;height: 61px;}
+.header-i.i5{background-position: -610px 0px;width:140px;height: 61px;}
+.header-i.i6{background-position: -790px 0px;width:65px;height: 61px;}
+.header-i.i7{background-position: -898px 0px;width:45px;height: 61px;}
+.header-i.i8{background-position: -960px 0px;width:70px;height: 61px;}
 
 .other-i{background: url(/Public/images/other-i.png) no-repeat;display: inline-block;}
 .other-i.logo{background-position: 0px 0px;width:122px;height: 60px;}
@@ -84,11 +86,10 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 .two_link{font-size: 13px; width:100%}
 .two_link p{text-align: center; font-size: 14px;}
 .two_link a{color:#444444}
-/*baidu分享*/
-#bdshare{width: 480px;height: 25px;padding-left: 270px;}
 
-.footer{height:180px;width:100%;}
-.footer .detail{width:750px;margin:20px auto;text-align: center;font-size: 12px;}
+
+.footer{height:180px;width:900px;margin:30px auto;text-align: center;}
+.footer .detail{width:480px;text-align: center;font-size: 12px;float: left;}
 .footer .detail .first{margin-top: 20px;}
 .footer .detail p{margin-top: 10px;}
 .footer .number{height: 40px;margin: 0px auto;}
@@ -96,4 +97,16 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 .footer .number .total{float: left;margin-top: 5px;margin-right: 10px;}
 .footer .number .once{float: left;margin-top: 10px;margin-left: 10px;}
 .footer .numbers{float: left;}
-.footer .font,a{color:gray;}
+.footer .font a{color:gray;}
+.siteHeader{text-align: center;width: auto;}
+.footLink{width: auto}
+.footLink a{boder:0px ; margin: 5px;height: auto; color: #000000;display: inline-block;}
+.footLink a:hover{color: red;}
+div.footer .detail .font p.first{margin-top:5px}
+#bdshare{height: 25px;display: inline-block;margin: 0px auto;}
+#bdshare .bdsharebuttonbox{float: left;width: 280px;margin: 0px auto;}
+.two_link a{ margin: 1px 2px ;color: red; }
+div.history{width:350px;float: left;margin-left: 20px;border-left-width: 1px; border-left-style: dashed;border-left-color: #000000;padding-left: 30px;text-align: left;}
+div.history a{color: gray;font-size: 12px;}
+div.history ul li{float: left;margin-left: 10px;width: 100px;overflow: hidden;}
+li.more a{color: black;}

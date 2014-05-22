@@ -1,0 +1,143 @@
+<include file="Public/header" />
+<style>
+.content .detail{width: 900px;}
+.content .result{width: 100%;border: #f2f2f2 solid 1px;height: auto;background: white;position: relative;}
+.result .even{background-color: #f9f9f9}
+.result .odd{background-color: #fff}
+
+.c_h {font-size: 12px;border: 1px solid #c9c9c9;padding: 10px;margin-top: 30px;background-color: #f7faff}
+
+
+.list {width: 100%;border: 1px solid #c9c9c9;}
+.list thead tr th{background-color: #ececec;height: 37px;border-bottom: 2px solid #d3d3d3;}
+.list tr td{height: 41px;border-bottom: 1px solid #e5e5e4;font-size: 12px;text-align:center}
+.list tbody tr:hover{background: #fff8ec;border-bottom: 1px solid #e5dfd4;}
+.list .un a{color: #0077e9}
+.list .un a:hover{color: #f28813}
+.list .time{color:#a2a2a2;}
+.list .pl{color: #666666}
+.list .H{color: red;}
+.result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
+input{height: 30px;}
+input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:-2px;*vertical-align:middle;_vertical-align:3px;}
+select {height: 30px;}
+.main_01 {    line-height: 24px;}
+.headScore {background: none repeat scroll 0 0 #F4F4F4;	border-image: none;	overflow: hidden;	border-top-width: 1px;	border-right-width: 1px;	border-bottom-width: 0;	border-left-width: 1px;	border-top-style: solid;	border-right-style: solid;	border-bottom-style: none;	border-left-style: solid;	border-top-color: #E0E0E0;	border-right-color: #E0E0E0;	border-bottom-color: #E0E0E0;	border-left-color: #E0E0E0;}
+.headScore .scoreTitle {    border-right: 1px solid #E0E0E0;    color: #DE0A0E;    font-size: 15px;    font-weight: bold;    height: 35px;    line-height: 35px;    text-align: center;    width: 400px;}
+#divResultScore .headScore li {    float: left;}
+li {    list-style: none outside none;}
+.headScore .ggTitle {    color: #666666;    font-size: 15px;    font-weight: bold;    height: 35px;    line-height: 35px;    text-align: center;    width: 407px;}
+#divResultScore .headScore li {    float: left;}
+
+.itemScore {    background: none repeat scroll 0 0 #FFFFFF;    border: 1px solid #E0E0E0;    overflow: hidden;}
+
+.itemScore .scoreInfo {    border-right: 1px solid #E0E0E0;    height: 184px;    line-height: 50px;    width: 400px;}
+#divResultScore .itemScore .scoreInfo .clear {    height: 40px;}
+#divResultScore #msg_score {    color: #00A600;    font-family: 楷体;    font-size: 23px;    margin-left: 80px;}
+#divResultScore .itemScore .font_GG {	height:184px;}
+#divResultScore .itemScore li {    float: left;}
+
+.itemScore .font_GG p {    margin-left: 5px;font-size: 12px;}
+#divResultScore .itemScore .font_GG .tuijian {    color: red;    font-size: 13px;    font-weight: 600;}
+.rsRed{	color:#ff0000;	font-size:12px;	margin-left:0px;}
+#resultScore p{	padding-left:10px;	line-height:25px;}
+.ipt_s{	width:50px;	border-top:none;	border-left:none;	border-right:none;	border-bottom:1px solid #999;	color:#C30;	text-align:center;}
+</style>
+
+
+	<div class="content" >
+		<div class="detail" style='padding-top:45px;'>
+			<div class="other-i logo">
+			</div>
+			<form class="search" action="/Index/getDongtai.html" method="get">
+				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
+				<input class="index-input-s" type="text" id="txtKey" name="username" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
+				<input class="other-i button-s" id = 'btn' type="submit" value=""/>
+			</form>
+			<br clear="all" />
+			<div class="clf"></div>
+			<div class="c_h">
+温馨提示：输入淘宝卖家帐号，点击查询即可显示店铺的动态评分以及动态评分升级所需多少笔5分订单。
+			</div>		
+			<div class="result">
+				<div class="main_01" id="divResultScore">
+					<ul class="headScore">
+						<li class="scoreTitle"><span>店铺动态评分信息(鼠标移动至分数显示详细)</span></li>
+						<li class="ggTitle"><span>店铺动态评分直接影响宝贝的搜索排名！如何提高动态评分？</span></li>
+					</ul>
+					<ul class="itemScore">
+						<li class="scoreInfo" id="resultScore">
+							<div class="clear"></div>
+							<empty name="data">
+								<span id="msg_score">快点来了解店铺评分状况吧！</span>
+							<else />
+								<eq name='data' value='该用户不是卖家'>
+									<div style="margin-left:10px">该用户不是卖家</div>
+								<else />
+<assign name="dongtai" value="$data.dongtai" />
+<assign name="miaoshu" value="$dongtai:miaoshu" />
+<assign name="fuwu" value="$dongtai:fuwu" />
+<assign name="fahuo" value="$dongtai:fahuo" />
+<p><b>宝贝与描述相符：</b> <font color="blue" title="{$miaoshu->score}分">{$miaoshu->pscore}</font>分， 升<input type="text" id="ipt_s_0" class="ipt_s" data="{sid:0,now:<?php echo $miaoshu->score;?>,total:<?php echo $miaoshu->total;?>}" title="输入分数范围：4.65909-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_0">{$miaoshu->need}</font>单。</p>
+<p><b>卖家的服务态度：</b> <font color="blue" title="{$fuwu->score}分">{$fuwu->pscore}</font>分， 升<input type="text" id="ipt_s_1" class="ipt_s" data="{sid:1,now:<?php echo $fuwu->score;?>,total:<?php echo $fuwu->total;?>}" title="输入分数范围：4.69048-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_1">{$fuwu->need}</font>单。</p>
+<p><b>卖家发货的速度：</b> <font color="blue" title="{$fahuo->score}分">{$fahuo->pscore}</font>分， 升<input type="text" id="ipt_s_2" class="ipt_s" data="{sid:2,now:<?php echo $fahuo->score;?>,total:<?php echo $fahuo->total;?>}" title="输入分数范围：4.65116-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_2">{$fahuo->need}</font>单。</p>
+
+
+
+								</eq>
+							</empty>
+						</li>
+						<li class="font_GG">
+							<p>1、完善商品的描叙、提高服务态度，积极主动、简洁明了的解决顾客疑问，让顾客舒心购物!</p> 
+							<p>2、顾客拍下宝贝付款之后立即把快递单写好并在淘宝上面点击发货。</p>
+							<p>3、选择服务态度好、运送速度快的物流公司来合作。</p>
+							<p>4、顾客收到宝贝后，应主动进行售后服务，增加顾客对店铺的好感度并获好评且全打5分!</p>
+							<p>5、如果是新店，可邀请您的朋友关照下或联系我们，从而获得全5分好评!</p>
+							<p></p>
+						</li>
+					</ul>
+				</div>		
+
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+var propertychange = '';
+if($.browser.msie) {
+	propertychange = 'propertychange';
+} else {
+	propertychange = 'input';
+}
+ function  getSellerScoreMember(total, now, need){
+	if (need >= 5) return 'x';
+	count = ((need - now) * total) / (5 - need);
+	if (count < 0) return 'x';
+	if (count > Math.floor(count)) count = Math.floor(count) + 1;
+	return count;
+};
+ function getMember(obj){
+	var data = obj.attr('data');
+	var arr;
+	eval('arr='+data);
+	var val = obj.val().replace(/^\s+|\s+$/g, '');
+	if (/^\d+(?:\.\d+)?$/.test(val)) {
+		val = parseFloat(val);
+		if (val >= arr.now && val <= 5) {
+			$('#total_s_'+arr.sid).html(getSellerScoreMember(arr.total, arr.now, val));
+		} else {
+			$('#total_s_'+arr.sid).html('x');
+		}
+	} else {
+		$('#total_s_'+arr.sid).html('x');
+	}
+};
+function iniFunc(){
+	$('.ipt_s').bind(propertychange,function(){
+		getMember($(this));
+	}).bind('change', function(){
+		getMember($(this));
+	});
+};
+iniFunc();
+</script>
+<include file="Public/footer" />

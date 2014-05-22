@@ -19,7 +19,7 @@
     width: 330px;
 }
 .search .input-ico {
-    background: url("../images/input-ico.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/Public/images/input-ico.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     display: block;
     height: 33px;
     left: 5px;
@@ -32,7 +32,7 @@
     clear: both;
 }
 .header {
-    background: url("../images/header-background.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/Public/images/header-background.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
     height: 103px;
     width: 100%;
 }
@@ -43,7 +43,7 @@
 }
 .header .detail ul li {
     float: left;
-    margin-right: 50px;
+    margin-right: 10px;
     text-indent: -9999px;
 }
 .content {

@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
+<notempty name="userInfo">淘宝账号：【{$userInfo.username}】 - 主营：{$userInfo.zhuying} - <notempty name="userInf.googdNum">商品数量：{$userInfo.goodNum}</notempty> -</notempty>
 {$title}
 </title>
 <meta name="keywords" content="{$keywords}">
@@ -15,6 +16,7 @@
 <script type="text/javascript" src="__PUBLIC__/js/placeholder.js"></script>
 </head>
 <style>
+.header_logo{position: relative; float: left; top:25px;left:150px;background: url('__PUBLIC__/images/other-i.png') no-repeat scroll 0% 0% transparent; width: 122px; height: 60px;text-indent: -9999px;}
 .content .result{width: 100%;border: #f2f2f2 solid 1px;height: 360px;background: white;font-size:13px;}
 .result .left{width: 120px;height: 100%;border-right: #f2f2f2 1px solid;float: left;text-align: center;}
 .result .left .warn-ico{margin: 0 auto;width: 74px;padding:20px 0px;}
@@ -78,23 +80,36 @@
 .info-block .charge span {font-weight: 700;color: #F60;}
 .rank{vertical-align: text-top;}
 .numbers{font-size:30px;color:red;font:italic bold arial,sans-serif,微软雅黑;}
-#bdshare{width: auto;height: 25px;text-align:center;}
-.siteHeader{text-align: center;width: auto;}
-.footLink{width: auto;text-align: center;}
-.footLink a{boder:0px ; margin: 5px;height: 20px ;width: 80px;color: #000000;display: inline-block;}
-.footLink a:hover{color: red;}
+#goTopBtn {
+  z-index: 999;
+  position: fixed;
+  line-height: 36px;
+  width: 48px;
+  bottom: 35px;
+  height: 49px;
+  cursor: pointer;
+  display: none;
+  background: url(__PUBLIC__/images/gotop.png) no-repeat;
+}
+#goTopBtn:hover {
+  background-position: 48px 0;
+}
 </style>
 <body>
 <div class="siteHeader">{:showAd('siteHeader')} </div>
 <div class="header">
+	<!--neq name="ACTION_NAME" value="getMember"--> <div class="logo"><a class="header_logo" href="#">淘宝信誉查询</a></div>	<!--/neq-->
 	<div class="detail">
 		<ul>
-			<li ><a class="header-i <if condition="ACTION_NAME eq 'getMember'" > hover <else />deafult</if> i1" href="/">淘宝信誉查询</a></li>
-			<li ><a class="header-i <if condition="ACTION_NAME eq 'getWeight'" > hover <else />deafult</if>  i2" href="/Index/getWeight.html">淘宝隐形降权查询</a></li>
-			<li ><a class="header-i <if condition="ACTION_NAME eq 'getRank'" > hover <else />deafult</if>  i3" href="/Index/getRank.html">淘宝排名查询</a></li>
-			<li ><a class="header-i <if condition="ACTION_NAME eq 'getExpress'" > hover <else />deafult</if>  i4" href="/Index/getExpress.html">淘宝快递查询</a></li>
-			<li ><a class="header-i <if condition="ACTION_NAME eq 'getHistory'" > hover <else />deafult</if>  i5" href="/Index/getHistory.html">卖家查询记录</a></li>
-			<li ><a class="header-i deafult  i6" href="http://tb.wdfxy.com/" target="_blank">dddd</a></li>
+			<!--<li ><a class="header-i i1" href="/">淘宝信誉查询</a></li>-->
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getMember'" > hover <else /> deafult </if> i1" href="/">淘宝信誉查询</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getWeight'" > hover <else /> deafult </if>  i2" href="/Index/getWeight.html">淘宝隐形降权查询</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getRank'" > hover <else /> deafult </if>  i3" href="/Index/getRank.html">淘宝排名查询</a></li>
+			<li ><a class="header-i <eq name='ACTION_NAME' value='getDongtai'>hover <else /> deafult</eq>  i4" href="/Index/getDongtai.html">宝贝动态评分查询</a></li>
+			<li ><a class="header-i deafult  i5" href="#">宝贝上下架时间查询</a></li>
+			<li ><a class="header-i deafult  i6" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes">联系我们</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getExpress'" > hover <else /> deafult </if>  i7" href="/Index/getExpress.html">淘宝快递查询</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getHistory'" > hover <else /> deafult </if>  i8" href="/Index/getHistory.html">卖家查询记录</a></li>
 		</ul>
 	</div>
  </div>
