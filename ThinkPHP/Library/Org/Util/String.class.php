@@ -306,13 +306,13 @@ class string
         $flagBL = strlen($flagB);
         $rn = '';
         $a = ($b = 0);
-        trace('截取开始');
+        //trace('截取开始');
         if (($findA = strpos($data, $flagA, $start)) !== false) {
             $a = 1;
             $tmpA = $findA;
             $findB = $findA + $flagAL;
             $findA = $findB;
-            trace('成功进入');
+//            trace('成功进入');
             while ($a != $b) {
                 if (($findB = strpos($data, $flagB, $findB)) !== false) {
                     $b++;

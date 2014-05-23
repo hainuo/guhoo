@@ -546,35 +546,7 @@ class Taobao {
                     return $code;
             }
     }
-    public function checkUser(){//检查用户是不是卖家
-        $userName=$this->truename;
-        $userInfo=$this->getMember();//先更新userInfo信息保证信息准确度\
-        if(empty($score)){   //当评分不存在时设置为空防止php报错/
-            $score=json_encode($userInfo['score']);//使用json_encode转换成文本序列
-            $userInfo['score']=$score;
-        }else
-           $userInfo['score']='';
-        if(empty($dongtai)){ //当店铺动态不存在时设置为空防止php报错
-            $dongtai=json_encode($userInfo['dongtai']);
-            $userInfo['dongtai']=$dongtai;
-        }else
-            $userInfo['dongtai']='';  
-        $data=M('Member')->where('username="'.$userName.'"')->find();
-        if($data)
-            M('Member')->where('username="'.$userName.'"')->save($userInfo);
-        else
-            M('Member')->data($userInfo)->add();
-        $rateurl=$userInfo['rateurl'];
-        if ($html = file_get_contents($rateurl)) {
-            if (strpos($html, '淘宝') == false) {
-                $html=iconv( 'gbk','utf-8', $html);
-            }
-            if (strpos($html, 'id="dsr"') === false) 
-                return '该用户不是卖家';
-            else
-                return $userInfo;
-        }
-    }
+
     public function getSellerScoreMember($total, $now, $need){ //计算达到5还需要多少单
         //($now * $total + 5 * $count) / ($total + $count) = $need;
         //$now * $total + 5 * $count = $need * $total + $need * $count;

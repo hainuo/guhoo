@@ -16,7 +16,7 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 
 .f-l{float:left;}
 
-.beautiful{width:960px;margin:0 auto;padding-bottom:10px;}
+.beautiful{width:1020px;margin:0 auto;padding-bottom:10px;}
 
 .numbers-i{background: url(/Public/images/numbers.png) no-repeat;display:block;text-indent: -9999px;}
 .numbers-i.wh{height: 38px;width:23px;}
@@ -88,8 +88,8 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 .two_link a{color:#444444}
 
 
-.footer{height:180px;width:900px;margin:30px auto;text-align: center;}
-.footer .detail{width:480px;text-align: center;font-size: 12px;float: left;}
+.footer{height:180px;width:1020px;margin:30px auto;text-align: center;}
+.footer .detail{text-align: center;font-size: 12px;}
 .footer .detail .first{margin-top: 20px;}
 .footer .detail p{margin-top: 10px;}
 .footer .number{height: 40px;margin: 0px auto;}
@@ -106,7 +106,8 @@ div.footer .detail .font p.first{margin-top:5px}
 #bdshare{height: 25px;display: inline-block;margin: 0px auto;}
 #bdshare .bdsharebuttonbox{float: left;width: 280px;margin: 0px auto;}
 .two_link a{ margin: 1px 2px ;color: red; }
-div.history{width:350px;float: left;margin-left: 20px;border-left-width: 1px; border-left-style: dashed;border-left-color: #000000;padding-left: 30px;text-align: left;}
+div.history{margin-left: 20px;padding-left: 30px;text-align: center;}
 div.history a{color: gray;font-size: 12px;}
-div.history ul li{float: left;margin-left: 10px;width: 100px;overflow: hidden;}
+div.history ul{direction: inherit;display: inline-block;margin-top: 10px;}
+div.history ul li{max-width: 80px;overflow-x: hidden;display: inline-block;margin-left: 10px;}
 li.more a{color: black;}

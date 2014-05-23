@@ -29,9 +29,16 @@
 				</td>
 			</tr>
 		</table>
-		<div id="bdshare">{:C('baidu_share_code')}</div>		
+		<div id="bdshare">{:C('baidu_share_code')}</div>
+        <div class="history">
+            <ul class="historyUl">
+                <li>最近查询</li>
+                {:showLastHistory()}
+            </ul>
+            <br clear="all" />
+        </div>
 		<div class="font">
-							{:showLink()}
+
 			<p class="first">
 				<a target="_blank" href="#">联系我们</a> | <a href='javascript:void(0);'>加入收藏</a> | <a href="#">添加桌面</a><a id="goTopBtn" style="display: none; right: 50px;"></a>
 			</p>
@@ -40,15 +47,11 @@
 			</p>
 			<p>
 				{:C('beian')}
-			</p>				
+			</p>
+            {:showLink()}
 		</div>
 	</div>
-	<div class="history">
-		<h4>最近查询</h4>
-		<ul class="historyUl">
-			{:showLastHistory()}
-		</ul>
-	</div>
+
 </div>
 <a id="goTopBtn" ></a>
 <!-- 加入收藏 -->
