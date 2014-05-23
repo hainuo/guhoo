@@ -36,7 +36,13 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 .header-i.hover{background: url(/Public/images/header-hover.png) no-repeat;}
 .header-i.click{background: url(/Public/images/header-click.png) no-repeat;}
 .header-i.i1{background-position: 0px 0px;width:146px;height: 61px;}
-.header-i.i2{background-position: -155px 0px;width:140px;height: 61px;}
+
+.header-i.i2 {
+    background-position: -165px 0px;
+    width: 125px;
+    height: 61px;
+}
+
 .header-i.i3{background-position: -330px 0px;width:90px;height: 61px;}
 .header-i.i4{background-position: -470px 0px;width:125px;height: 61px;}
 .header-i.i5{background-position: -610px 0px;width:140px;height: 61px;}
@@ -103,11 +109,39 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 .footLink a{boder:0px ; margin: 5px;height: auto; color: #000000;display: inline-block;}
 .footLink a:hover{color: red;}
 div.footer .detail .font p.first{margin-top:5px}
-#bdshare{height: 25px;display: inline-block;margin: 0px auto;}
+
+#bdshare {
+    height: 25px;
+    display: inline-block;
+    margin: 0px auto;
+    *width: 300px;
+    text-align: center;
+}
+
 #bdshare .bdsharebuttonbox{float: left;width: 280px;margin: 0px auto;}
 .two_link a{ margin: 1px 2px ;color: red; }
-div.history{margin-left: 20px;padding-left: 30px;text-align: center;}
+
+div.history {
+    margin-left: 20px;
+    padding-left: 30px;
+    text-align: center;
+    min-height: 18px;
+}
+
 div.history a{color: gray;font-size: 12px;}
-div.history ul{direction: inherit;display: inline-block;margin-top: 10px;}
-div.history ul li{max-width: 80px;overflow-x: hidden;display: inline-block;margin-left: 10px;}
+
+div.history ul {
+    display: inline-block;
+    margin: 10px auto;
+    text-align: center;
+}
+
+div.history ul li {
+    min-width: 50px;
+    max-width: 80px;
+    overflow-x: hidden;
+    display: inline;
+    margin-left: 10px;
+}
+
 li.more a{color: black;}

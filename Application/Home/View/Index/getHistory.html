@@ -10,11 +10,16 @@
 .list thead tr th{background-color: #ececec;height: 37px;border-bottom: 2px solid #d3d3d3;}
 .list tr td{height: 41px;border-bottom: 1px solid #e5e5e4;font-size: 12px;text-align:center}
 .list tbody tr:hover{background: #fff8ec;border-bottom: 1px solid #e5dfd4;}
-.list .un{width: 100px;}
-.list .bscore{width:100px;}
+
+/*.list .un{width: 100px;}*/
+/*.list .bscore{width:100px;}*/
 .list .un a{color: #0077e9}
 .list .un a:hover{color: #f28813}
-.list .time{color:#a2a2a2;width: 150px;}
+
+.list .time {
+    color: #a2a2a2; /*width: 150px;*/
+}
+
 .list .pl{color: #666666}
 .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
 
@@ -51,7 +56,6 @@
 							<td>
 <notempty name='vo.score'>
 <?php $score=json_decode($vo['score']);?>
-							<ul class="f-size-12 f-gray">
                                                 <!--li>
                                                         <a href="{$vo.rateurl}" target="_blank"><span class="other-i good"></span><font>好评</font><p style="color: red; font-weight: bold;text-align:center;">
                                                         {$score.0.0+$score.1.0+$score.2.0+$score.3.0}
@@ -59,19 +63,15 @@
 
                                                         </p></a>
                                                 </li-->
-                                                <li>
-                                                        <a href="{$vo.rateurl}" target="_blank"><span class="other-i normal"></span><font>中评</font><span style="color: #F5CC04; font-weight: bold;text-align:center;">
+
+    <a href="{$vo.rateurl}" target="_blank"><span class="other-i normal"></span><font>中评</font><span style="color: #F5CC04; font-weight: bold;text-align:center;">
                                                         <?php echo $score[0][1]+ $score[1][1]+$score[2][1]+$score[3][1];?>
                                                         	
                                                         </span></a>
-                                                </li>
-                                                <li>
                                                         <a href="{$vo.rateurl}" target="_blank"><span class="other-i bad"></span><font>差评</font><span style="color: black; font-weight: bold;text-align:center;">
                                                         <?php echo $score[0][2]+ $score[1][2]+$score[2][2]+$score[3][2];?>
                                                         </span></a>
-                                                </li>
-                                                <!-- <li><a href="http://favorite.taobao.com/collect_item_relation---33454965-0.htm" target="_blank"><span class="other-n"></span><font>收藏</font><p style="color: #67bbfe; font-weight: bold;text-align:center;">2901</p></a></li> -->
-                                        </ul>
+
 </notempty>                                        </td>
 							<td class="time">{$vo.create_time}</td>
 						</tr>

@@ -80,6 +80,7 @@
 .info-block .charge span {font-weight: 700;color: #F60;}
 .rank{vertical-align: text-top;}
 .numbers{font-size:30px;color:red;font:italic bold arial,sans-serif,微软雅黑;}
+
 #goTopBtn {
   z-index: 999;
   position: fixed;
@@ -94,12 +95,24 @@
 #goTopBtn:hover {
   background-position: 48px 0;
 }
+
+div.logo {
+    *width: 122px;
+    *float: left;
+    *position: relative;
+}
+
+div.header .detail {
+    *float: left;
+    *width: 890px;
+    *padding-left: 0px;
+}
 </style>
 <body>
 <div class="siteHeader">{:showAd('siteHeader')} </div>
 <div class="header">
-	<!--neq name="ACTION_NAME" value="getMember"--> <div class="logo"><a class="header_logo" href="#">淘宝信誉查询</a></div>	<!--/neq-->
-	<div class="detail">
+    <div class="logo"><a class="header_logo" href="#">淘宝信誉查询</a></div>
+    <div class="detail">
 		<ul>
 			<!--<li ><a class="header-i i1" href="/">淘宝信誉查询</a></li>-->
 			<li ><a class="header-i <if condition="ACTION_NAME eq 'getMember'" > hover <else /> deafult </if> i1" href="/">淘宝信誉查询</a></li>

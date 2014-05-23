@@ -47,11 +47,13 @@
     padding-top: 25px;
     padding-left: 135px;
     width: 1020px;
+    z-index: 1000;
 }
 
 .header .detail ul li {
     float: left;
-    margin-right: 9px;
+    margin-left: 9px;
+    *margin-left: 3px;
     text-indent: -9999px;
 }
 
@@ -59,6 +61,7 @@
     background-color: #F4F4F4;
     width: 1020px;
     margin: 0px auto;
+    clear: both;
 }
 
 .content .detail {
@@ -78,6 +81,20 @@
     left: 280px;
     position: relative;
     top: -20px;
+}
+
+* .content .search {
+    left: 280px;
+    position: absolute;
+    top: 30px;
+}
+
+* .content .result {
+    margin-top: 50px;
+}
+
+.k_search {
+    text-align: center;
 }
 
 .k_progress {

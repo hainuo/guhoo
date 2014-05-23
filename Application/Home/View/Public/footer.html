@@ -40,8 +40,10 @@
 		<div class="font">
 
 			<p class="first">
-				<a target="_blank" href="#">联系我们</a> | <a href='javascript:void(0);'>加入收藏</a> | <a href="#">添加桌面</a><a id="goTopBtn" style="display: none; right: 50px;"></a>
-			</p>
+                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes">联系我们</a>
+                | <a href='javascript:void(0);'>加入收藏</a> | <a href="#">添加桌面</a><a id="goTopBtn"
+                                                                                  style="display: none; right: 50px;"></a>
+            </p>
 			<p>
 				{:C('footer_code')}
 			</p>
@@ -58,8 +60,8 @@
 <script>
 $(function(){
 	$(".font .first a:eq(1)").click(function(){
-			Favorite(__SELF__,'{$title}');
-	});
+        Favorite('__SELF__', '{$title}');
+    });
 
 });
 Favorite = function Favorite(sURL, sTitle) {

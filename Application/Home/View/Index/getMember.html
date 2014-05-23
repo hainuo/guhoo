@@ -195,8 +195,70 @@
                                                 <!--<li class="f-size-12 f-green">（此帐号已开通淘宝店，买家信用明细无法查询！）</li>-->
                                         </ul>
                                         <empty name='data.is_seller'>
-                                        该用户不是卖家！
-                                        <else />
+                                            <ul class="u">
+                                                <li>
+                                                    <strong>
+                                                        卖家信用
+                                                    </strong>
+                                                    　
+                                                    <a class="mini-dsr" href="{$data['rateurl']}" target="_blank"
+                                                       style="font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;">
+                                                        <span class="mini-dsr-wrap dsr-wrap-left"></span>
+                                                        <span class="dsr-title">描述</span>
+                                                        <span class="dsr-num red">0</span>
+                                                        <span class="dsr-split"></span>
+                                                        <span class="dsr-title">服务</span>
+                                                        <span class="dsr-num red">0</span>
+                                                        <span class="dsr-split"></span>
+                                                        <span class="dsr-title">物流</span>
+                                                        <span class="dsr-num red">0</span>
+                                                        <span class="mini-dsr-wrap dsr-wrap-right"></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{$data['rateurl']}" target="_blank"><img
+                                                            src="http://pics.taobaocdn.com/newrank/s_red_1.gif"
+                                                            border="0"/></a>
+                                                        <span>
+                                                                &nbsp;
+                                                                <b style="color:#333;">
+                                                                    0
+                                                                </b>
+                                                                (
+                                                            0
+                                                            )
+                                                        </span>
+                                                    <font>
+                                                        <a href="{$data['rateurl']}" target="_blank">查看店铺</a>
+                                                    </font>
+                                                </li>
+                                                <li>
+                                                    <a class='tzlj' href="{$data['rateurl']}"><span
+                                                            style="color:#3C3C3C">最近一周：</span><font
+                                                            style='color:#246f9b;font-weight: bold;'
+                                                            title="好评：0">0点</font></a>
+                                                </li>
+                                                <li>
+                                                    <a class='tzlj' href="{$data['rateurl']}"><span
+                                                            style="color:#666666">最近一月：</span><font
+                                                            style='color:#246f9b;font-weight: bold;'
+                                                            title="好评：0点　中评：0点　差评：0点">0点</font></a>
+                                                </li>
+                                                <li>
+                                                    <a class='tzlj' href="{$data['rateurl']}"><span
+                                                            style="color:#828282">最近半年：</span><font
+                                                            style='color:#246f9b;font-weight: bold;'
+                                                            title="好评：0点　中评：0点　差评：0点">0点</font></a>
+                                                </li>
+                                                <li>
+                                                    <a class='tzlj' href="{$data['rateurl']}"><span
+                                                            style="color:#9D9D9D">半年以前：</span><font
+                                                            style='color:#246f9b;font-weight: bold;'
+                                                            title="好评：0点　中评：0点　差评：0点">0点</font></a>
+                                                </li>
+                                                <!--<li class="f-size-12 f-green"></li>-->
+                                            </ul>
+                                            <else />
                                         <ul class="u">
                                                 <li>
                                                         <strong>
@@ -206,14 +268,14 @@
                                                         <a class="mini-dsr" href="{$data['rateurl']}" target="_blank" style="font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;">
                                                         <span class="mini-dsr-wrap dsr-wrap-left"></span>
                                                         <span class="dsr-title">描述</span>
-                                                        <span class="dsr-num red">{$data['dongtai'][0]}</span>
-                                                        <span class="dsr-split"></span>
+                                                            <span class="dsr-num red">{$data['dongtai']['miaoshu']['pscore']}</span>
+                                                            <span class="dsr-split"></span>
                                                         <span class="dsr-title">服务</span>
-                                                        <span class="dsr-num red">{$data['dongtai'][1]}</span>
-                                                        <span class="dsr-split"></span>
+                                                            <span class="dsr-num red">{$data['dongtai']['fuwu']['pscore']}</span>
+                                                            <span class="dsr-split"></span>
                                                         <span class="dsr-title">物流</span>
-                                                        <span class="dsr-num red">{$data['dongtai'][2]}</span>
-                                                        <span class="mini-dsr-wrap dsr-wrap-right"></span>
+                                                            <span class="dsr-num red">{$data['dongtai'][fahuo]['pscore']}</span>
+                                                            <span class="mini-dsr-wrap dsr-wrap-right"></span>
                                                         </a>
                                                 </li>
                                                 <li>

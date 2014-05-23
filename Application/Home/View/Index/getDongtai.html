@@ -1,12 +1,26 @@
 <include file="Public/header" />
 <style>
 .content .detail{width: 900px;}
-.content .result{width: 100%;border: #f2f2f2 solid 1px;height: auto;background: white;position: relative;}
+
+.content .result {
+    width: 100%;
+    border: #f2f2f2 solid 1px;
+    height: auto;
+    background: white;
+    position: relative;
+    *margin-top: 0px;
+}
+
 .result .even{background-color: #f9f9f9}
 .result .odd{background-color: #fff}
 
-.c_h {font-size: 12px;border: 1px solid #c9c9c9;padding: 10px;margin-top: 30px;background-color: #f7faff}
-
+.c_h {
+    font-size: 12px;
+    border: 1px solid #c9c9c9;
+    padding: 10px;
+    margin-top: 50px;
+    background-color: #f7faff
+}
 
 .list {width: 100%;border: 1px solid #c9c9c9;}
 .list thead tr th{background-color: #ececec;height: 37px;border-bottom: 2px solid #d3d3d3;}
@@ -46,8 +60,8 @@ li {    list-style: none outside none;}
 
 
 	<div class="content" >
-		<div class="detail" style='padding-top:45px;'>
-			<div class="other-i logo">
+        <div class="detail">
+        <div class="other-i logo">
 			</div>
 			<form class="search" action="/Index/getDongtai.html" method="get">
 				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
