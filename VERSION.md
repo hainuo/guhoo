@@ -1,3 +1,9 @@
+version 2.8
+锁定首页宽度，防止因为在小屏（分辨率低于1024屏）下导航错位。
+更新整站站点html架构，使其更方便调整样式。
+更新底部样式，使两栏变成一栏，并且保证底部内容居中。
+更新checkuser方法，将checkuser方法从Org\Util\taobao.class.php移动到Home\Indexcontroller.class.php中，使其能够在执行更新命令时调用getUserInfo()方法
+
 version 2.0
 修改了getMember样式
 增加了友情链接
