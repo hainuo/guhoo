@@ -1,0 +1,33 @@
+<html>
+<script>
+function addBookmark(){
+var ctrl = (navigator.userAgent.toLowerCase()).indexOf('mac') != -1 ? 'Command/Cmd': 'CTRL';
+try{
+if (document.all) { //IE类浏览器
+try {
+window.external.toString(); //360浏览器不支持window.external，无法收藏
+window.alert("国内开发的360浏览器等不支持主动加入收藏。\n您可以尝试通过浏览器菜单栏 或快捷键 ctrl+D 试试。");
+}
+catch (e){
+try{
+window.external.addFavorite(window.location, document.title);
+}
+catch (e){
+window.external.addToFavoritesBar(window.location, document.title);  //IE8
+}
+}
+}
+else if (window.sidebar) { //firfox等浏览器
+window.sidebar.addPanel(document.title, window.location, "");
+}
+else {
+alert('您可以尝试通过快捷键' + ctrl + ' + D 加入到收藏夹~');
+}
+}
+catch (e){
+window.alert("因为IE浏览器存在bug，添加收藏失败！\n解决办法：在注册表中查找\n HKEY_CLASSES_ROOT\\TypeLib\\{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}\\1.1\\0\\win32 \n将 C:\\WINDOWS\\system32\\shdocvw.dll 改为 C:\\WINDOWS\\system32\\ieframe.dll ");
+}
+}
+</script>
+<a href="javascript:addBookmark()">添加收藏</a>
+</html>
