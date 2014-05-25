@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 header('content-type:text/html; charset=utf-8');
-//define('APP_DEBUG',true);
+define('APP_DEBUG',true);
 define('APP_PATH','./Application/');
 define('APP_NAME','fentutu');
 define('HTML_PATH',APP_PATH."Runtime/html");

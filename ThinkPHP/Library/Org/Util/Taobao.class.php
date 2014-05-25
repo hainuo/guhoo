@@ -237,10 +237,10 @@ class Taobao {
     private function getShopUrl($html) {
 
            $str=String::dg_string2($html, 'div', '<div class="title">
-                        <a h');//TODO  此处不能够修改，否则无法正确截取字符串
+                        <a href');//TODO  此处不能够修改，否则无法正确截取字符串
            //trace($str,'getUStr');
            $str=String::dg_string($str, '<a', 'target="_blank" >');
-           //trace($str,'getUrl:::::::::');
+           \Think\Log::write('getUrl:::::::::'.$str);
            preg_match('/http:\/\/(.+)htm/', $str, $matches); 
             
             //$matches=strip_tags($str);

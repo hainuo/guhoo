@@ -71,6 +71,7 @@ class IndexController extends Controller
             //trace(json_encode($data->page),'跟踪测试data');
             $userInfo = $this->getUserInfo($userName);
             $model = D('goods');
+            $list=array();
             if (!empty($data)) {
                 if ($data == '该用户没有宝贝') {
                     $map['goodsNum'] = '0';
@@ -137,7 +138,10 @@ class IndexController extends Controller
 //            }
             if ($checked != '该用户不是卖家')
                 $this->assign('userInfo', $checked);
+            else
+                $this->assign('userInfo',$this->getUserInfo($userName));
             $this->assign('data', $checked);
+
         }
         $this->assign('count', $this->getTotalCount());
         $this->seo();
@@ -237,7 +241,10 @@ class IndexController extends Controller
             //trace(json_encode($data),'输出data序列化数据');
             if ($tbdata) {
                 //trace('创建数据库数据','信息');//跟踪方法测试是否数据准确
-                $tbdata['goodNum'] = $goodNum; //创建商品数量栏
+                if($goodNum)
+                    $tbdata['goodNum'] = $goodNum; //创建商品数量栏
+                else
+                    $tbdata['goodNum'] = 0;
                 $map = $tbdata; //新变量，防止下面对data进行修改时，往模板中赋值出错。
 
                 if (empty($score)) { //当评分不存在时设置为空防止php报错/
@@ -255,7 +262,11 @@ class IndexController extends Controller
                 if (!empty($data)) {
                     $model->where('username="' . $userName . '"')->save($tbdata);
                 } else {
-                    $model->add($tbdata);
+                    $tbdata['username']=$userName;//增加对username字段的定义防止为空
+                    if($userName && $tbdata['sid'])
+                        $model->add($tbdata);
+                    else
+                        $this->error('不存在此淘宝用户',U('index'));
                 }
 
                 return $map;
@@ -267,7 +278,7 @@ class IndexController extends Controller
             $data['score'] = $score;
 
             $dongtai = json_decode($data['dongtai']);
-            $data['dongtai'] = $dongtai;
+            $data['dongtai'] =  $dongtai;
             S($userName . '-userInfo', $data); //设置缓存
             return $data;
             //trace('使用数据库数据，且没有超时','信息');//跟踪方法测试是否数据准确
