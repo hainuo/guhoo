@@ -92,9 +92,9 @@ li {    list-style: none outside none;}
 <assign name="miaoshu" value="$dongtai.miaoshu" />
 <assign name="fuwu" value="$dongtai.fuwu" />
 <assign name="fahuo" value="$dongtai.fahuo" />
-<p><b>宝贝与描述相符：</b> <font color="blue" title="{$miaoshu.score}分">{$miaoshu.pscore}</font>分， 升<input type="text" id="ipt_s_0" class="ipt_s" data="{sid:0,now:<?php echo $miaoshu['score'];?>,total:<?php echo $miaoshu['total'];?>}" title="输入分数范围：4.65909-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_0">{$miaoshu.need}</font>单。</p>
-<p><b>卖家的服务态度：</b> <font color="blue" title="{$fuwu.score}分">{$fuwu.pscore}</font>分， 升<input type="text" id="ipt_s_1" class="ipt_s" data="{sid:1,now:<?php echo $fuwu['score'];?>,total:<?php echo $fuwu['total'];?>}" title="输入分数范围：4.69048-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_1">{$fuwu.need}</font>单。</p>
-<p><b>卖家发货的速度：</b> <font color="blue" title="{$fahuo.score}分">{$fahuo.pscore}</font>分， 升<input type="text" id="ipt_s_2" class="ipt_s" data="{sid:2,now:<?php echo $fahuo['score'];?>,total:<?php echo $fahuo['total'];?>}" title="输入分数范围：4.65116-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_2">{$fahuo.need}</font>单。</p>
+<p><b>宝贝与描述相符：</b> <font color="blue" title="{$miaoshu:score}分">{$miaoshu:pscore}</font>分， 升<input type="text" id="ipt_s_0" class="ipt_s" data="{sid:0,now:<?php echo $miaoshu->score;?>,total:<?php echo $miaoshu->total;?>}" title="输入分数范围：4.65909-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_0">{$miaoshu:need}</font>单。</p>
+<p><b>卖家的服务态度：</b> <font color="blue" title="{$fuwu:score}分">{$fuwu:pscore}</font>分， 升<input type="text" id="ipt_s_1" class="ipt_s" data="{sid:1,now:<?php echo $fuwu->score;?>,total:<?php echo $fuwu->total;?>}" title="输入分数范围：4.69048-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_1">{$fuwu:need}</font>单。</p>
+<p><b>卖家发货的速度：</b> <font color="blue" title="{$fahuo:score}分">{$fahuo:pscore}</font>分， 升<input type="text" id="ipt_s_2" class="ipt_s" data="{sid:2,now:<?php echo $fahuo->score;?>,total:<?php echo $fahuo->total;?>}" title="输入分数范围：4.65116-4.99999" value="{:C('DONGTAI_NEED')}" maxlength="7">分，需要<font color="red" id="total_s_2">{$fahuo:need}</font>单。</p>
 
 
 

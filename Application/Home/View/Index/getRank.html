@@ -26,9 +26,10 @@
 .list .pl{color: #666666}
 .list .H{color: red;}
 .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
-input{height: 30px;}
-input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:-2px;*vertical-align:middle;_vertical-align:3px;}
-select {height: 30px;}
+input{height: 30px;*height: 25px;*font-size: 18px;text-align:center;*padding-top: 3px;vertical-align: middle;}
+input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:middle;}
+select {height: 30px;vertical-align: middle;}
+div.k_serach{vertical-align:text-top;*font-size: 18px; }
 </style>
 
 
@@ -39,7 +40,7 @@ select {height: 30px;}
 				<input id="hidActionType" type="hidden" value="1" />
 		        <div class="k_serach">
 					排序：
-					<select id="sortType">
+					<select id="sortType" style="*height: 30px;*font-size: 18px;*text-align: center;">
 						<option value="">默认</option>
 						<option value="renqi-asc">人气↑</option>
 						<option value="renqi-desc">人气↓</option>
@@ -50,14 +51,14 @@ select {height: 30px;}
 						<option value="price-asc">价格↑</option>
 						<option value="price-desc">价格↓</option>
 					</select>
-		            淘宝帐号：<input type="text" id="member" style="width:120px;" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
+		            淘宝帐号：<input type="text" id="member" style="width:150px;" value="<empty name='userInfo'>输入淘宝账号<else />{$userInfo.username}</empty>" />
 		            关键词：<input type="text" id="key" style="width:120px;" />
 		            <span style="color:Red;font-weight:bold;">
 				            <input id="chkbType" type="checkbox" checked="checked" />
 				            <label for="chkbType">只列出自己的商品</label>
 				          </span>
 		            
-		            <input name="txtPageCount" type="text" value="#" id="txtPageCount" title="最多100页" style="width:15px;" />
+		            <input name="txtPageCount" type="text" value="#" id="txtPageCount" title="最多20页" style="width:40px;" />
 		            页<input id="btnSearch" type="button" value="确定" />
 		        </div>
 				<div class="ProgressTextBox" id="divProgressTextBox">
@@ -83,14 +84,7 @@ select {height: 30px;}
 			<div class="result">
 				<table class="list" cellpadding="0" cellspacing="0">
 					<thead>
-						<tr>
-							<th>排名</th>
-							<th>位置</th>
-							<th>最近成交</th>
-							<th>售价</th>
-							<th>卖家</th>
-							<th>商品名称</th>
-						</tr>
+
 					</thead>
 					<tbody>
 						
@@ -102,6 +96,7 @@ select {height: 30px;}
 		</div>
 	</div>
 <script type="text/javascript">
+		var theadcode='<tr><th>排名</th><th>位置</th><th>最近成交</th><th>售价</th><th>卖家</th><th>商品名称</th></tr>';
 		$("#ResultBox").css("display", "none");
 		$("#divProgressTextBox").css("display", "none");
 		$(".Action").css("display", "none");
@@ -109,7 +104,7 @@ select {height: 30px;}
 		$("#btnSearch").click(function() {
 			init();
 		});
-		$("#txtPageCount").attr("disabled", "true");
+		//$("#txtPageCount").attr("disabled", "true");
 		$("#txtPageCount").attr("value", "10");//默认查询10页所有商品信息
 		$("#txtPageCount").attr("title", "只列出自己的商品 的模式下才能自定义页数");
 
@@ -132,7 +127,7 @@ select {height: 30px;}
 			if ($("#chkbType").attr("checked")) {
 				$("#txtPageCount").removeAttr("disabled");
 				$("#txtPageCount").attr("value", "10");//一般10页内必定有指定商家的商品
-				$("#txtPageCount").attr("title", "最多只能100页");
+				$("#txtPageCount").attr("title", "最多只能20页");
 			}
 			else {
 				$("#txtPageCount").attr("disabled", "true");
@@ -222,10 +217,11 @@ select {height: 30px;}
 
 		$("#divProgressTextBox").fadeIn(); ;
 		var sortType = $('#sortType').val();
-		var sAccount = $("#member").attr("value");
-		if (sAccount == "" || sAccount=='输入淘宝账号') {
+		var sAccount =$.trim($("#member").val());
+		if (sAccount=="输入淘宝账号" ||  sAccount == "" ) {
 			$("#GetResultState").html("请填写卖家帐号");
 			$(".Action").css("display", "none");
+			$("#member").val('');
 			$("#member").focus();
 			return false;
 		}
@@ -245,7 +241,7 @@ select {height: 30px;}
 		else {
 			sType = 0;
 		}
-
+		$(".list thead").html(theadcode);
 		var sPageCount = $("#txtPageCount").attr("value");
 		if (sPageCount == "") {
 			$("#txtPageCount").focus();
@@ -255,8 +251,8 @@ select {height: 30px;}
 		}
 
 		var iPageCount = parseInt(sPageCount);
-		if (iPageCount > 100) {
-			$("#txtPageCount").val(100);
+		if (iPageCount > 20) {
+			$("#txtPageCount").val(20);
 		}
 
 		$("#PageCount").html(sPageCount);
@@ -299,6 +295,14 @@ select {height: 30px;}
 				$("#ResultBox").css("display", "block");
 				if (data != "") {
 					switch (data) {
+						case "ResultCode:004":
+							$("#GetResultState").html("请输入正确的账号！");
+							$(".Action").css("display", "none");
+							//$(".k_progress").css("display", "none");
+							//$(".ProgressState").css("display", "none");
+							$(".list thead").empty();
+							return false;
+							break;						
 						case "ResultCode:001":
 							$("#divResult").html("在淘宝搜索引擎中，没有找到与 《" + skey + "》 相关的商品");
 							$("#GetResultState").html("查询完毕");
@@ -319,7 +323,8 @@ select {height: 30px;}
 							if (data != "ResultCode:003") {
 							    // alert(data);
 								$(".list tbody").append(data);
-							}
+							}else
+								$(".list tbody").append(data.info);
 							outime = setTimeout("GetResult()", 2000);
 						break;
 					}

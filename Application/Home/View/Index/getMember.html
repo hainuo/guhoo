@@ -1,7 +1,7 @@
 <include file="Public/header" />
 <style type="text/css">
 .backpicture{height: 350px;width: auto;margin: 0px auto;background: url(__PUBLIC__/images/member.jpg) no-repeat;}
-.backpicture .detail{position: relative;top: 150px;}
+.backpicture .detail{position: relative;top: 75px;}
 
 </style>
 <div class="content <empty name="userInfo">backpicture</empty>">
@@ -268,13 +268,13 @@
                                                         <a class="mini-dsr" href="{$data['rateurl']}" target="_blank" style="font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;">
                                                         <span class="mini-dsr-wrap dsr-wrap-left"></span>
                                                         <span class="dsr-title">描述</span>
-                                                            <span class="dsr-num red">{$data['dongtai']->miaoshu->pscore}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['miaoshu']->pscore}</span>
                                                             <span class="dsr-split"></span>
                                                         <span class="dsr-title">服务</span>
-                                                            <span class="dsr-num red">{$data['dongtai']->fuwu->pscore}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['fuwu']->pscore}</span>
                                                             <span class="dsr-split"></span>
                                                         <span class="dsr-title">物流</span>
-                                                            <span class="dsr-num red">{$data['dongtai']->fahuo->pscore}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['fahuo']->pscore}</span>
                                                             <span class="mini-dsr-wrap dsr-wrap-right"></span>
                                                         </a>
                                                 </li>

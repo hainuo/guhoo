@@ -30,10 +30,7 @@ class IndexController extends Controller
             $this->redirect($url);
         }
         if ($userName && ($userName != '输入淘宝帐号')) {
-            if ($cache = S($userName . '-userInfo'))
-                $userInfo = $cache;
-            else
-                $userInfo = $this->getUserInfo($userName);
+            $userInfo = $this->getUserInfo($userName);
 
             $this->assign('data', $userInfo);
             $this->assign('userInfo', $userInfo);
@@ -62,7 +59,6 @@ class IndexController extends Controller
             $url = "/Index/getWeight/username/" . $userName;
             $this->redirect($url);
         }
-        $page = I('get.page');
         if ($userName && ($userName != '输入淘宝帐号')) {
             $taobao = new \Org\Util\Taobao($userName);
             $data = $taobao->getXLRank();
@@ -70,7 +66,6 @@ class IndexController extends Controller
             C($userName . '_pageSize_XLURl', $data->page->pageSize); //每页项目数  写入配置文件方便读取
             //trace(json_encode($data->page),'跟踪测试data');
             $userInfo = $this->getUserInfo($userName);
-            $model = D('goods');
             $list=array();
             if (!empty($data)) {
                 if ($data == '该用户没有宝贝') {
@@ -110,8 +105,12 @@ class IndexController extends Controller
             $key = I('get.key');
             $nowPage = I('get.nowPage');
             $taobao = new \Org\Util\Taobao($userName);
+            $userInfo=$this->getUserInfo($userName);
+            if ($userInfo=='ResultCode:004') {
+                echo $userInfo;
+                exit;
+            }
             $data = $taobao->getRankBykeyword($userName, $sortType, $key, $type, $nowPage);
-            $this->getUserInfo($userName);
             $this->getTotalCount();
             //$this->ajaxReturn($data);
             echo $data;
@@ -136,6 +135,7 @@ class IndexController extends Controller
 //                $dongtai=json_decode($checked['dongtai']);
 //                $checked['dongtai']=$dongtai;
 //            }
+            //var_dump($checked['dongtai']);
             if ($checked != '该用户不是卖家')
                 $this->assign('userInfo', $checked);
             else
@@ -212,6 +212,10 @@ class IndexController extends Controller
         if ($userName) {
             $map['username'] = $userName;
             $data = $model->where($map)->find();
+            if($data){
+               $data['create_time']=date('Y-m-d H:i:s',time());//增加对时间的处理
+                $model->where($map)->save($data);
+            }
             $list = $goodModel->where('username="' . $userName . '"')->select();
             if ($list)
                 $goodNum = count($list);
@@ -253,36 +257,40 @@ class IndexController extends Controller
                 } else
                     $tbdata['score'] = '';
                 if (empty($dongtai)) { //当店铺动态不存在时设置为空防止php报错
-                    $dongtai = json_encode($tbdata['dongtai']);
+                    $dongtai = json_encode((array)$tbdata['dongtai']);
                     $tbdata['dongtai'] = $dongtai;
                 } else
                     $tbdata['dongtai'] = '';
+
+                $tbdata['create_time']=date('Y-m-d H:i:s',time());//增加对时间的处理
                 //trace(json_encode($data),'data');
-                //先查询是否存在这个用户数据，没有则插入，有责更新
+                //先查询是否存在这个用户数据，没有则插入，有责更新为保证数据准确重新查询一边数据库
+                $data=M('Member')->where('username="'.$userName.'"')->find();
                 if (!empty($data)) {
                     $model->where('username="' . $userName . '"')->save($tbdata);
                 } else {
                     $tbdata['username']=$userName;//增加对username字段的定义防止为空
-                    if($userName && $tbdata['sid'])
+                    if($userName && $tbdata['sid']){
                         $model->add($tbdata);
+                    }elseif(IS_AJAX)
+                        return 'ResultCode:004';
                     else
                         $this->error('不存在此淘宝用户',U('index'));
                 }
 
-                return $map;
             } else
                 $this->error($model->getError());
         } else {
             //数据转换  将data.score 转换成序列 使用json_decode转换成数组
             $score = json_decode($data['score']);
             $data['score'] = $score;
-
             $dongtai = json_decode($data['dongtai']);
-            $data['dongtai'] =  $dongtai;
-            S($userName . '-userInfo', $data); //设置缓存
-            return $data;
+            $data['dongtai'] = (array) $dongtai;
+//            S($userName . '-userInfo', $data); //设置缓存
+            $map = $data;
             //trace('使用数据库数据，且没有超时','信息');//跟踪方法测试是否数据准确
         }
+       return $map;
     }
 
     /**
@@ -330,7 +338,9 @@ class IndexController extends Controller
     }
 
     public function seo()
-    {
+    {//为保证能够及时查看到更改后的标题信息，这里对数据进行了及时更新;
+        $config=M('Config')->getField('name,value');
+        C($config);
         $this->assign('title', C(ACTION_NAME . '_title'));
         $this->assign('keywords', C(ACTION_NAME . '_keyWords'));
         $this->assign('description', C(ACTION_NAME . '_description'));

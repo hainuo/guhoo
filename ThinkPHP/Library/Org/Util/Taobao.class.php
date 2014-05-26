@@ -198,7 +198,7 @@ class Taobao {
         if(isset($member['is_seller']) && $member['is_seller']==1){
             $member['deposit']=$this->getDeposit($html);
             $member['url']=$this->getShopUrl($html);
-            preg_match('/data-item-id="(\d+)/',$html,$sellerId);
+            preg_match('/data-item-id="(\d+)[^"]/',$html,$sellerId);
             //trace(json_encode($sellerId),'获取sellerId');
             if(!empty($sellerId))
                 $member['sellerId']=$sellerId[1]?$sellerId['1']:$member['sid'];
@@ -236,16 +236,17 @@ class Taobao {
      */
     private function getShopUrl($html) {
 
-           $str=String::dg_string2($html, 'div', '<div class="title">
-                        <a href');//TODO  此处不能够修改，否则无法正确截取字符串
+           //$str=String::dg_string2($html, 'div', '<div class="title">
+           //             <a href');//TODO  此处不能够修改，否则无法正确截取字符串
            //trace($str,'getUStr');
-           $str=String::dg_string($str, '<a', 'target="_blank" >');
-           \Think\Log::write('getUrl:::::::::'.$str);
-           preg_match('/http:\/\/(.+)htm/', $str, $matches); 
-            
+
+           //$str=String::dg_string($str, '<a', 'target="_blank" >');
+
+           preg_match('/(http:\/\/store\.taobao\.com\/shop.*\.htm)["]/', $html, $matches);
+       // \Think\Log::write('getUrl:::::::::'.$matches[0]."    url2   ".$matches[1]);
             //$matches=strip_tags($str);
             //trace($matches,'最后的matches');
-            return $matches[0];
+            return $matches[1];
 
     }    
 
@@ -571,7 +572,7 @@ class Taobao {
         }
         $list=array();
         list($list['miaoshu'] ,$list['fuwu'] ,$list['fahuo'] )=$sList;        
-        return $list;
+        return (array)$list;
     }    
 }
 ?>

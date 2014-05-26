@@ -2,12 +2,13 @@
 <!-- 联接 -->
 <div class="two_link">
     <div style="margin: 0px auto; color: rgb(102, 102, 102); width: 790px;">
-        <p>淘宝买家信誉的好处： </p>
+      {/*  <p>淘宝买家信誉的好处： </p>
         1、当买家一周信用点数超出20点，有可能这个号已经被淘宝列入黑名单，所以他再拍的东西，就有可能被列为炒作，卖家有降权危险。 <br>
         2、注册时间小于30天的，容易给他人中评、差评，或有可能是骗子，请谨慎交易！ <br>
         3、如果买家给他人中评或差评过多的，或喜欢随随便便就给他人中、差评的买家。请谨慎交易！免得惹来不必要的麻烦。<br>
         4、每一次查询本站都会生成一个记录,方面其他用户查看。详情请点击买家<a target="_blank" href="/Index/getHistory.html" title='历史查询记录'>历史查询记录</a>或<a
             target="_blank" title='淘宝隐形降权查询' href="/Index/getWeight.html">淘宝隐形降权查询</a>
+        */}
     </div>
 </div>
 <!-- 尾巴 -->
@@ -40,14 +41,8 @@
         </div>
         <div class="font">
 
-            <p class="first">
-                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes">联系我们</a>
-                | <a href='javascript:void(0);'>加入收藏</a> | <a href="/fentutu.php" target="_blank">添加桌面</a><a
-                    id="goTopBtn" "></a>
-            </p>
-
-            <p>
-                {:C('footer_code')}
+            <p >
+                <a class="first" href='javascript:void(0);'>加入收藏</a> | <a href="/fentutu.php" target="_blank">添加桌面</a> | {:C('footer_code')} | <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes">联系我们</a>
             </p>
 
             <p>
@@ -62,8 +57,8 @@
 <!-- 加入收藏 -->
 <script>
     $(function () {
-        $(".font .first a:eq(1)").click(function () {
-            Favorite('http://{$Think.server.http_host}/__ACTION__.html', '{$title}');
+        $("a.first").click(function () {
+            Favorite('http://{$Think.server.http_host}/{$Think.const.CONTROLLER_NAME}/{$Think.const.ACTION_NAME}.html', '{$title}');
         });
 
     });

@@ -21,7 +21,8 @@ class IndexController extends Controller {
 			$configs=$configModel->order('id ASC')->select();
 			$users=$userModel->order('id ASC')->select();
 $config=M('Config')->getField('name,value');
-C($config);//重新加载一遍配置文件			
+C($config);//重新加载一遍配置文件
+            C('DATA_CATCH_TIME','1');
 			$this->assign('userName',session('name'));
 			$this->assign('users',$users);
 			$this->assign('ads',$ads);
@@ -62,10 +63,10 @@ C($config);//重新加载一遍配置文件
 	public function linkManage( ){
 		$type=I('get.type');
 		$linkModel=D('Link');
-		$id=I('request.id');	
-		$name=I('request.name');
+		$id=I('id');	
+		$name=I('name');
 		$url=I('post.url');
-		$delImg=I('request.delImg');
+		$delImg=I('delImg');
 		if( session('name') && session('logged') )  //进行登录判断
 			switch ($type) {
 				case 'add':
@@ -163,10 +164,10 @@ C($config);//重新加载一遍配置文件
 		if(session('name')&&session('logged')){
 			if($type=='change'){
 				$id=I('get.id');
-				$name=I('request.name');
+				$name=I('name');
 				$url=I('post.url');
-				$delImg=I('request.delImg');
-				$remark=I('request.remark');
+				$delImg=I('delImg');
+				$remark=I('remark');
 				$adModel=D('Ad');
 				$data=$adModel->where('id='.$id)->find();
 				if(IS_POST && $adModel->autoCheckToken($_POST)){
@@ -216,10 +217,10 @@ C($config);//重新加载一遍配置文件
 	}
 	public function configManage(){
 		$type=I('get.type');
-		$id=I('request.id');
-		$name=I('request.name');
-		$value=I('request.value');
-		$remark=I('request.remark');
+		$id=I('id');
+		//$name=I('name');
+	    $text=I('text');
+		$remark=I('remark');
 		$configModel=D('Config');
 		if(session('name')&&session('logged')){
 			switch ($type) {
@@ -231,7 +232,7 @@ C($config);//重新加载一遍配置文件
 					break;
 				case 'change':
 					if (IS_POST && $configModel->autoCheckToken($_POST)) {
-						$configInfo = array('id' => $id,  'value'=>addslashes($value),'remark'=>$remark);
+						$configInfo = array('id' => $id,  'value'=>$text);
 						$result=$configModel->data($configInfo)->save();
 						if($result)
 							$this->success('修改成功','javascript:parent.location.reload();');
@@ -258,8 +259,8 @@ C($config);//重新加载一遍配置文件
 	public function userManage(){
 		$type=I('get.type');
 		$userModel=D('Admin');
-		$userId=I('request.userId');	
-		$userName=I('request.userName');
+		$userId=I('userId');	
+		$userName=I('userName');
 		$password=I('post.password');
 		$rePassword=I('post.repassword');		
 		if( session('name') && session('logged') )  //进行登录判断

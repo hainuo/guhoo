@@ -31,11 +31,11 @@
     <div class="loginform">
         <table align="center" cellpadding="0" cellspacing="0" class="l-table-edit">
         <empty name='data'>
-        <tr><td class="left" class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="remark" name="remark" data-rule="required;" /></td><td></td></tr>
+        <tr><td class="left" class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" name="remark" data-rule="required;" /></td><td></td></tr>
         <else />
-        <tr><td class="left" class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" id="remark" name="remark" value="{$data.remark}" data-rule="required;length[1~, true]" /><input type="hidden" name="id" value="{$data.id}"><input type="hidden" name="name" value="{$data.name}"> </td><td></td></tr>        
+        <tr><td class="left" class="l-table-edit-td">remark</td><td  class="l-table-edit-td"><input  type="text" class="loginform_input" name="remark" disabled value="{$data.remark}" data-rule="required;length[1~, true]" /><input type="hidden" name="id" value="{$data.id}"><input type="hidden" name="name" value="{$data.name}"> </td><td></td></tr>
         </empty>
-        <tr><td class="left"  class="l-table-edit-td">value</td><td  class="l-table-edit-td"><textarea cols="30" rows="5" data-rule="required;length[2~]" name="value">{$data.value|stripslashes }</textarea><td></td></tr>
+        <tr><td class="left"  class="l-table-edit-td">value</td><td  class="l-table-edit-td"><textarea cols="30" rows="5" data-rule="required;length[2~]" name="text">{$data.value}</textarea><td></td></tr>
         <tr><td class="left"  class="l-table-edit-td">name</td><td  class="l-table-edit-td">{$data.name}<td></td></tr>
         </table>
         <div class="loginform_row">

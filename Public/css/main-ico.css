@@ -105,43 +105,15 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
 .footer .numbers{float: left;}
 .footer .font a{color:gray;}
 .siteHeader{text-align: center;width: auto;}
-.footLink{width: auto}
-.footLink a{boder:0px ; margin: 5px;height: auto; color: #000000;display: inline-block;}
+.detail p.footLink{width: auto;margin-top: 1px;height: 17px;}
+.footLink a{boder:0px ; margin-top: 5px;margin-left: 5px; color: #000000;display: inline-block;}
 .footLink a:hover{color: red;}
-div.footer .detail .font p.first{margin-top:5px}
-
-#bdshare {
-    height: 25px;
-    display: inline-block;
-    margin: 0px auto;
-    *width: 300px;
-    text-align: center;
-}
-
+div.footer .detail .font p.first{margin-top:5px;}
+#bdshare {    height: 25px;    display: inline-block;    margin: 0px auto;    *width: 300px;    text-align: center;}
 #bdshare .bdsharebuttonbox{float: left;width: 280px;margin: 0px auto;}
 .two_link a{ margin: 1px 2px ;color: red; }
-
-div.history {
-    margin-left: 20px;
-    padding-left: 30px;
-    text-align: center;
-    min-height: 18px;
-}
-
+div.history {   margin-left: 20px;   padding-left: 30px;    text-align: center;    height: 30px;}
 div.history a{color: gray;font-size: 12px;}
-
-div.history ul {
-    display: inline-block;
-    margin: 10px auto;
-    text-align: center;
-}
-
-div.history ul li {
-    min-width: 50px;
-    max-width: 80px;
-    overflow-x: hidden;
-    display: inline;
-    margin-left: 10px;
-}
-
+div.history ul {    display: inline-block;    margin: 10px auto;    text-align: center;}
+div.history ul li {    min-width: 50px;    max-width: 80px;    overflow-x: hidden;    display: inline;    margin-left: 10px;}
 li.more a{color: black;}

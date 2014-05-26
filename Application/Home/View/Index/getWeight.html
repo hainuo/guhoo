@@ -41,7 +41,7 @@
 .list .time{color:#a2a2a2;}
 .list .pl{color: #666666}
 .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
-
+.content .result {margin-top: 0px;}
 
 </style>
 
@@ -61,12 +61,12 @@
 			</div>
 			<div class="result">
             <empty name='userInfo'>  
-                <div class="c_h">请输入正确的淘宝账号！</div>
+                {/*<div class="c_h">请输入正确的淘宝账号！</div>*/}
             <else />            
 				<div class="r-h">
 					<ul><li><span>淘宝帐号：</span><a href="/Index/getMember/username/{$userInfo.username}.html"><font style="color:#0077e9">{$userInfo.username}</font></a></li>
 				<notempty name="userInfo.is_seller">
-					<li>一共<font>{$data['goodsNum']}</font>宝贝</li><li><a href="{$userInfo.url}">[进入店铺]</a></li></ul>
+					<li>一共<font>{$data['goodsNum']}</font>宝贝</li><li><a href="<empty name='userInfo.url'>{$userInfo.rateurl}<else />{$userInfo.url}</empty>">[进入店铺]</a></li></ul>
 					<ul class="u2"><li><empty name="userInfo.is_buyer">卖<else />买</empty>家好评率：<font>{$userInfo.haopinglv}</font></li>
 						
 					<li>描述相符：<a href="/Index/getDongtai/username/{$userInfo.username}.html"><font>{$userInfo['dongtai']->miaoshu->pscore}</font>  分</a></li>
