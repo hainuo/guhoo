@@ -185,14 +185,17 @@ class IndexController extends Controller
         //dump($count);
         //trace(serialize($count),'总次数数据');
         $count['val'] += 1;
+        //var_dump($count['val']);
         $nuberModel->save($count);
         //return $count['val'];
         $code = '';
         $val = str_split($count['val']);
+        $val=array_reverse($val);
+        $length=count($val);
         foreach ($val as $k => $v) {
-            $code .= '<i class="numbers-i wh n' . $v . '"></i>';
-            if ($k != 0 && $k % 3 == 0)
-                $code .= '<img src="/Public/images/Comma.png" />';
+            $code = '<i class="numbers-i wh n' . $v . '"></i>'.$code ;
+            if (($k+1) % 3 == 0 && ($k+1)!=$length)
+                $code = '<img src="/Public/images/Comma.png" />'.$code;
         }
         return $code;
 
