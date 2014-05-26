@@ -1,9 +1,24 @@
 <include file="Public/header" />
 <style type="text/css">
-.backpicture{height: 350px;width: auto;margin: 0px auto;background: url(__PUBLIC__/images/member.jpg) no-repeat;}
-.backpicture .detail{position: relative;top: 75px;}
+.backpicture{height: 350px;width: auto;margin: 0px auto;background: url(__PUBLIC__/images/member.jpg) no-repeat center top;overflow-x: hidden;}
+.backpicture .detail{top: 75px;}
+</style>{/*
+<script type="text/javascript"> 
+$(document).ready(function() 
+{ 
+// alert('可视区域高度'+$(window).height()); //浏览器时下窗口可视区域高度 
+// alert('当前文档的高度'+$(document).height()); //浏览器时下窗口文档的高度 
+// alert('文档body高度'+$(document.body).height());//浏览器时下窗口文档body的高度 
+// alert('文档body的总高度'+$(document.body).outerHeight(true));//浏览器时下窗口文档body的总高度 包括border padding margin 
+// alert('可视区域宽度'+$(window).width()); //浏览器时下窗口可视区域宽度 
+// alert('文档宽度'+$(document).width());//浏览器时下窗口文档的宽度 
+// alert('文档body宽度'+$(document.body).width());//浏览器时下窗口文档body的高度 
+// alert('文档body总度'+$(document.body).outerWidth(true));//浏览器时下窗口文档body的总宽度 包括border padding margin 
+});
 
-</style>
+    //$(".backpicture").css.width=$(document.body).outerWidth(true) * 2 - $(document).width();
+// $(document).width=$(document.body).outerWidth(true) -12;
+</script>*/}
 <div class="content <empty name="userInfo">backpicture</empty>">
         <div class="detail ">
                 <div class="other-i logo">
@@ -139,6 +154,7 @@
                                                         </span>
                                                 </li>
                                         </ul>
+<notempty name="data.is_seller">                                        
                                         <div class="clf">
                                                 <span>
                                                         查看商品：
@@ -147,6 +163,7 @@
                                                         <a href="/Index/getWeight/username/{$data.username}.html" target="_blank">http://{$Think.server.HTTP_HOST}/Index/getWeight/username/{$data.username}.html</a>
                                                 </font>
                                         </div>                                        
+</notempty>                                        
                                         <div class="clf">
                                                 <span>
                                                         详细信息：
@@ -229,7 +246,7 @@
                                                             )
                                                         </span>
                                                     <font>
-                                                        <a href="{$data['rateurl']}" target="_blank">查看店铺</a>
+                                                        <!--a href="__SELF__" target="_blank"-->没有店铺<!--/a-->
                                                     </font>
                                                 </li>
                                                 <li>

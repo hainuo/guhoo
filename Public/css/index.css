@@ -4,9 +4,9 @@
 a { text-decoration: none; }
 a:hover { color: rgb(224, 120, 0); text-decoration: underline; }
 li { list-style: none outside none; }
-body { font-family: "微软雅黑","华文细黑",Arial,Helvetica,sans-serif; }
+body { font-family: "微软雅黑","华文细黑",Arial,Helvetica,sans-serif; overflow-x:hidden; }
 .beautiful { width: 960px; margin: 0px auto; padding-bottom: 10px; }
-.numbers-i { background: url('../../images/numbers.png') no-repeat scroll 0% 0% transparent; display: block; text-indent: -9999px; }
+.numbers-i { background: url('../../images/numbers.png') no-repeat  0% 0% transparent; display: block; text-indent: -9999px; }
 .numbers-i.wh { height: 38px; width: 23px; }
 .numbers-i.n0 { background-position: 0px 0px; }
 .numbers-i.n1 { background-position: -27px 0px; }
@@ -14,8 +14,8 @@ body { font-family: "微软雅黑","华文细黑",Arial,Helvetica,sans-serif; }
 .numbers-i.n5 { background-position: -135px 0px; }
 .numbers-i.n7 { background-position: -189px 0px; }
 .header-i { background-attachment: fixed; display: block; }
-.header-i.deafult { background: url('../../images/header-deafult.png') no-repeat scroll 0% 0% transparent; }
-.header-i.click,.header-i.hover { background: url('../../images/header-click.png') no-repeat scroll 0% 0% transparent; }
+.header-i.deafult { background: url('../../images/header-deafult.png') no-repeat  0% 0% transparent; }
+.header-i.click,.header-i.hover { background: url('../../images/header-click.png') no-repeat  0% 0% transparent; }
 .header-i.i1 { background-position: 0px 0px; width: 146px; height: 61px; }
 .header-i.i2 { background-position: -172px 0px; width: 119px; height: 61px; }
 .header-i.i3 { background-position: -345px 0px; width: 87px; height: 61px; }

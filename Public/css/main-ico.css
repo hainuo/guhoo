@@ -3,7 +3,7 @@
 a{text-decoration: none;}
 a:hover{color:rgb(224,120,0);text-decoration: underline;}
 li {list-style: none;}
-body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;}
+body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;overflow-x:hidden; }
 
 
 .f-red{color:red;}

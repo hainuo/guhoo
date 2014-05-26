@@ -26,18 +26,21 @@
 .list .pl{color: #666666}
 .list .H{color: red;}
 .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
-input{height: 30px;*height: 25px;*font-size: 18px;text-align:center;*padding-top: 3px;vertical-align: middle;}
+input{height: 30px;*height: 25px;font-size: 16px;text-align:center;*padding-top: 3px;vertical-align: middle;color: gray;font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;font-weight: bold;}
 input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:middle;}
 select {height: 30px;vertical-align: middle;}
-div.k_serach{vertical-align:text-top;*font-size: 18px; }
+div.k_serach{vertical-align:text-top;font-size: 16px; width: 800px;*width:850px;padding-left: 20px;float: right;bottom: 0px;max-height:50px; }
+.content .detail{padding-top: 50px;}
+div.ranklogo{width: 122px;height: 60px;position: relative;background: url('/Public/images/other-i.png') no-repeat;top: -20px;left: 50px;*left:20px;float: left;}
+.searchDiv{padding: 0px;margin: 0px;border: 0px;}
 </style>
 
 
 	<div class="content" >
         <div class="detail">
-        <div class="clf"></div>
-			<div class="c_h">
-				<input id="hidActionType" type="hidden" value="1" />
+        	<div class="clf"></div>
+			<div class="c_h searchDiv">
+				<div class="ranklogo"></div>
 		        <div class="k_serach">
 					排序：
 					<select id="sortType" style="*height: 30px;*font-size: 18px;*text-align: center;">
@@ -51,14 +54,14 @@ div.k_serach{vertical-align:text-top;*font-size: 18px; }
 						<option value="price-asc">价格↑</option>
 						<option value="price-desc">价格↓</option>
 					</select>
-		            淘宝帐号：<input type="text" id="member" style="width:150px;" value="<empty name='userInfo'>输入淘宝账号<else />{$userInfo.username}</empty>" />
-		            关键词：<input type="text" id="key" style="width:120px;" />
+		            淘宝帐号：<input type="text" id="member" style="width:120px;" value="<empty name='userInfo'>输入淘宝账号<else />{$userInfo.username}</empty>" />
+		            关键词：<input type="text" id="key" style="width:120px;" value="输入商品关键词" />
 		            <span style="color:Red;font-weight:bold;">
 				            <input id="chkbType" type="checkbox" checked="checked" />
 				            <label for="chkbType">只列出自己的商品</label>
 				          </span>
 		            
-		            <input name="txtPageCount" type="text" value="#" id="txtPageCount" title="最多20页" style="width:40px;" />
+		            <input name="txtPageCount" type="text" value="#" id="txtPageCount" title="最多20页" style="width:30px;" />
 		            页<input id="btnSearch" type="button" value="确定" />
 		        </div>
 				<div class="ProgressTextBox" id="divProgressTextBox">
@@ -80,6 +83,7 @@ div.k_serach{vertical-align:text-top;*font-size: 18px; }
 				    </div>
 				</div>
 			</div>
+			<br clear="all">
 			<div class="c_h">请输入正确的账号！</div>
 			<div class="result">
 				<table class="list" cellpadding="0" cellspacing="0">
