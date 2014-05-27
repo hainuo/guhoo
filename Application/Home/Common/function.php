@@ -40,7 +40,10 @@ function showLink($num = 7)
     $html .= "</p>";
     echo $html;
 }
-
+/*
+ * 显示用户查询历史
+ *
+ */
 function showLastHistory($num = 17)
 { //默认取十条数据
     $data = M('Member')->order('create_time DESC')->limit($num)->select();
@@ -55,6 +58,16 @@ function showLastHistory($num = 17)
     } else {
         echo '快来查询一个人吧！';
     }
+}
+function showNews($limit=10){
+    $data=D('Article')->order('create_time DESC')->limit($limit)->select();
+    if($data)
+        foreach($data as $val){
+            $code.='『<a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';
+            $code.=$val['title'];
+            $code.="</a>』 ";
+        }
+    echo $code;
 }
 
 ?>

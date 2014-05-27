@@ -1,4 +1,7 @@
 <div class="beautiful">{:showAd('siteFooter')}</div>
+<div class="newsList">
+    <marquee width="100%" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="3">{:showNews()}</marquee>
+</div>
 <!-- 联接 -->
 <div class="two_link" style="display:none;">
     <div style="margin: 0px auto; color: rgb(102, 102, 102); width: 790px;">
@@ -13,8 +16,6 @@
 </div>
 <!-- 尾巴 -->
 <div class="footer">
-
-
     <div class="detail">
         <table class="number" cellpadding="0" cellspacing="0">
             <tr>
@@ -40,11 +41,9 @@
             <br clear="all"/>
         </div>
         <div class="font">
-
             <p >
                 <a class="first" href='javascript:void(0);'>加入收藏</a> | <a href="/fentutu.php" target="_blank">添加桌面</a> | {:C('footer_code')} | <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes">联系我们</a>
             </p>
-
             <p>
                 {:C('beian')}
             </p>
@@ -95,6 +94,5 @@
     }
     bindGoTop();
 </script>
-
 </body>
 </html>

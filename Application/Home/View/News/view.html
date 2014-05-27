@@ -1,0 +1,105 @@
+<include file="Public/header" />
+<style>
+    .content .detail{width: 900px;}
+
+    .content .result {
+        width: 100%;
+        border: #f2f2f2 solid 1px;
+        height: auto;
+        background: white;
+        position: relative;
+        *margin-top: 0px;
+    }
+
+    .result .even{background-color: #f9f9f9}
+    .result .odd{background-color: #fff}
+
+    .c_h {
+        font-size: 12px;
+        border: 1px solid #c9c9c9;
+        padding: 10px;
+        margin-top: 50px;
+        background-color: #f7faff
+    }
+
+    .list {width: 100%;border: 1px solid #c9c9c9;}
+    .list thead tr th{background-color: #ececec;height: 37px;border-bottom: 2px solid #d3d3d3;}
+    .list tr td{height: 41px;border-bottom: 1px solid #e5e5e4;font-size: 12px;text-align:center}
+    .list tbody tr:hover{background: #fff8ec;border-bottom: 1px solid #e5dfd4;}
+    .list .un a{color: #0077e9}
+    .list .un a:hover{color: #f28813}
+    .list .time{color:#a2a2a2;}
+    .list .pl{color: #666666}
+    .list .H{color: red;}
+    .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
+    input{height: 30px;}
+    input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:-2px;*vertical-align:middle;_vertical-align:3px;}
+    select {height: 30px;}
+    .main_01 {    line-height: 24px;}
+    .headScore {background: none repeat scroll 0 0 #F4F4F4;	border-image: none;	overflow: hidden;	border-top-width: 1px;	border-right-width: 1px;	border-bottom-width: 0;	border-left-width: 1px;	border-top-style: solid;	border-right-style: solid;	border-bottom-style: none;	border-left-style: solid;	border-top-color: #E0E0E0;	border-right-color: #E0E0E0;	border-bottom-color: #E0E0E0;	border-left-color: #E0E0E0;}
+    .headScore .scoreTitle {    border-right: 1px solid #E0E0E0;    color: #DE0A0E;    font-size: 15px;    font-weight: bold;    height: 35px;    line-height: 35px;    text-align: center;    width: 400px;}
+    #divResultScore .headScore li {    float: left;}
+    li {    list-style: none outside none;}
+    .headScore .ggTitle {    color: #666666;    font-size: 15px;    font-weight: bold;    height: 35px;    line-height: 35px;    text-align: center;    width: 407px;}
+    #divResultScore .headScore li {    float: left;}
+
+    .itemScore {    background: none repeat scroll 0 0 #FFFFFF;    border: 1px solid #E0E0E0;    overflow: hidden;}
+
+    .itemScore .scoreInfo {    border-right: 1px solid #E0E0E0;    height: 184px;    line-height: 50px;    width: 400px;}
+    #divResultScore .itemScore .scoreInfo .clear {    height: 40px;}
+    #divResultScore #msg_score {    color: #00A600;    font-family: 楷体;    font-size: 23px;    margin-left: 80px;}
+    #divResultScore .itemScore .font_GG {	height:184px;}
+    #divResultScore .itemScore li {    float: left;}
+
+    .itemScore .font_GG p {    margin-left: 5px;font-size: 12px;}
+    #divResultScore .itemScore .font_GG .tuijian {    color: red;    font-size: 13px;    font-weight: 600;}
+    .rsRed{	color:#ff0000;	font-size:12px;	margin-left:0px;}
+    #resultScore p{	padding-left:10px;	line-height:25px;}
+    .ipt_s{	width:50px;	border-top:none;	border-left:none;	border-right:none;	border-bottom:1px solid #999;	color:#C30;	text-align:center;}
+</style>
+
+
+<div class="content" >
+    <div class="detail">
+        <div class="other-i logo">
+        </div>
+        <form class="search" action="/Index/getDongtai.html" method="get">
+            <i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
+            <input class="index-input-s" type="text" id="txtKey" name="username" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
+            <input class="other-i button-s" id = 'btn' type="submit" value=""/>
+        </form>
+        <br clear="all" />
+        <div class="clf"></div>
+        <div class="c_h">
+            粉兔兔网站能够做什么。 1、查信誉，2、查隐形降权，3、查淘宝快递，4、查动态评分，5、看最新动态！
+        </div>
+        <div class="result">
+            <div class="main_01" id="divResultScore">
+                <ul class="headScore">
+                    <li class="scoreTitle"><span>新闻动态</span></li>
+                    <li class="ggTitle"><span>正文内容</span></li>
+                </ul>
+                <ul class="itemScore">
+                    <li class="scoreInfo" id="resultScore">
+                        <volist name="dataLists" id="vo">
+                            <eq name="vo.id" value="$id">
+                                <assign name="data" value="$vo" />
+                            </eq>
+                            <p>
+                                <a href="/news/{$vo.id}.html" target="_blank" title="{$vo.title}">{$vo.title}</a>
+                            </p>
+                        </volist>
+                    </li>
+                    <li class="font_GG">
+                        <h4>标题：{$data.title}</h4>
+                        <h6>作者：{$data.username}</h6>
+                        <h4>内容：</h4>
+                        {$data.content|htmlspecialchars_decode}
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />

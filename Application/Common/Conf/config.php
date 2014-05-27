@@ -45,11 +45,12 @@ return array(
     'SESSION_AUTO_START' => true, //自动打开session
     'SESSION_TYPE' => 'Db', //开启session的数据库驱动模式
     'SESSION_PREFIX' => 'TB', //定义session本地化前缀
-    'URL_ROUTER_ON' => false, //开启路由模式
-    'URL_ROUTE_RULES' => array(//'/Admin\/(.*)\.html/' => 'Admin/:1',
-    ),
     'TOKEN_ON' => true, // 是否开启令牌验证 默认关闭
     'TOKEN_NAME' => '__hash__', // 令牌验证的表单隐藏字段名称，默认为__hash__
     'TOKEN_TYPE' => 'md5', //令牌哈希验证规则 默认为MD5
     'TOKEN_RESET' => true, //令牌验证出错后是否重置令牌 默认为true
+    //新闻页面seo
+    'view_title'       =>   '淘宝信用查询_淘宝卖家信用查询_买家信用查询_防止恶意差评_淘宝查询小号 — 粉兔兔卖家工具箱',
+    'view_keyWords'     =>   '淘宝信用查询_淘宝卖家信用查询_买家信用查询_防止恶意差评_淘宝查询小号 — 粉兔兔卖家工具箱',
+    'view_description' =>   '淘宝信用查询_淘宝卖家信用查询_买家信用查询_防止恶意差评_淘宝查询小号 — 粉兔兔卖家工具箱',
 );
