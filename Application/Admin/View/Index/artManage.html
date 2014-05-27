@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Panelo - Free Admin Template</title>
+
+    <!-- jQuery file -->
+    <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+    <link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="__PUBLIC__/css/jquery.validator.css">
+    <script type="text/javascript" src="__PUBLIC__/js/jquery.validator.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/local/zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css"/>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/js/umeditor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/js/umeditor/umeditor.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/umeditor/lang/zh-cn/zh-cn.js"></script>
+    <link href="__PUBLIC__/js/umeditor/themes/default/css/umeditor.min.css" type="text/css" rel="stylesheet">
+
+    <style type="text/css">
+        td {
+            height: 30px;
+            vertical-align: baseline;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        tr {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        td.left {
+            width: 100px;
+        }
+
+        #errorLabelContainer {
+            text-align: center;
+            line-height: 35px;
+            font-family: sans-serif serif 微 软 雅 黑;
+        }
+
+        input.loginform_input {
+            width: 300px;
+        }
+
+        #loginpanelwrap {
+            margin: 0px;
+            width: auto;
+        }
+
+        .loginform_row {
+            width: 880px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginpanelwrap">
+
+    <div class="loginheader">
+        <div class="logintitle"><a href="#">
+            <empty name='data'> Article Add
+                <else/>
+                更改文章
+            </empty>
+        </a></div>
+    </div>
+</div>
+<form action="__SELF__" method="post" name="article">
+    <div class="loginform">
+        <table align="center" cellpadding="0" cellspacing="0" class="l-table-edit">
+            <empty name='data'>
+                <tr>
+                    <td class="left" class="l-table-edit-td">Title</td>
+                    <td class="l-table-edit-td"><input type="text" class="loginform_input" id="Title" name="title"
+                                                       data-rule="required;title;"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="left" class="l-table-edit-td">Content</td>
+                    <td class="l-table-edit-td">
+                        <div style="width:800px;margin:20px auto 40px;">
+                            <script type="text/plain" id="editor" style="width:100%;height:360px;"></script>
+                        </div>
+                        <input type="hidden" name="userName" value="{:session('name')}"/></td>
+                    <td></td>
+                </tr>
+                <else/>
+                <tr>
+                    <td class="left" class="l-table-edit-td">Title</td>
+                    <td class="l-table-edit-td"><input type="text" class="loginform_input" id="Title" name="title"
+                                                       value="{$data.title}"/><input type="hidden" name="id"
+                                                                                     value="{$data.id}"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="left" class="l-table-edit-td">Content</td>
+                    <td class="l-table-edit-td">
+                        <div style="width:800px;margin:20px auto 40px;">
+                            <script type="text/plain" id="editor" name="content" style="width:100%;height:360px;">
+                                {$data.content|htmlspecialchars_decode}
+                            </script>
+                        </div>
+                        <input type="hidden" name="userName" value="{:session('name')}"/></td>
+                    <td></td>
+                </tr>
+            </empty>
+        </table>
+        <div class="loginform_row">
+            <input type="submit" class="loginform_submit" value="<empty name='data'>增加<else /> 修改</empty>"/>
+            <input type="reset" class="loginform_reset " onclick="frameElement.dialog.close()" value="取消"/>
+        </div>
+        <div class="clear"></div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" charset="utf-8">
+    var serverPath = '__PUBLIC__/js/umeditor/',
+            um = UM.getEditor('editor', {
+                imageUrl: serverPath + "imageUp.php",
+                imagePath: serverPath,
+                lang: /^zh/.test(navigator.language || navigator.browserLanguage || navigator.userLanguage) ? 'zh-cn' : 'en',
+                langPath: UMEDITOR_CONFIG.UMEDITOR_HOME_URL + "lang/",
+                focus: false,
+                textarea: 'content'
+            });
+</script>
+</body>
+</html>

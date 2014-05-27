@@ -1,199 +1,292 @@
-<include file="Public/header" />
-    <div class="center_content">  
- 
-    <div id="right_wrap">
-    <div id="right_content"> 
-    <h2>广告设置</h2> 
-                    
-                    
-<table class ="rounded-corner" width="600px" style="overflow-wrap:normal;word-wrap:normal;">
+<include file="Public/header"/>
+<div class="center_content">
+
+<div id="right_wrap">
+<div id="right_content">
+<!--start ad-->
+<h2>新闻动态</h2>
+<table class="rounded-corner" width="600px" style="overflow-wrap:normal;word-wrap:normal;">
     <thead>
+    <tr>
+        <th width="30px">id</th>
+        <th width="150px">title</th>
+        <!--<th>keyword</th>-->
+        <th>content</th>
+        <th width="60px">editor</th>
+        <th width="60px">trash</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <td colspan="6">文章管理功能暂时只有一个分类 <a href="javascript:newArt()">新增文章</a></td>
+    </tr>
+    </tfoot>
+    <tbody>
+    <empty name="articles">
         <tr>
+            <td colspan="6">没有内容添加一个吧！ <a href="javascript:newArt()">新增文章</a></td>
+        </tr>
+
+        <else/>
+        <volist name="articles" id="vo" mod="2">
+            <tr class=" <eq name='mod' value='1'>even<else />odd</eq>  ">
+                <td>{$vo.id}</td>
+                <td>{$vo.title|msubstr=0,20}</td>
+                <!--<td>{$vo.keyword}</td>-->
+                <td>{$vo.content|htmlspecialchars_decode|strip_tags|msubstr=0,30}</td>
+                <td><a href="javascript:changeArt({$vo.id})"><img src="__PUBLIC__/images/edit.png" alt="" title=""
+                                                                  border="0"/></a></td>
+                <td><a href="javascript:delArt({$vo.id})"><img src="__PUBLIC__/images/trash.gif" alt="" title=""
+                                                               border="0"/></a></td>
+            </tr>
+        </volist>
+    </empty>
+    </tbody>
+</table>
+<script type="text/javascript">
+    function newArt() {
+        $.ligerDialog.open({ url: '{:U("/Admin/Index/artManage")}?type=new', title: '编辑文章', height: 800, width: 950, });
+    }
+    function changeArt(id) {
+        if (parseInt(id)) {
+            $.ligerDialog.open({ url: '{:U("/Admin/Index/artManage")}?type=change' + '&id=' + id, title: '编辑文章', height: 800, width: 950, });
+        }
+        ;
+    }
+    function delArt(id) {
+        if (parseInt(id)) {
+            $.ligerDialog.open({ url: '{:U("/Admin/Index/artManage")}?type=del' + '&id=' + id, title: '编辑文章', height: 600, width: 550, });
+        }
+        ;
+    }
+</script>
+<br/>
+<!-- end ad -->
+<!--start ad-->
+<h2>广告设置</h2>
+<table class="rounded-corner" width="600px" style="overflow-wrap:normal;word-wrap:normal;">
+    <thead>
+    <tr>
         <th>id</th>
         <th>keyword</th>
         <th>image&url</th>
         <th>name</th>
         <th>remark</th>
         <th>editor</th>
-        </tr>
+    </tr>
     </thead>
-        <tfoot>
-        <tr>
-            <td colspan="6">这里列出的是广告配置，为防止恶意数据，已经禁用添加和删除操作</td>
-        </tr>
+    <tfoot>
+    <tr>
+        <td colspan="6">这里列出的是广告配置，为防止恶意数据，已经禁用添加和删除操作</td>
+    </tr>
     </tfoot>
     <tbody>
     <empty name="ads">
-    <tr>
+        <tr>
             <td></td>
             <td></td>
             <td></td>
             <td>没有内容</td>
             <td></td>
-    </tr>
-
-    <else />
-    <volist name="ads" id="vo" mod="2">
-        <tr class=" <eq name='mod' value='1'>even<else />odd</eq>  ">
-        <td>{$vo.id}</td>
-        <td>{$vo.keyword}</td>
-        <td><a href="{$vo.image}" target="_blank" title="{$vo.remark}"><img src="{$vo.image}" width="90px"  /></a><br />{$vo.url}</td>
-        <td>{$vo.name}</td>
-        <td>{$vo.remark}</td>
-        <td><a href="javascript:changeAd({$vo.id})"><img src="__PUBLIC__/images/edit.png" alt="" title="" border="0" /></a></td>
         </tr>
-    </volist>
-    <script type="text/javascript">
-    function changeAd(id){
-            if (parseInt(id)) {
-                $.ligerDialog.open({ url: '{:U('/Admin/Index/adManage')}?type=change'+'&id='+id, title:'编辑配置', height: 600,width: 550, });
-            };
-    }
-    </script>
+        <else/>
+        <volist name="ads" id="vo" mod="2">
+            <tr class=" <eq name='mod' value='1'>even<else />odd</eq>  ">
+                <td>{$vo.id}</td>
+                <td>{$vo.keyword}</td>
+                <td><a href="{$vo.image}" target="_blank" title="{$vo.remark}"><img src="{$vo.image}" width="90px"/></a><br/>{$vo.url}
+                </td>
+                <td>{$vo.name}</td>
+                <td>{$vo.remark}</td>
+                <td><a href="javascript:changeAd({$vo.id})"><img src="__PUBLIC__/images/edit.png" alt="" title=""
+                                                                 border="0"/></a></td>
+            </tr>
+        </volist>
+        <script type="text/javascript">
+            function changeAd(id) {
+                if (parseInt(id)) {
+                    $.ligerDialog.open({ url: '{:U("/Admin/Index/adManage")}?type=change' + '&id=' + id, title: '编辑配置', height: 600, width: 550, });
+                }
+                ;
+            }
+        </script>
     </empty>
     </tbody>
-</table> 
-<br />
-<!-- end ad -->               
-    <h2>系统配置</h2> 
+</table>
+<br/>
+<!-- end ad -->
+<h2>系统配置</h2>
 <table class="rounded-corner" width="600px" style="overflow-wrap:normal;word-wrap:normal;">
     <thead>
-    	<tr>
-        	<th>id</th>
-            <th>remark</th>
-            <th>name</th>
-            <th width="200px">value</th>
-{/*            <th>Date</th>
-            <th>Category</th>
-            <th>User</th>*/}
-            <th>Edit</th>
-        </tr>
+    <tr>
+        <th>id</th>
+        <th>remark</th>
+        <th>name</th>
+        <th width="200px">value</th>
+        {/*
+        <th>Date</th>
+        <th>Category</th>
+        <th>User</th>
+        */}
+        <th>Edit</th>
+    </tr>
     </thead>
-        <tfoot>
-    	<tr>
-        	<td colspan="6">这里列出的是系统配置和SEO优化配置，如果不必须，请勿修改,已经尽禁用了删除操作。为防止恶意数据，已经禁用添加操作</td>
-        </tr>
+    <tfoot>
+    <tr>
+        <td colspan="6">这里列出的是系统配置和SEO优化配置，如果不必须，请勿修改,已经尽禁用了删除操作。为防止恶意数据，已经禁用添加操作</td>
+    </tr>
     </tfoot>
     <tbody>
     <empty name="configs">
-    <tr>
+        <tr>
             <th></th>
             <th></th>
             <th></th>
             <th>没有内容</th>
             <th></th>
             <th></th>
-    </tr>
-
-    <else />
-    <volist name="configs" id="vo" mod="2">
-    	<tr class=" <eq name='mod' value='1'>even<else />odd</eq>  ">
-            <td width="20px">{$vo.id}</td>
-            <td width="100px">{$vo.remark}</td>
-            <td >{$vo.name}</td>
-            <td ><div style="width:350px;word-wrap:break-word;word-break:break-all;">{$vo.value}</div></td>
-            <td width="40px"><a href="javascript:changeConfig({$vo.id})"><img src="__PUBLIC__/images/edit.png" alt="" title="" border="0" /></a></td>
-            {/* <td width="20px"><a href="#"><img src="__PUBLIC__/images/trash.gif" alt="" title="" border="0" /></a></td> */}
         </tr>
-    </volist>
-    <script type="text/javascript">
-    function changeConfig(id){
-            if (parseInt(id)) {
-                $.ligerDialog.open({ url: '{:U('/Admin/Index/configManage')}?type=change'+'&id='+id, title:'编辑配置', height: 500,width: 550, });
-            };
-    }
-    </script>
+
+        <else/>
+        <volist name="configs" id="vo" mod="2">
+            <tr class=" <eq name='mod' value='1'>even<else />odd</eq>  ">
+                <td width="20px">{$vo.id}</td>
+                <td width="100px">{$vo.remark}</td>
+                <td>{$vo.name}</td>
+                <td>
+                    <div style="width:350px;word-wrap:break-word;word-break:break-all;">{$vo.value}</div>
+                </td>
+                <td width="40px"><a href="javascript:changeConfig({$vo.id})"><img src="__PUBLIC__/images/edit.png"
+                                                                                  alt="" title="" border="0"/></a></td>
+                {/*
+                <td width="20px"><a href="#"><img src="__PUBLIC__/images/trash.gif" alt="" title="" border="0"/></a>
+                </td>
+                */}
+            </tr>
+        </volist>
+        <script type="text/javascript">
+            function changeConfig(id) {
+                if (parseInt(id)) {
+                    $.ligerDialog.open({ url: '{:U("/Admin/Index/configManage")}?type=change' + '&id=' + id, title: '编辑配置', height: 500, width: 550, });
+                }
+                ;
+            }
+        </script>
     </empty>
     </tbody>
 </table>
 {/*
-	<div class="form_sub_buttons">
-	<a href="#" class="button green">Edit selected</a>
+<div class="form_sub_buttons">
+    <a href="#" class="button green">Edit selected</a>
     <a href="#" class="button red">Delete selected</a>
-    </div>
-    
-    <ul id="tabsmenu" class="tabsmenu">
-        <li class="active"><a href="#tab1">Form Design Structure</a></li>
-        <li><a href="#tab2">Tab two</a></li>
-        <li><a href="#tab3">Tab three</a></li>
-        <li><a href="#tab4">Tab four</a></li>
-    </ul>
-    <div id="tab1" class="tabcontent">
-        <h3>Tab one title</h3>
-        <div class="form">
-            
-            <div class="form_row">
+</div>
+
+<ul id="tabsmenu" class="tabsmenu">
+    <li class="active"><a href="#tab1">Form Design Structure</a></li>
+    <li><a href="#tab2">Tab two</a></li>
+    <li><a href="#tab3">Tab three</a></li>
+    <li><a href="#tab4">Tab four</a></li>
+</ul>
+<div id="tab1" class="tabcontent">
+    <h3>Tab one title</h3>
+
+    <div class="form">
+
+        <div class="form_row">
             <label>Name:</label>
-            <input type="text" class="form_input" name="" />
-            </div>
-             
-            <div class="form_row">
+            <input type="text" class="form_input" name=""/>
+        </div>
+
+        <div class="form_row">
             <label>Email:</label>
-            <input type="text" class="form_input" name="" />
-            </div>
-            
-            <div class="form_row">
+            <input type="text" class="form_input" name=""/>
+        </div>
+
+        <div class="form_row">
             <label>Subject:</label>
             <select class="form_select" name="">
-            <option>Select one</option>
+                <option>Select one</option>
             </select>
-            </div>
-            
-             <div class="form_row">
+        </div>
+
+        <div class="form_row">
             <label>Message:</label>
             <textarea class="form_textarea" name=""></textarea>
-            </div>
-            <div class="form_row">
-            <input type="submit" class="form_submit" value="Submit" />
-            </div> 
-            <div class="clear"></div>
         </div>
+        <div class="form_row">
+            <input type="submit" class="form_submit" value="Submit"/>
+        </div>
+        <div class="clear"></div>
     </div>
-    <div id="tab2" class="tabcontent">
-        <h3>Tab two title</h3>
-        <ul class="lists">
-        <li>Consectetur adipisicing elit  error sit voluptatem accusantium doloremqu sed</li>
+</div>
+<div id="tab2" class="tabcontent">
+    <h3>Tab two title</h3>
+    <ul class="lists">
+        <li>Consectetur adipisicing elit error sit voluptatem accusantium doloremqu sed</li>
         <li>Sed do eiusmod tempor incididunt</li>
         <li>Ut enim ad minim veniam is iste natus error sit</li>
         <li>Consectetur adipisicing elit sed</li>
-        <li>Sed do eiusmod tempor  error sit voluptatem accus antium dolor emqu incididunt</li>
+        <li>Sed do eiusmod tempor error sit voluptatem accus antium dolor emqu incididunt</li>
         <li>Ut enim ad minim veniam</li>
-        <li>Consectetur adipisi  error sit voluptatem accusantium doloremqu cing elit sed</li>
+        <li>Consectetur adipisi error sit voluptatem accusantium doloremqu cing elit sed</li>
         <li>Sed do eiusmod tempor in is iste natus error sit cididunt</li>
         <li>Ut enim ad minim ve is iste natus error sitniam</li>
-        </ul>
+    </ul>
+</div>
+
+<div id="tab3" class="tabcontent">
+    <h3>Tab three title</h3>
+
+    <p>
+        Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+        vitae dicta sunt explicabo. <br/><br/>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+        fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+        qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
+        incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum
+        iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum
+        fugiat quo voluptas nulla pariatur?
+    </p>
+</div>
+
+<div id="tab4" class="tabcontent">
+    <h3>Tab four title</h3>
+
+    <p>
+        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+        eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+        consectetur, ad <br/><br/>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+        consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+        ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
+        labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit
+        qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas
+        nulla pariatur?
+    </p>
+</div>
+
+
+<div class="toogle_wrap">
+    <div class="trigger"><a href="#">Toggle with text</a></div>
+
+    <div class="toggle_container">
+        <p>
+            Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
     </div>
-
-    <div id="tab3" class="tabcontent">
-        <h3>Tab three title</h3>
-        <p>
-    Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. <br /><br />Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-        </p>
-    </div> 
-    
-    <div id="tab4" class="tabcontent">
-        <h3>Tab four title</h3>
-        <p>
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad <br /><br />Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-        </p>
-    </div> 
-     
-    
-
-    
-        <div class="toogle_wrap">
-            <div class="trigger"><a href="#">Toggle with text</a></div>
-
-            <div class="toggle_container">
-			<p>
-        Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			</p>
-            </div>
-        </div>
-      */}
-     </div>
-     </div><!-- end of right content-->
-<include file="Public/siderbar" />     
-    <div class="clear"></div>
-    </div> <!--end of center_content-->
-<include file="Public/footer" />    
+</div>
+*/}
+</div>
+</div>
+<!-- end of right content-->
+<include file="Public/siderbar"/>
+<div class="clear"></div>
+</div> <!--end of center_content-->
+<include file="Public/footer"/>
