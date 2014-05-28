@@ -94,7 +94,7 @@ body{font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;ove
 .two_link a{color:#444444}
 
 
-.footer{height:180px;width:1020px;margin: 30px auto;*margin:5px auto;text-align: center;}
+.footer{height:180px;width:1020px;margin: 0px auto;*margin:5px auto;text-align: center;}
 .footer .detail{text-align: center;font-size: 12px;}
 .footer .detail .first{margin-top: 20px;}
 .footer .detail p{margin-top: 10px;}

@@ -65,7 +65,7 @@ function showNews($limit=10){
         foreach($data as $val){
             $code.='『<a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';
             $code.=$val['title'];
-            $code.="</a>』 ";
+            $code.="</a>』";
         }
     echo $code;
 }
