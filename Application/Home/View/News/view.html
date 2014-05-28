@@ -1,105 +1,67 @@
 <include file="Public/header" />
+
 <style>
-    .content .detail{width: 900px;}
+    .fage a{margin-left: 5px;}.fage span{margin-left: 5px;}
+    #content{width:980px; height:auto; overflow:hidden; margin:0 auto;}
 
-    .content .result {
-        width: 100%;
-        border: #f2f2f2 solid 1px;
-        height: auto;
-        background: white;
-        position: relative;
-        *margin-top: 0px;
-    }
-
-    .result .even{background-color: #f9f9f9}
-    .result .odd{background-color: #fff}
-
-    .c_h {
-        font-size: 12px;
-        border: 1px solid #c9c9c9;
-        padding: 10px;
-        margin-top: 50px;
-        background-color: #f7faff
-    }
-
-    .list {width: 100%;border: 1px solid #c9c9c9;}
-    .list thead tr th{background-color: #ececec;height: 37px;border-bottom: 2px solid #d3d3d3;}
-    .list tr td{height: 41px;border-bottom: 1px solid #e5e5e4;font-size: 12px;text-align:center}
-    .list tbody tr:hover{background: #fff8ec;border-bottom: 1px solid #e5dfd4;}
-    .list .un a{color: #0077e9}
-    .list .un a:hover{color: #f28813}
-    .list .time{color:#a2a2a2;}
-    .list .pl{color: #666666}
-    .list .H{color: red;}
-    .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
-    input{height: 30px;}
-    input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:-2px;*vertical-align:middle;_vertical-align:3px;}
-    select {height: 30px;}
-    .main_01 {    line-height: 24px;}
-    .headScore {background: none repeat scroll 0 0 #F4F4F4;	border-image: none;	overflow: hidden;	border-top-width: 1px;	border-right-width: 1px;	border-bottom-width: 0;	border-left-width: 1px;	border-top-style: solid;	border-right-style: solid;	border-bottom-style: none;	border-left-style: solid;	border-top-color: #E0E0E0;	border-right-color: #E0E0E0;	border-bottom-color: #E0E0E0;	border-left-color: #E0E0E0;}
-    .headScore .scoreTitle {    border-right: 1px solid #E0E0E0;    color: #DE0A0E;    font-size: 15px;    font-weight: bold;    height: 35px;    line-height: 35px;    text-align: center;    width: 400px;}
-    #divResultScore .headScore li {    float: left;}
-    li {    list-style: none outside none;}
-    .headScore .ggTitle {    color: #666666;    font-size: 15px;    font-weight: bold;    height: 35px;    line-height: 35px;    text-align: center;    width: 407px;}
-    #divResultScore .headScore li {    float: left;}
-
-    .itemScore {    background: none repeat scroll 0 0 #FFFFFF;    border: 1px solid #E0E0E0;    overflow: hidden;}
-
-    .itemScore .scoreInfo {    border-right: 1px solid #E0E0E0;    height: 184px;    line-height: 50px;    width: 400px;}
-    #divResultScore .itemScore .scoreInfo .clear {    height: 40px;}
-    #divResultScore #msg_score {    color: #00A600;    font-family: 楷体;    font-size: 23px;    margin-left: 80px;}
-    #divResultScore .itemScore .font_GG {	height:184px;}
-    #divResultScore .itemScore li {    float: left;}
-
-    .itemScore .font_GG p {    margin-left: 5px;font-size: 12px;}
-    #divResultScore .itemScore .font_GG .tuijian {    color: red;    font-size: 13px;    font-weight: 600;}
-    .rsRed{	color:#ff0000;	font-size:12px;	margin-left:0px;}
-    #resultScore p{	padding-left:10px;	line-height:25px;}
-    .ipt_s{	width:50px;	border-top:none;	border-left:none;	border-right:none;	border-bottom:1px solid #999;	color:#C30;	text-align:center;}
+    /* extra */
+    #content2{width:auto; height:auto; overflow:hidden; margin:0 auto; border-top:1px #dcdcdc solid; padding-top:15px; }
+    /* position */
+    #position{width:480px; height:auto; overflow:hidden; margin:5 10 5 0;}
+    #position p{font-size:12px; color:#6c879b; line-height:24px; float:left;}
+    #position .pos{background:url(__PUBLIC__/images/pos.gif); width:5px; height:9px; float:left; font-size:1px; margin-left:5px; margin-right:5px; margin-top:7px;}
+    #help_l{width:250px; height:auto; overflow:hidden; background:#f5f5f5; padding:10px 15px; float:left;}
+    #help_l h4{font-size:14px; color:#505050; line-height:24px;}
+    #help_l ul li{background:url(__PUBLIC__/images/ord.gif) left center no-repeat; padding-left:10px; line-height:24px;}
+    #help_r{width:auto; height:auto; overflow:hidden; padding-left:20px;}
+    #help_r h1{font-size:20px; color:#505050; line-height:36px; border-bottom:1px #dcdcdc solid; margin-bottom:20px;}
+    #help_r p{font-size:14px; color:#505050; line-height:24px; text-indent:24px;}
+    #help_r .tp{font-size:14px; color:#505050; line-height:24px;text-indent:0px;}
+    #help_r ul li{line-height:24px; text-indent:0; border-bottom:1px #d2d2d2 dotted; margin-bottom:20px;}
+    /*#help_l a{font-size:14px; background:url(__PUBLIC__/images/ord.gif) left center no-repeat; padding-left:10px;}*/
+    #help_r samp{font-size:12px; color:#666666; text-indent:34px;}
+    #help_r .fage{}
+    #help_r .fage ol li{float:right; margin-left:15px; line-height:24px; font-size:12px; color:#878787; background:none; border-bottom:none;}
+    #help_r .fage a{background:none; padding-left:0;}
+    #help_r .fage .cen{color:#e66432; font-weight:bold;}
+    a{font-size:12px; color:#41a51d; text-decoration:none; hide-focus: expression(this.hideFocus=true);outline: none;}
+    a:hover{color:#ff9600; text-decoration:underline;}
 </style>
-
-
-<div class="content" >
-    <div class="detail">
-        <div class="other-i logo">
+<div id="content">
+    <div id="position">
+        <p>当前位置：</p>
+        <p><a href="{$Think.server.http_host}">粉兔兔</a></p>
+        <p class="pos">
+        </p><p><a href="/news/{$last.id}.html">电商快讯</a></p>
+    </div>
+    <div id="content2">
+        <!-- Page -->
+        <div id="help_l">
+            <h4>电商快讯</h4>
+            <ul>
+               <volist name="dataLists" id="vo">
+                   <li><a href="/news/{$vo.id}.html">{$vo.title}</a></li>
+               </volist>
+            </ul>
         </div>
-        <form class="search" action="/Index/getDongtai.html" method="get">
-            <i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
-            <input class="index-input-s" type="text" id="txtKey" name="username" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
-            <input class="other-i button-s" id = 'btn' type="submit" value=""/>
-        </form>
-        <br clear="all" />
-        <div class="clf"></div>
-        <div class="c_h">
-            粉兔兔网站能够做什么。 1、查信誉，2、查隐形降权，3、查淘宝快递，4、查动态评分，5、看最新动态！
-        </div>
-        <div class="result">
-            <div class="main_01" id="divResultScore">
-                <ul class="headScore">
-                    <li class="scoreTitle"><span>新闻动态</span></li>
-                    <li class="ggTitle"><span>正文内容</span></li>
-                </ul>
-                <ul class="itemScore">
-                    <li class="scoreInfo" id="resultScore">
-                        <volist name="dataLists" id="vo">
-                            <eq name="vo.id" value="$id">
-                                <assign name="data" value="$vo" />
-                            </eq>
-                            <p>
-                                {$i} <a href="/news/{$vo.id}.html" target="_blank" title="{$vo.title}">{$vo.title}</a>
-                            </p>
-                        </volist>
-                    </li>
-                    <li class="font_GG">
-                        <h4>标题：{$data.title}</h4>
-                        <h6>作者：{$data.username}</h6>
-                        <h4>内容：</h4>
-                        {$data.content|htmlspecialchars_decode}
-                    </li>
-                </ul>
+        <div id="help_r">
+            <h1>{$data.title}</h1>
+            <p style="margin-top:-10px;margin-bottom:10px;font-size:12px;color:#969696;">作者：{$data.username} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间：{$data.create_time}</p><!-- Baidu Button BEGIN -->
+            <div style="float:right;margin-top:-36px;" id="bdshare" class="bdshare_b">{:C('baidu_share_code')}</div>
+            <!-- Baidu Button END -->
+            <p></p>
+            {$data.content|htmlspecialchars_decode}
+            <empty name="previousData">
+                <div style="text-align:left;font-size:14px;margin-top:10px;">这是最新的一篇</div>
+                <else />
+                <div style="clear:both;text-align:left;font-size:14px;margin-top:20px;">上一篇：<a style="background:none;padding:0;" href="/news/{$previousData.id}.html" title="{$previousData.title}">{$previousData.title}</a></div>
+            </empty>
+            <empty name="nextData">
+                <div style="text-align:left;font-size:14px;margin-top:10px;">下一篇：没有了</div>
+            <else />
+                <div style="clear:both;text-align:left;font-size:14px;margin-top:20px;">下一篇：<a style="background:none;padding:0;" href="/news/{$nextData.id}.html" title="{$nextData.title}">{$nextData.title}</a></div>
+            </empty>
             </div>
-
-        </div>
     </div>
 </div>
 <include file="Public/footer" />
