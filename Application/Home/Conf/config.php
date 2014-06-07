@@ -15,5 +15,9 @@ return array(
     'URL_ROUTER_ON' => true, //开启路由模式
     'URL_ROUTE_RULES' => array(
         'news/:id\d'=>'News/view',
+        '/^get(\w{4,7}[^\/])/'=>function(){
+        	$_SERVER['PATH_INFO']='/Index/'.$_SERVER['PATH_INFO'];
+        	return false;
+        }
     ),
 );

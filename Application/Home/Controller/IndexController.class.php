@@ -26,7 +26,7 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/Index/getMember/username/" . $userName;
+            $url = "/getMember/username/" . $userName;
             $this->redirect($url);
         }
         if ($userName && ($userName != '输入淘宝帐号')) {
@@ -56,7 +56,7 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/Index/getWeight/username/" . $userName;
+            $url = "/getWeight/username/" . $userName;
             $this->redirect($url);
         }
         if ($userName && ($userName != '输入淘宝帐号')) {
@@ -126,7 +126,7 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/Index/getDongtai/username/" . $userName;
+            $url = "/getDongtai/username/" . $userName;
             $this->redirect($url);
         }
         if ($userName && ($userName != '输入淘宝帐号')) {

@@ -50,10 +50,10 @@ function showLastHistory($num = 17)
     $html = '';
     if ($data) {
         foreach ($data as $k => $v) {
-            $html .= '<li class="lastHistory"><a href="/Index/getMember/username/' . $v['username'] . '.html" target="_blank" >';
+            $html .= '<li class="lastHistory"><a href="/getMember/username/' . $v['username'] . '.html" target="_blank" >';
             $html .= $v['username'] . '</a></li>';
         }
-        $html .= "<li class='more'><a href='/Index/getHistory.html' target='_blank'>查看更多</a></li>";
+        $html .= "<li class='more'><a href='/getHistory.html' target='_blank'>查看更多</a></li>";
         echo $html;
     } else {
         echo '快来查询一个人吧！';

@@ -28,7 +28,7 @@
 		<div class="detail">
 			<div class="other-i logo">
 			</div>
-			<form class="search" method="get" action="/Index/getWeight.html">
+			<form class="search" method="get" action="/getWeight.html">
 				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
 				<input class="index-input-s" type="text" id="txtKey" name="username" value="输入淘宝帐号" /><input class="other-i button-s" type="submit" value=""/>
 			</form>
@@ -49,10 +49,10 @@
 <notempty name='list'>
 <volist name='list' id='vo' mod="2">
 <tr class="<eq name="mod" value="2" > odd <else /> even</eq>">
-    <td class="un"><a href="/Index/getMember/username/{$vo.username}.html" target="_blank">{$vo.username}</a></td>
+    <td class="un"><a href="/getMember/username/{$vo.username}.html" target="_blank">{$vo.username}</a></td>
 	<td class="bscore">{$vo.sscore}</td>
 	<td class="bscore">{$vo.bscore}</td>
-							<td class="bscore"><a href="/Index/getWeight/username/{$vo.username}.html" target="_blank">{$vo.goodNum}</a></td>
+							<td class="bscore"><a href="/getWeight/username/{$vo.username}.html" target="_blank">{$vo.goodNum}</a></td>
 							<td>
 <notempty name='vo.score'>
 <?php $score=json_decode($vo['score']);?>

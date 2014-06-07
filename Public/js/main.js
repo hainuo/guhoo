@@ -52,7 +52,7 @@ $(function(){
 });
 
 // function getSearchNum(){
-// 	$.get('/Index/countSearchNum',{},function(request){
+// 	$.get('/countSearchNum',{},function(request){
 // 		var i=0,
 // 			num = request.split(''),
 // 			len=0;
