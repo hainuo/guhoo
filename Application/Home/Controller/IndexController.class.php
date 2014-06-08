@@ -14,7 +14,7 @@ class IndexController extends Controller
     public function index()
     {
 
-        $this->redirect('getMember/');
+        redirect('/getMember.html');
     }
 
     /**
@@ -26,10 +26,10 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/getMember/username/" . $userName;
-            $this->redirect($url);
+            $url = "/getMember/username/" . $userName.'.html';
+            redirect($url);
         }
-        if ($userName && ($userName != '输入淘宝帐号')) {
+        if ($userName && ($userName!= '输入淘宝帐号')) {
             $userInfo = $this->getUserInfo($userName);
 
             $this->assign('data', $userInfo);
@@ -56,8 +56,8 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/getWeight/username/" . $userName;
-            $this->redirect($url);
+            $url = "/getWeight/username/" . $userName.'.html';
+            redirect($url);
         }
         if ($userName && ($userName != '输入淘宝帐号')) {
             $taobao = new \Org\Util\Taobao($userName);
@@ -126,8 +126,8 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/getDongtai/username/" . $userName;
-            $this->redirect($url);
+            $url = "/getDongtai/username/" . $userName.'.html';
+            redirect($url);
         }
         if ($userName && ($userName != '输入淘宝帐号')) {
             $checked = $this->checkUser($userName);
