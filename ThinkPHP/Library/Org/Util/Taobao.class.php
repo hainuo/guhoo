@@ -530,7 +530,9 @@ class Taobao {
                 header("Content-type:text/html;charset=UTF-8");
                 import('Org.JAE.QueryList');
                 $url0 = 'http://s.taobao.com/search?q='.urlencode(iconv("utf-8", 'GBK', $key)).'&commend=all&style=list&tab=coefp&s=';
-                $url = $url0.($nowPage * $perPage).($sortType ? '&sort='.$sortType : '');
+                $url0='http://s.taobao.com/search?promote=0&initiative_id=tbindexz_'.date('Ymd',time()).'&tab=all&q='.urlencode(iconv("utf-8", 'GBK', $key)).'&style=list';
+                $url = $url0.'&s='.($nowPage * $perPage).'&sort='.($sortType ?$sortType: 'default');
+//                var_dump($url);
                 if (strpos(file_get_contents($url), 'cat-noresult') !== false)
                     $rsErr = 'ResultCode:002';
                 else{
@@ -539,7 +541,7 @@ class Taobao {
                         "title"=>array("h3.summary a:eq(0)","text"),//商品标题
                         "url"=>array("h3.summary a:eq(0)","href"),//商品url
                         "title1"=>array("h3.summary a:eq(0)","title"),//商品alt属性
-                        "seller"=>array(".seller a:eq(0)","text"),//卖家帐号
+                        "nick"=>array(".seller a:eq(0)","text"),//卖家帐号
                         "shop"=>array(".seller a:eq(0)","href"),//淘宝店铺url
                         "price"=>array(".total .price","text"),//淘宝店铺url
                     );
@@ -569,16 +571,16 @@ class Taobao {
                 $codeList.=$k + 1 .'位</td>';
                 $codeList.='<td><font color="#000">'. $v["saleCount"] .'</font>笔</td>';
                 $codeList.='<td> <font color="#000">'.$v["price"].'</font> 元</td>';
-                $codeList.='<td class="pl"><a href="'.$v["shopUrl"].'" target="_blank">';
+                $codeList.='<td class="pl"><a href="'.$v["shop"].'" target="_blank">';
                 if($v["nick"]==$username)
                     $codeList.='<b><font color="red">'.$username.'</font></b>';
                 else
                     $codeList.=$v["nick"];
                 $codeList.='</a>';
-                if($v["tmall"])
+                if(strpos($v['url'],'tmall'))
                     $codeList.='<img src="'.__PUBLIC__.'/images/tmall.gif" />';
                 $codeList.='</td><td class="time" width="30%"><a href="'.$v["url"].'" target="_blank" title="'.$v["title0"].'">'.$v["title"].'</a></td></tr>';
-                if($type=='1' && $v['nick']==$username){
+                if($type=='1' && trim($v['nick'])==$username){
                     $code.=$codeList;//当只查询自己的时候显示。
                 }
             }
