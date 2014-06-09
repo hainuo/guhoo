@@ -244,6 +244,8 @@ class IndexController extends Controller
             //if(!empty($data))//数据过期时进行删除操作   过期数据不再删除，而是直接更新 减少一个sql查询
             //    $model->where($map)->delete();
             $tbdata = $taobao->getMember();
+            if($taobao->error!='')
+                $this->error($taobao->error);
             //trace(json_encode($data),'输出data序列化数据');
             if ($tbdata) {
                 //trace('创建数据库数据','信息');//跟踪方法测试是否数据准确

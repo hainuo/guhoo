@@ -109,7 +109,16 @@ $(document).ready(function()
                                                                 实名认证：
                                                         </span>
                                                         <font>
+                                                        <gt name="data['utype']" value="0" >
                                                                 支付宝认证
+                                                        </gt>
+                                                        <eq name="data['utype']" value ="0" >
+                                                                        未认证
+                                                        </eq>
+                                                        <lt name="data['utype']" value ="0" >
+
+                                                                        未知
+                                                        </lt>
                                                         </font>
                                                 </li>
 <notempty name='data.zhuying'>

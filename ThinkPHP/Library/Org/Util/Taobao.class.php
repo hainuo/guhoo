@@ -103,6 +103,10 @@ class Taobao {
             $this->error = '该用户已经被查封';
             return false;
         }
+        if(strpos($html,'很抱歉！淘宝正在对该店铺盘点，请稍后再试！') !==false ){
+            $this->error='很抱歉！淘宝正在对该店铺盘点，请稍后再试！';
+            return false;
+        }
 
         if (preg_match('/注册时间：\s*(\d+)年(\d+)月(\d+)日/', $html, $matches)) {
             $regTime = mktime(0, 0, 0, $matches[2], $matches[3], $matches[1]);
@@ -115,7 +119,6 @@ class Taobao {
         if ($regTime) { //如果是买家
             $member['regTime'] = $regTime;
         }
-
         if (preg_match('/http:\/\/rate\.taobao\.com\/user-rate-(\w+)\.htm/', $html, $matches)) {
             $url = $matches[0]; //信誉页面
             $sid = $matches[1]; //卖家id
