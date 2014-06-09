@@ -16,7 +16,7 @@ return array(
     'URL_ROUTE_RULES' => array(
         'news/:id\d'=>'News/view',
         '/^get(\w+[^\/|^\.])/'=>function(){
-        	$_SERVER['PATH_INFO']='/Index/'.$_SERVER['PATH_INFO'];
+                $_SERVER['PATH_INFO']='/Index/'.$_SERVER['PATH_INFO'];
         	return false;
         }
     ),

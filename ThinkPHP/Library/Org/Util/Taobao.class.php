@@ -445,107 +445,152 @@ class Taobao {
 //            }            
 //        }
 //    }
-    public function getRankBykeyword($username,$sortType,$key,$type,$nowPage){
- 			$cache=s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
-            $code='';
-            if($cache)
-                return $cache;
-            else{
-              if($key && ($type == 1 && $username || $type == 0)) {
+/* 此方法需要修改输出部分，才能使用
+ *     public function getRankBykeywordByDOM($username,$sortType,$key,$type,$nowPage,$perPage=44){//使用dom扩展类                比较方便
+        $cache=s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
+        if($cache)
+            return $cache;
+        else{
+            if($key && ($type == 1 && $username || $type == 0)) {
                 $url0 = 'http://s.taobao.com/search?q='.urlencode(iconv("utf-8", 'GBK', $key)).'&commend=all&style=list&tab=coefp&s=';
-    			//var_dump($url0);
-    			$url = $url0.($nowPage * 40).($sortType ? '&sort='.$sortType : '');
-		        $html = file_get_contents($url);
-				if (strpos($html, '淘宝') == false)
-	 	          $html=iconv( 'gbk','utf-8', $html);
-                $rsErr = '';
-			    $rsList = array();
-			    if (strpos($html, 'item-not-found') !== false)
-				    $rsErr = 'ResultCode:001';
-                elseif (strpos($html, 'cat-noresult') !== false)
-				    $rsErr = 'ResultCode:002';
-			    else{
-    				$html = String::dg_string2($html, 'div', '<div class="list-view"');
-    				$html=str_replace(" ","",$html);
-    				$html=str_replace("\r","",$html);
-    				$html=str_replace("\n","",$html);
-                    preg_match('/<divclass="list-view"bx-name="baobei\/listcontent"bx-path="components\/_baobei_listcontent_\/">(.*)<\/div>/',$html,$matches);
-    				$matches=explode('div><divclass="rowitemicon-datalink"',$matches['1']);
-                    
-    				if(!empty($matches)){
-        				foreach ($matches as $k => $v) {
-        					$nick =String::getSubstr($v,'<divclass="seller">','</a>'); 
-        					$nid=String::getSubstr($v,'id="','"');
-                            preg_match('/nid="(\d+)"/',$v,$nid);
-                            $nid=$nid['1'];
-                            $id=String::getSubstr($v,'_id="','"');
-                            $title1=String::getSubstr($v,'<h3class="summary">','</h3>');
-                            preg_match('/http:\/\/store.taobao.com\/shop\/view_shop.htm\?user_number_id=(\d+[^"])/',$v,$id);
-                            $shopUrl=$id['0']; 
-                            $sellerId=$id['1'];
-                            preg_match('/item.htm\?id=(\d+)"/',$v,$itemId);
-                            $itemId=$itemId['1'];
-                            preg_match('/<atrace="auction"traceNum="3"href="http:\/\/item.taobao.com\/item.htm\?id='.$itemId.'"target="_blank"title="([^"]*)"/',$v,$title0);
-                            $title0=$title0['1'];
-                            preg_match('/(\d+)人付款/',$v,$saleCount);
-                            $saleCount=$saleCount['1'];
-                            preg_match('/tmall\.com/',$v,$tmall);
-        					if ($type == 0 || $type == 1 && trim($nick) == trim($username)) {
-        					$rsList[] = array(
-        						'index'     => $k,
-        						'url'       => String::getSubstr($v,'<atrace="auction"traceNum="3"href="','"target="_blank'),
-        						//'title0'    =>  String::getSubstr($v,'<h3class="summary"><atrace="auction"traceNum="3"href="http://item.taobao.com/item.htm??id='.$nid.'"target="_blank"title="','">'),
-        						'title1'     => $title1,
-        						'saleCount' =>  $saleCount,
-        						'price'     =>  String::getSubstr($v,'<divclass="price">￥','<em>'),
-        						'nick'      => $nick,
-        						'tmall'     => !empty($tmall)?true:false,
-                                'title0'    =>  $title0,
-                                'shopUrl'   => $shopUrl
-        					   );
-                            }
-        				}
-                    }else
-                        $rsErr="ResultCode:002";      
-                 }
-                }else            
-                    $error = '参数错误';
-                if($error)
-                    return  $error;
-                elseif($rsErr)
-                    return  $rsErr;
-                else
-                    if($rsList)
+                //var_dump($url0);
+                $url = $url0.($nowPage * $perPage).($sortType ? '&sort='.$sortType : '');
+                $contents = file_get_contents($url);
+                if (strpos($contents, '淘宝') == false)
+                    $contents=iconv( 'gbk','utf-8', $contents);
+
+                if (strpos($contents, 'item-not-found') !== false)
+                    $rsErr = 'ResultCode:001';
+                elseif (strpos($contents, 'cat-noresult') !== false)
+                    $rsErr = 'ResultCode:002';
+                else{
+                    import('Org.Util.Dom');
+                    $dom=new \Dom;
+                    $dom->load($contents);
+                    foreach($dom->find('div.list-view div.item') as $k=> $code){
+                        $rsList[] = array(
+                            'index'     => $k,
+                            'url'       => trim($code->find('h3.summary a',0)->href),//商品url
+                            'title'     => trim($code->find('h3.summary a',0)->plaintext),//商品标题
+                            'saleCount' => trim($code->find('.dealing div',0)->plaintext),//成交数量
+                            'price'     => trim($code->find('.total .price',0)->plaintext),//商品价格
+                            'nick'      => trim($code->find('.seller a',0)->plaintext),//商家昵称
+                            'tmall'     => preg_match('/tmall\.com/',$code->find('.seller a',0)->href,$matches)?true:false,
+                            'title0'    => trim($code->find('h3.summary a',0)->title),//商品连接的title属性
+                            'shopUrl'   => $code->find('.seller a',0)->href,//淘宝店地址
+                        );
+                    }
+                }
+            } else
+                $error = '参数错误';
+            if($error)
+                return  $error;
+            elseif($rsErr)
+                return  $rsErr;
+            else
+                if($rsList)
                     foreach($rsList as $k=>$v){
                         $code.= '<tr>';
                         $code .= '<td>第<b>';
-                        $code.=$nowPage * 40  + $v["index"] +1 .'</b>位</td>';
+                        $code.=$nowPage * $perPage  + $k +1 .'</b>位</td>';
                         $code.='<td class="un"><a href="';
-                        $code.=$url0.($nowPage * 40);
+                        $code.=$url0.($nowPage * $perPage);
                         $code.='" target="_blank">第';
                         $code.= $nowPage + 1 ;
                         $code.='页</a>，第';
-                        $code.=$v["index"] + 1 .'位</td>';
+                        $code.=$k + 1 .'位</td>';
                         $code.='<td><font color="#000">'. $v["saleCount"] .'</font>笔</td>';
                         $code.='<td> <font color="#000">'.$v["price"].'</font> 元</td>';
                         $code.='<td class="pl"><a href="'.$v["shopUrl"].'" target="_blank">';
-                        if($v["nick"]==$username) 
+                        if($v["nick"]==$username)
                             $code.='<b><font color="red">'.$username.'</font></b>';
                         else
                             $code.=$v["nick"];
                         $code.='</a>';
                         if($v["tmall"])
-                                $code.='<img src="'.__PUBLIC__.'/images/tmall.gif" />';
-                        $code.='</td><td class="time" width="30%"><a href="'.$v["url"].'" target="_blank" title="'.$v["title0"].'">'.$v["title1"].'</a></td></tr>';              
+                            $code.='<img src="'.__PUBLIC__.'/images/tmall.gif" />';
+                        $code.='</td><td class="time" width="30%"><a href="'.$v["url"].'" target="_blank" title="'.$v["title0"].'">'.$v["title"].'</a></td></tr>';
                     }
-                    else{
+                else{
                     $code.='<tr><td></td><td></td><td></td><td></td><td>第';
                     $code.= $nowPage + 1 ;
                     $code.='页无</td><td></td></tr>';
-                    }
-                    s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage,$code);
-                    return $code;
+                }
+            s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage,$code,3600);
+            return $code;
+        }*/
+    }
+    public function getRankBykeyword($username,$sortType,$key,$type,$nowPage,$perPage=44){
+        $cache=s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
+        $code='';
+        if($cache)
+            return $cache;
+        else{
+            if($key && ($type == 1 && $username || $type == 0)) {
+                header("Content-type:text/html;charset=UTF-8");
+                import('Org.JAE.QueryList');
+                $url0 = 'http://s.taobao.com/search?q='.urlencode(iconv("utf-8", 'GBK', $key)).'&commend=all&style=list&tab=coefp&s=';
+                $url = $url0.($nowPage * $perPage).($sortType ? '&sort='.$sortType : '');
+                if (strpos(file_get_contents($url), 'cat-noresult') !== false)
+                    $rsErr = 'ResultCode:002';
+                else{
+                    $reg = array(
+                        "saleCount"=>array(".dealing div:eq(0)","text"),//成交量
+                        "title"=>array("h3.summary a:eq(0)","text"),//商品标题
+                        "url"=>array("h3.summary a:eq(0)","href"),//商品url
+                        "title1"=>array("h3.summary a:eq(0)","title"),//商品alt属性
+                        "seller"=>array(".seller a:eq(0)","text"),//卖家帐号
+                        "shop"=>array(".seller a:eq(0)","href"),//淘宝店铺url
+                        "price"=>array(".total .price","text"),//淘宝店铺url
+                    );
+                    $rang = ".list-view div.item";
+                    $hj = new \QueryList($url,$reg,$rang,'curl','');
+                    $rsList=$hj->jsonArr;
+                    if(empty($rsList))
+                        $rsErr = 'ResultCode:001';
+                }
+            }else
+                $error="参数错误";
+        }
+        if($error)
+            return  $error;
+        if($rsErr)
+            return  $rsErr;
+        if($rsList)
+            foreach($rsList as $k=>$v){
+                $codeList.= '<tr>';
+                $codeList .= '<td>第<b>';
+                $codeList.=$nowPage * $perPage  + $k +1 .'</b>位</td>';
+                $codeList.='<td class="un"><a href="';
+                $codeList.=$url0.($nowPage * $perPage);
+                $codeList.='" target="_blank">第';
+                $codeList.= $nowPage + 1 ;
+                $codeList.='页</a>，第';
+                $codeList.=$k + 1 .'位</td>';
+                $codeList.='<td><font color="#000">'. $v["saleCount"] .'</font>笔</td>';
+                $codeList.='<td> <font color="#000">'.$v["price"].'</font> 元</td>';
+                $codeList.='<td class="pl"><a href="'.$v["shopUrl"].'" target="_blank">';
+                if($v["nick"]==$username)
+                    $codeList.='<b><font color="red">'.$username.'</font></b>';
+                else
+                    $codeList.=$v["nick"];
+                $codeList.='</a>';
+                if($v["tmall"])
+                    $codeList.='<img src="'.__PUBLIC__.'/images/tmall.gif" />';
+                $codeList.='</td><td class="time" width="30%"><a href="'.$v["url"].'" target="_blank" title="'.$v["title0"].'">'.$v["title"].'</a></td></tr>';
+                if($type=='1' && $v['nick']==$username){
+                    $code.=$codeList;//当只查询自己的时候显示。
+                }
             }
+        if($type==0 && $codeList)
+                $code=$codeList;//当查询所有的时候显示
+         elseif(empty($code)){
+             $code.='<tr><td></td><td></td><td></td><td></td><td>第';
+             $code.= $nowPage + 1 ;
+             $code.='页无</td><td></td></tr>';
+         }
+        s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage,$code,3600);//强制缓存3600s
+        return $code;
     }
 
     public function getSellerScoreMember($total, $now, $need){ //计算达到5还需要多少单
@@ -573,6 +618,46 @@ class Taobao {
         $list=array();
         list($list['miaoshu'] ,$list['fuwu'] ,$list['fahuo'] )=$sList;        
         return (array)$list;
-    }    
+    }
+// helper functions
+// -----------------------------------------------------------------------------
+// get html dom from file
+// $maxlen is defined in the code as PHP_STREAM_COPY_ALL which is defined as -1.
+    function file_get_html($url, $use_include_path = false, $context=null, $offset = -1, $maxLen=-1, $lowercase = true, $forceTagsClosed=true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN=true, $defaultBRText=DEFAULT_BR_TEXT)
+    {
+        // We DO force the tags to be terminated.
+        $dom = new Dom(null, $lowercase, $forceTagsClosed, $target_charset, $defaultBRText);
+        // For sourceforge users: uncomment the next line and comment the retreive_url_contents line 2 lines down if it is not already done.
+        $contents = file_get_contents($url, $use_include_path, $context, $offset);
+        // Paperg - use our own mechanism for getting the contents as we want to control the timeout.
+//    $contents = retrieve_url_contents($url);
+        if (empty($contents))
+        {
+            return false;
+        }
+        // The second parameter can force the selectors to all be lowercase.
+        $dom->load($contents, $lowercase, $stripRN);
+        return $dom;
+    }
+
+// get html dom from string
+    function str_get_html($str, $lowercase=true, $forceTagsClosed=true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN=true, $defaultBRText=DEFAULT_BR_TEXT)
+    {
+        $dom = new Dom(null, $lowercase, $forceTagsClosed, $target_charset, $defaultBRText);
+        if (empty($str))
+        {
+            $dom->clear();
+            return false;
+        }
+        $dom->load($str, $lowercase, $stripRN);
+        return $dom;
+    }
+
+// dump html dom tree
+    function dump_html_tree($node, $show_attr=true, $deep=0)
+    {
+        $node->dump($node);
+    }
+
 }
 ?>
