@@ -1,4 +1,4 @@
-﻿/* 任务栏 */
+/* 任务栏 */
 .l-taskbar{background-image:url('/Public/images/win/taskbar.png'); background-repeat:repeat-x; height:36px; line-height:36px; overflow:hidden; width:100%; position:fixed; left:0px; bottom:-36px; display:none; z-index: 11000;}
 .l-taskbar-tasks{ width:100%; margin-top:2px;}
 .l-taskbar-task{  height:26px; line-height:26px;overflow:hidden; margin:2px; float:left; margin-left:2px; position:relative; cursor:pointer; background-repeat:repeat-x;}
