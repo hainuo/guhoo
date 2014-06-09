@@ -518,8 +518,8 @@ class Taobao {
                 }
             s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage,$code,3600);
             return $code;
-        }*/
-    }
+        }
+    }*/
     public function getRankBykeyword($username,$sortType,$key,$type,$nowPage,$perPage=44){
         $cache=s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
         $code='';
