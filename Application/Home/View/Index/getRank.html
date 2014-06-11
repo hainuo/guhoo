@@ -100,6 +100,13 @@ div.ranklogo{width: 122px;height: 60px;position: relative;background: url('/Publ
 		</div>
 	</div>
 <script type="text/javascript">
+$('#member').live('blur',function(){
+		if ($(this).val()==''){
+			$(this).val('输入淘宝帐号').css('color','gray');
+		}
+	}).live('focus',function () {
+	$(this).val('');
+});
 		var theadcode='<tr><th>排名</th><th>位置</th><th>最近成交</th><th>售价</th><th>卖家</th><th>商品名称</th></tr>';
 		$("#ResultBox").css("display", "none");
 		$("#divProgressTextBox").css("display", "none");
@@ -342,5 +349,6 @@ div.ranklogo{width: 122px;height: 60px;position: relative;background: url('/Publ
 			}
 		});
 	}
+
 </script>
 <include file="Public/footer" />

@@ -66,7 +66,7 @@ function showNews($limit=10){
         foreach($data as $val){
             $code.='<li>『<a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';
             $code.=$val['title'];
-            $code.="</a>』 <span>[".date('m-d',strtotime($val['create_time']))."]</span></li>";
+            $code.="</a>』 <span>".date('m-d',strtotime($val['create_time']))."</span></li>";
         }
     $code.='</ul>';
     echo $code;
