@@ -106,6 +106,7 @@ $('#member').live('blur',function(){
 		}
 	}).live('focus',function () {
 	$(this).val('');
+	$(this).css('text-align','left');
 });
 		var theadcode='<tr><th>排名</th><th>位置</th><th>最近成交</th><th>售价</th><th>卖家</th><th>商品名称</th></tr>';
 		$("#ResultBox").css("display", "none");
@@ -119,7 +120,7 @@ $('#member').live('blur',function(){
 		$("#txtPageCount").attr("value", "10");//默认查询10页所有商品信息
 		$("#txtPageCount").attr("title", "只列出自己的商品 的模式下才能自定义页数");
 
-		$("#member").focus();
+		//$("#member").focus();
 		$("#member").keypress(function(event) {
 			if (event.keyCode == 13) {
 				event.preventDefault();

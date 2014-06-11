@@ -10,7 +10,7 @@
                 <form class="search" action="__SELF__" method="get">
                         <i class="other-i ww" style="position: absolute;top:5px;left:5px;">
                         </i>
-                        <input class="index-input-s" type="text" name="username" id="txtKey" <?php if($display) echo 'value="'.$data[ 'username']. '"'?>
+                        <input class="index-input-s" type="text" name="username" id="txtKey" <?php if($display) echo 'value="'.$data[ 'username']. '"'; else echo 'value="输入淘宝帐号"';?>
                         />
                         <input class="other-i button-s" type="submit" value="" />
                 </form>
@@ -340,7 +340,6 @@ $('.safe').hover(function(){
 $('.safe').mouseleave(function (){
 	$(".info-block").css('display','none');
 });
-
-					
+//$('#txtKey').focus();					
 </script>
 <include file="Public/footer" />
