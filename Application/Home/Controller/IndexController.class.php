@@ -110,7 +110,7 @@ class IndexController extends Controller
         $userName=$this->detecteEncoding($userName);
 
 //			if (!preg_match("/^[\x7f-\xff]+$/", $userName)) {//判断是否含有中文如有中文则不进行查询操作
-	            $userInfo=$this->getUserInfo($userName);
+	            $userInfo=$this->getUserInfo($userName,false);
 //			}
 //            if ($userInfo=='ResultCode:004') {
 //                echo $userInfo;
@@ -211,10 +211,10 @@ class IndexController extends Controller
     /**
      * IndexController::getUserInfo()
      * 获取用户的详细信息，从getMember中提取出来，方便查询和调用，减少系统资源占用。
-     * @param mixed $userName
-     * @return
+     * @param mixed $userName $return 是否输出this->error()
+     * @return 
      */
-    public function getUserInfo($userName)
+    public function getUserInfo($userName,$return=true)
     {
         $model = D('Member');
         $goodModel = D('goods');
@@ -252,8 +252,11 @@ class IndexController extends Controller
             //if(!empty($data))//数据过期时进行删除操作   过期数据不再删除，而是直接更新 减少一个sql查询
             //    $model->where($map)->delete();
             $tbdata = $taobao->getMember();
-            if($taobao->error!='' && empty($data))
+            if($taobao->error!='' && empty($data) && $return)
                 $this->error($taobao->error,'/');
+            if($taobao->error!='' && empty($data) && !$return) //修正getRank数据ajax执行返回错误
+                return $taobao->error;
+
             //trace(json_encode($data),'输出data序列化数据');
             if ($tbdata) {
                 //trace('创建数据库数据','信息');//跟踪方法测试是否数据准确

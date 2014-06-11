@@ -525,7 +525,7 @@ class Taobao {
     }*/
     public function getRankBykeyword($username,$sortType='default',$key,$type=0,$nowPage=0,$perPage=44){
         $cache=s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
-//		var_dump($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
+//		var_dump($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);&initiative_id=tbindexz_'.date('Ymd',time()).'
         $code='';
         if($cache)
             return $cache;
@@ -533,8 +533,8 @@ class Taobao {
             if($key && ($type == 1 && $username || $type == 0)) {
                 header("Content-type:text/html;charset=UTF-8");
                 import('Org.JAE.QueryList');
-                $url0='http://s.taobao.com/search?promote=0&initiative_id=tbindexz_'.date('Ymd',time()).'&tab=all&q='.urlencode(iconv("utf-8", 'GBK', $key)).'&style=list';
-                $url = $url0.'&s='.($nowPage * $perPage).'&sort='.$sortType;
+                $url0='http://s.taobao.com/search?tab=all&q='.urlencode(iconv("utf-8", 'GBK', $key)).'&style=item';
+                $url = $url0.'&s='.($nowPage * $perPage).'&sort='.($sortType?$sortType:'default');//."#J_relative";
 //                var_dump($url);
                 if (strpos(file_get_contents($url), 'cat-noresult') !== false)
                     $rsErr = 'ResultCode:002';
@@ -561,13 +561,19 @@ class Taobao {
             return  $error;
         if($rsErr)
             return  $rsErr;
+        if($nowPage==0)
+        $num=0;
+        else
+        $num = s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.($nowPage-1).'-num');
+var_dump(S($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.($nowPage-1).'-num'));
         if($rsList)
             foreach($rsList as $k=>$v){//codeList是当前循环内的数据 trueList是整个循环数据code是只查自己时候的数据
                 $codeList= '<tr>';
                 $codeList .= '<td>第<b>';
-                $codeList.=$nowPage * $perPage  + $k +1 .'</b>位</td>';
+                $codeList.=$num+$k+1;
+                $codeList.='</b>位</td>';
                 $codeList.='<td class="un"><a href="';
-                $codeList.=$url0.($nowPage * $perPage);
+                $codeList.=$url;
                 $codeList.='" target="_blank">第';
                 $codeList.= $nowPage + 1 ;
                 $codeList.='页</a>，第';
@@ -588,8 +594,7 @@ class Taobao {
                 if($type=='1' && trim($v['nick'])==$username){
                     $code.=$codeList;//当只查询自己的时候显示。
                 }
-				if($k>=$perPage) 
-					continue;
+
             }
         if($type==0 && $codeList)
                 $code=$trueList;//当查询所有的时候显示
@@ -598,7 +603,8 @@ class Taobao {
              $code.= $nowPage + 1 ;
              $code.='页无</td><td></td></tr>';
          }
-        s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage,$code,3600);//强制缓存3600s
+        s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage,$code,300);//强制缓存300s
+        $num = s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage.'-num',count($rsList)+$num,300);//强制缓存300s
         return $code;
     }
 
