@@ -26,3 +26,7 @@ http://niceue.com/validator/
 这两样产品都是在jQuery框架基础之上的。
 
 taobao.sql是数据库文件，导入后正常使用
+
+
+使用了JAE大神的querylist
+<http://git.oschina.net/jae/QueryList>
