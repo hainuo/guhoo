@@ -23,11 +23,13 @@ class IndexController extends Controller
      */
     public function getMember()
     {
+
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/getMember/username/" . $userName.'.html';
+            $url = "/getMember/username/" . urlencode($userName).'.html';
             redirect($url);
         }
+        $userName=$this->detecteEncoding($userName);
         if ($userName && ($userName!= '输入淘宝帐号')) {
             $userInfo = $this->getUserInfo($userName);
 
@@ -55,9 +57,10 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/getWeight/username/" . $userName.'.html';
+            $url = "/getWeight/username/" . urlencode($userName).'.html';
             redirect($url);
         }
+        $userName=$this->detecteEncoding($userName);
         if ($userName && ($userName != '输入淘宝帐号')) {
             $taobao = new \Org\Util\Taobao($userName);
             $data = $taobao->getXLRank();
@@ -100,15 +103,19 @@ class IndexController extends Controller
         if (IS_AJAX) {
             $userName = I('get.username');
             $type = I('get.type');
-            $sortType = I('get.sortType');
+            $sortType = I('get.sortType')?I('get.sortType'):'default';
             $key = I('get.key');
-            $nowPage = I('get.nowPage');
+            $nowPage = I('get.nowPage')?I('get.nowPage'):0;
             $taobao = new \Org\Util\Taobao($userName);
-            $userInfo=$this->getUserInfo($userName);
-            if ($userInfo=='ResultCode:004') {
-                echo $userInfo;
-                exit;
-            }
+        $userName=$this->detecteEncoding($userName);
+
+//			if (!preg_match("/^[\x7f-\xff]+$/", $userName)) {//判断是否含有中文如有中文则不进行查询操作
+	            $userInfo=$this->getUserInfo($userName);
+//			}
+//            if ($userInfo=='ResultCode:004') {
+//                echo $userInfo;
+//                exit;
+//            }
             $data = $taobao->getRankBykeyword($userName, $sortType, $key, $type, $nowPage);
             $this->getTotalCount();
             //$this->ajaxReturn($data);
@@ -125,9 +132,10 @@ class IndexController extends Controller
     {
         $userName = I('request.username');
         if (preg_match('/\?.*=/', __SELF__, $url)) {
-            $url = "/getDongtai/username/" . $userName.'.html';
+            $url = "/getDongtai/username/" . urlencode($userName).'.html';
             redirect($url);
         }
+        $userName=$this->detecteEncoding($userName);
         if ($userName && ($userName != '输入淘宝帐号')) {
             $checked = $this->checkUser($userName);
 //            if($checked!='该用户不是卖家'){//返回值为已经格式化之后的userInfo，所以不需要再进行转码
@@ -244,8 +252,8 @@ class IndexController extends Controller
             //if(!empty($data))//数据过期时进行删除操作   过期数据不再删除，而是直接更新 减少一个sql查询
             //    $model->where($map)->delete();
             $tbdata = $taobao->getMember();
-            if($taobao->error!='')
-                $this->error($taobao->error);
+            if($taobao->error!='' && empty($data))
+                $this->error($taobao->error,'/');
             //trace(json_encode($data),'输出data序列化数据');
             if ($tbdata) {
                 //trace('创建数据库数据','信息');//跟踪方法测试是否数据准确
@@ -361,4 +369,14 @@ class IndexController extends Controller
             $this->error('查询操作出错');
 
     }
+	public function detecteEncoding($userName){
+		$charset=strtolower(mb_detect_encoding($userName,array('UTF-8','GBK','GB2312')));
+		if($charset=='cp936'){
+			$charset='GBk';
+		}
+		if($charset!='UTF-8'){
+			return iconv($charset,'UTF-8',$userName);
+		}else
+			return $userName;
+	}
 }

@@ -96,6 +96,7 @@ class Taobao {
      */
     public function getMember() {
         $url = 'http://member1.taobao.com/member/user_profile.jhtml?user_id=' . $this->username;
+        // var_dump($url);
         $html = file_get_contents($url);
         $html = iconv('gbk', 'utf-8', $html); //匹配时要转码
         $regTime='';
@@ -262,8 +263,8 @@ class Taobao {
     private function getScore($html) {
         if ($str = String::dg_string2($html, 'div', '<div class="rate-box box-his-rate')) {
             //trace('已经获取到score的数据');
-            /* if (preg_match_all('/<tr>\s*<td>总数<\/td>\s*<td class="rateok">\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<td class="ratenormal">\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<td class="ratebad">\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) { */
-            if (preg_match_all('/<tr>\s*<td>总数<\/td>\s*<td class="rateok">(.*?)<\/td>\s*<td class="ratenormal">(.*?)<\/td>\s*<td class="ratebad">(.*?)<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) {
+            /* if (preg_match_all('/<tr>\s*<!-- <td> -->总数<\/td>\s*<!-- <td class="rateok"> -->\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<!-- <td class="ratenormal"> -->\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<!-- <td class="ratebad"> -->\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) { */
+            if (preg_match_all('/<!-- <tr> -->\s*<!-- <td> -->总数<\/td>\s*<!-- <td class="rateok"> -->(.*?)<\/td>\s*<!-- <td class="ratenormal"> -->(.*?)<\/td>\s*<!-- <td class="ratebad"> -->(.*?)<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) {
                 if (count($matches) == 4) {
                     $rs = array();
                     foreach ($matches as $v) {
@@ -523,8 +524,9 @@ class Taobao {
             return $code;
         }
     }*/
-    public function getRankBykeyword($username,$sortType,$key,$type,$nowPage,$perPage=44){
+    public function getRankBykeyword($username,$sortType='default',$key,$type=0,$nowPage=0,$perPage=44){
         $cache=s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
+//		var_dump($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.$nowPage);
         $code='';
         if($cache)
             return $cache;
@@ -532,9 +534,8 @@ class Taobao {
             if($key && ($type == 1 && $username || $type == 0)) {
                 header("Content-type:text/html;charset=UTF-8");
                 import('Org.JAE.QueryList');
-                $url0 = 'http://s.taobao.com/search?q='.urlencode(iconv("utf-8", 'GBK', $key)).'&commend=all&style=list&tab=coefp&s=';
                 $url0='http://s.taobao.com/search?promote=0&initiative_id=tbindexz_'.date('Ymd',time()).'&tab=all&q='.urlencode(iconv("utf-8", 'GBK', $key)).'&style=list';
-                $url = $url0.'&s='.($nowPage * $perPage).'&sort='.($sortType ?$sortType: 'default');
+                $url = $url0.'&s='.($nowPage * $perPage).'&sort='.$sortType;
 //                var_dump($url);
                 if (strpos(file_get_contents($url), 'cat-noresult') !== false)
                     $rsErr = 'ResultCode:002';
@@ -562,8 +563,8 @@ class Taobao {
         if($rsErr)
             return  $rsErr;
         if($rsList)
-            foreach($rsList as $k=>$v){
-                $codeList.= '<tr>';
+            foreach($rsList as $k=>$v){//codeList是当前循环内的数据 trueList是整个循环数据code是只查自己时候的数据
+                $codeList= '<tr>';
                 $codeList .= '<td>第<b>';
                 $codeList.=$nowPage * $perPage  + $k +1 .'</b>位</td>';
                 $codeList.='<td class="un"><a href="';
@@ -575,6 +576,7 @@ class Taobao {
                 $codeList.='<td><font color="#000">'. $v["saleCount"] .'</font>笔</td>';
                 $codeList.='<td> <font color="#000">'.$v["price"].'</font> 元</td>';
                 $codeList.='<td class="pl"><a href="'.$v["shop"].'" target="_blank">';
+				//var_dump($k.$v["nick"]);
                 if($v["nick"]==$username)
                     $codeList.='<b><font color="red">'.$username.'</font></b>';
                 else
@@ -583,12 +585,15 @@ class Taobao {
                 if(strpos($v['url'],'tmall'))
                     $codeList.='<img src="'.__PUBLIC__.'/images/tmall.gif" />';
                 $codeList.='</td><td class="time" width="30%"><a href="'.$v["url"].'" target="_blank" title="'.$v["title0"].'">'.$v["title"].'</a></td></tr>';
+				$trueList.=$codeList;//所有的数据都放进trueList
                 if($type=='1' && trim($v['nick'])==$username){
                     $code.=$codeList;//当只查询自己的时候显示。
                 }
+				if($k>=$perPage) 
+					continue;
             }
         if($type==0 && $codeList)
-                $code=$codeList;//当查询所有的时候显示
+                $code=$trueList;//当查询所有的时候显示
          elseif(empty($code)){
              $code.='<tr><td></td><td></td><td></td><td></td><td>第';
              $code.= $nowPage + 1 ;

@@ -3,26 +3,6 @@
 .backpicture{height: 350px;width: auto;margin: 0px auto;background: url(__PUBLIC__/images/member.jpg) no-repeat center top;overflow-x: hidden;}
 .backpicture .detail{top: 75px;}
 </style>
-<!--
-
-<script type="text/javascript">
-$(document).ready(function() 
-{ 
-// alert('可视区域高度'+$(window).height()); //浏览器时下窗口可视区域高度 
-// alert('当前文档的高度'+$(document).height()); //浏览器时下窗口文档的高度 
-// alert('文档body高度'+$(document.body).height());//浏览器时下窗口文档body的高度 
-// alert('文档body的总高度'+$(document.body).outerHeight(true));//浏览器时下窗口文档body的总高度 包括border padding margin 
-// alert('可视区域宽度'+$(window).width()); //浏览器时下窗口可视区域宽度 
-// alert('文档宽度'+$(document).width());//浏览器时下窗口文档的宽度 
-// alert('文档body宽度'+$(document.body).width());//浏览器时下窗口文档body的高度 
-// alert('文档body总度'+$(document.body).outerWidth(true));//浏览器时下窗口文档body的总宽度 包括border padding margin 
-});
-
-    //$(".backpicture").css.width=$(document.body).outerWidth(true) * 2 - $(document).width();
-// $(document).width=$(document.body).outerWidth(true) -12;
-</script>
--->
-
 <div class="content <empty name="userInfo">backpicture</empty>">
         <div class="detail ">
                 <div class="other-i logo">
@@ -87,7 +67,6 @@ $(document).ready(function()
                                                         </div>
                                                 </span>
                                                 <?php  endif;?>
-                                                <!--<span class="other-i tmall"></span>-->
                                         </ul>
                                         <ul class="f-size-12 f-gray">
                                                 <li>
@@ -99,7 +78,6 @@ $(document).ready(function()
                                                 <li>
                                                         <a href="{$data['rateurl']}" target="_blank"><span class="other-i bad"></span><font>差评</font><p style="color: black; font-weight: bold;text-align:center;"><?php echo $data['score'][0][2]+ $data['score'][1][2]+$data['score'][2][2]+$data['score'][3][2];?></p></a>
                                                 </li>
-                                                <!-- <li><a href="http://favorite.taobao.com/collect_item_relation---33454965-0.htm" target="_blank"><span class="other-n"></span><font>收藏</font><p style="color: #67bbfe; font-weight: bold;text-align:center;">2901</p></a></li> -->
                                         </ul>
                                 </div>
                                 <div class="r-c">
@@ -298,13 +276,13 @@ $(document).ready(function()
                                                         <a class="mini-dsr" href="{$data['rateurl']}" target="_blank" style="font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;">
                                                         <span class="mini-dsr-wrap dsr-wrap-left"></span>
                                                         <span class="dsr-title">描述</span>
-                                                            <span class="dsr-num red">{$data['dongtai']['miaoshu']->pscore}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['miaoshu']->pscore?$data['dongtai']['miaoshu']->pscore:0}</span>
                                                             <span class="dsr-split"></span>
                                                         <span class="dsr-title">服务</span>
-                                                            <span class="dsr-num red">{$data['dongtai']['fuwu']->pscore}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['fuwu']->pscore?$data['dongtai']['fuwu']->pscore:0}</span>
                                                             <span class="dsr-split"></span>
                                                         <span class="dsr-title">物流</span>
-                                                            <span class="dsr-num red">{$data['dongtai']['fahuo']->pscore}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['fahuo']->pscore?$data['dongtai']['fahuo']->pscore:0}</span>
                                                             <span class="mini-dsr-wrap dsr-wrap-right"></span>
                                                         </a>
                                                 </li>
