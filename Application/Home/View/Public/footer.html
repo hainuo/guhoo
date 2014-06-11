@@ -1,8 +1,36 @@
 <div class="beautiful">{:showAd('siteFooter')}</div>
 <neq name="ACTION_NAME" value="view">
-<div class="newsList">
-<marquee onmouseout="this.start()" onmouseover="this.stop()" scrollamount="3">{:showNews()}</marquee>
-</div>
+ <style>
+     .txtMarquee-left{ width:810px;  position:relative;  border:1px solid #ccc;margin: 0px auto; margin-bottom: 10px;}
+     .txtMarquee-left .hd{ overflow:hidden;  height:10px; background:#f4f4f4; padding:0px;  }
+     .txtMarquee-left .hd .prev,.txtMarquee-left .hd .next{ display:block;  width:5px; height:9px; float:right; margin-right:5px;  overflow:hidden; cursor:pointer; background:url("__PUBLIC__/images/icoLeft.gif") no-repeat;}
+     .txtMarquee-left .hd .next{ background:url("__PUBLIC__/images/icoRight.gif") no-repeat;  }
+     .txtMarquee-left .bd{ padding:0px;padding-left: 110px; }
+     .txtMarquee-left .bd .tempWrap{ width:695px !important; }/* 用 !important覆盖SuperSlide自动生成的宽度，这样就可以手动控制可视宽度。 */
+     .txtMarquee-left .bd ul{ overflow:hidden; zoom:1; }
+     .txtMarquee-left .bd ul li{ margin-right:20px;  float:left; height:24px; line-height:24px;  text-align:left; _display:inline; width:auto !important;  }/* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
+     /*d底部电商动态样式  */
+     .txtMarquee-left .bd{background: url("/Public/images/810-40.jpg") no-repeat  -2px center;}
+
+     .txtMarquee-left .bd ul li span{ color:#999;  }
+ </style>
+
+    <div class="txtMarquee-left">
+        <div class="hd">
+            <a class="next"></a>
+            <a class="prev"></a>
+        </div>
+        <div class="bd">
+{:showNews()}
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:2,interTime:50});
+    </script>
+
+
+
 </neq>
 <!-- 联接 -->
 <div class="two_link" style="display:none;">

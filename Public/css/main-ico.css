@@ -1,4 +1,4 @@
-
+﻿
 *{margin: 0px 0px;padding: 0px 0px;} 
 a{text-decoration: none;}
 a:hover{color:rgb(224,120,0);text-decoration: underline;}
@@ -118,5 +118,3 @@ div.history ul {    display: inline-block;    margin: 10px auto;    text-align: 
 div.history ul li {    min-width: 50px;    max-width: 80px;    overflow-x: hidden;    display: inline;    margin-left: 10px;}
 li.more a{color: black;}
 
-/*d底部电商动态样式  */
-.newsList{background: url("/public/images/810-40.jpg") no-repeat  center center;}

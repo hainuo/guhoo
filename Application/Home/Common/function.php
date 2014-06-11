@@ -61,12 +61,14 @@ function showLastHistory($num = 17)
 }
 function showNews($limit=10){
     $data=D('Article')->order('create_time DESC')->limit($limit)->select();
+    $code="<ul class='infoList'>";
     if($data)
         foreach($data as $val){
-            $code.='『<a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';
+            $code.='<li>『<a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';
             $code.=$val['title'];
-            $code.="</a>』";
+            $code.="</a>』 <span>[".date('m-d',strtotime($val['create_time']))."]</span></li>";
         }
+    $code.='</ul>';
     echo $code;
 }
 
