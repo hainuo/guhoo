@@ -25,5 +25,21 @@ $y=mb_detect_encoding($b);
 var_dump($x,$y);
 var_dump(urlencode($b));
 
+$arrayA=array(1,3,2,4,5,6,9,10,100,101);
+$arrayB=array(1,2,3,103,7,8,20,21,22,300);
 
-?>
+$arrayMerge=array_merge($arrayA,$arrayB);
+function bubbleSort($array){
+	$count=count($array);
+	for($i=0;$i<$count-1;$i++){//循环比较
+		for($j=$i+1;$j<$count;$j++){
+			if($array[$j]<array[$i]){//执行交换
+				$temp=$array[$i];
+				$$array[$i]=$array[$j];
+				$array[$j]=$temp;
+			}
+		}
+	}
+	return$array;
+}
+var_dump(bubbleSort($arrayMerge));
