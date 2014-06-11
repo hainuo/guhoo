@@ -16,14 +16,14 @@
 //echo $a;
 //
 
-$a=' "name":"默认排序", "key":"sort", "value":"", "status":"0", "isSelected": "0" }';
+$a='j_huwaiyi';
 // var_dump($b);
 echo "<pre>";
 $b=iconv('UTF-8', 'GBK', $a);
 $x=mb_detect_encoding($a);
 $y=mb_detect_encoding($b);
 var_dump($x,$y);
-var_dump($b);
+var_dump(urlencode($b));
 
 
 ?>

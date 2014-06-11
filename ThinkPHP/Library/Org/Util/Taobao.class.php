@@ -96,7 +96,6 @@ class Taobao {
      */
     public function getMember() {
         $url = 'http://member1.taobao.com/member/user_profile.jhtml?user_id=' . $this->username;
-        // var_dump($url);
         $html = file_get_contents($url);
         $html = iconv('gbk', 'utf-8', $html); //匹配时要转码
         $regTime='';
@@ -105,7 +104,7 @@ class Taobao {
             return false;
         }
         if(strpos($html,'很抱歉！淘宝正在对该店铺盘点，请稍后再试！') !==false ){
-            $this->error='很抱歉！淘宝正在对该店铺盘点，请稍后再试！';
+            $this->error='很抱歉！您查询的帐号不存在！';
             return false;
         }
 
