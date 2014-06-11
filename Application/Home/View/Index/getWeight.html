@@ -69,7 +69,7 @@
 					<li>一共<font>{$data['goodsNum']}</font>宝贝</li><li><a href="<empty name='userInfo.url'>{$userInfo.rateurl}<else />{$userInfo.url}</empty>">[进入店铺]</a></li></ul>
 					<ul class="u2"><li><empty name="userInfo.is_buyer">卖<else />买</empty>家好评率：<font>{$userInfo['haopinglv']?$userInfo['haopinglv']:'100%'}</font></li>
 						
-					<li>描述相符：<a href="/getDongtai/username/{$userInfo.username}.html"><font>{$userInfo['dongtai']['miaoshu']->pscore?$userInfo['dongtai']['miaoshu']->pscore:5}</font>  分</a></li>
+					<li>描述相符：<a href="/getDongtai/username/{$userInfo.username}.html"><font>{$userInfo['dongtai']['miaoshu']['pscore']?$userInfo['dongtai']['miaoshu']['pscore']:5}</font>  分</a></li>
 				</notempty>	
 					<li><!--高于同行业：<font>74.98%</font>--></li>
 					</ul>

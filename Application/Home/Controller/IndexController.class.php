@@ -139,7 +139,7 @@ class IndexController extends Controller
         if ($userName && ($userName != '输入淘宝帐号')) {
             $checked = $this->checkUser($userName);
 //            if($checked!='该用户不是卖家'){//返回值为已经格式化之后的userInfo，所以不需要再进行转码
-//                $dongtai=json_decode($checked['dongtai']);
+//                $dongtai=unserialize($checked['dongtai']);
 //                $checked['dongtai']=$dongtai;
 //            }
             //var_dump($checked['dongtai']);
@@ -264,12 +264,12 @@ class IndexController extends Controller
                 $map = $tbdata; //新变量，防止下面对data进行修改时，往模板中赋值出错。
 
                 if (empty($score)) { //当评分不存在时设置为空防止php报错/
-                    $score = json_encode($tbdata['score']); //使用json_encode转换成文本序列
+                    $score = serialize($tbdata['score']); //使用serialize转换成文本序列
                     $tbdata['score'] = $score;
                 } else
                     $tbdata['score'] = '';
                 if (empty($dongtai)) { //当店铺动态不存在时设置为空防止php报错
-                    $dongtai = json_encode((array)$tbdata['dongtai']);
+                    $dongtai = serialize((array)$tbdata['dongtai']);
                     $tbdata['dongtai'] = $dongtai;
                 } else
                     $tbdata['dongtai'] = '';
@@ -293,10 +293,11 @@ class IndexController extends Controller
             } else
                 $this->error($model->getError());
         } else {
-            //数据转换  将data.score 转换成序列 使用json_decode转换成数组
-            $score = json_decode($data['score']);
-            $data['score'] = $score;
-            $dongtai = json_decode($data['dongtai']);
+
+            //数据转换  将data.score 转换成序列 使用unserialize转换成数组
+            $score = unserialize($data['score']);
+            $data['score'] =(array) $score;
+            $dongtai = unserialize($data['dongtai']);
             $data['dongtai'] = (array) $dongtai;
 //            S($userName . '-userInfo', $data); //设置缓存
             $map = $data;

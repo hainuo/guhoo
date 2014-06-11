@@ -276,13 +276,13 @@
                                                         <a class="mini-dsr" href="{$data['rateurl']}" target="_blank" style="font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;">
                                                         <span class="mini-dsr-wrap dsr-wrap-left"></span>
                                                         <span class="dsr-title">描述</span>
-                                                            <span class="dsr-num red">{$data['dongtai']['miaoshu']->pscore?$data['dongtai']['miaoshu']->pscore:0}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['miaoshu']['pscore']?$data['dongtai']['miaoshu']['pscore']:0}</span>
                                                             <span class="dsr-split"></span>
                                                         <span class="dsr-title">服务</span>
-                                                            <span class="dsr-num red">{$data['dongtai']['fuwu']->pscore?$data['dongtai']['fuwu']->pscore:0}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['fuwu']['pscore']?$data['dongtai']['fuwu']['pscore']:0}</span>
                                                             <span class="dsr-split"></span>
                                                         <span class="dsr-title">物流</span>
-                                                            <span class="dsr-num red">{$data['dongtai']['fahuo']->pscore?$data['dongtai']['fahuo']->pscore:0}</span>
+                                                            <span class="dsr-num red">{$data['dongtai']['fahuo']['pscore']?$data['dongtai']['fahuo']['pscore']:0}</span>
                                                             <span class="mini-dsr-wrap dsr-wrap-right"></span>
                                                         </a>
                                                 </li>

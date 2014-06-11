@@ -55,7 +55,7 @@
 							<td class="bscore"><a href="/getWeight/username/{$vo.username}.html" target="_blank">{$vo.goodNum}</a></td>
 							<td>
 <notempty name='vo.score'>
-<?php $score=json_decode($vo['score']);?>
+<?php $score=unserialize($vo['score']);?>
 
     <a href="{$vo.rateurl}" target="_blank"><span class="other-i normal"></span><font>中评</font><span style="color: #F5CC04; font-weight: bold;text-align:center;">
                                                         <?php echo $score[0][1]+ $score[1][1]+$score[2][1]+$score[3][1];?>
