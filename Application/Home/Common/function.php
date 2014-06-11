@@ -64,9 +64,9 @@ function showNews($limit=10){
     $code="<ul class='infoList'>";
     if($data)
         foreach($data as $val){
-            $code.='<li>『<a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';
+            $code.='<li><a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';
             $code.=$val['title'];
-            $code.="</a>』 <span>".date('m-d',strtotime($val['create_time']))."</span></li>";
+            $code.="</a></li>";
         }
     $code.='</ul>';
     echo $code;
