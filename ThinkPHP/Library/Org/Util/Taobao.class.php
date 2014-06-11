@@ -262,8 +262,8 @@ class Taobao {
     private function getScore($html) {
         if ($str = String::dg_string2($html, 'div', '<div class="rate-box box-his-rate')) {
             //trace('已经获取到score的数据');
-            /* if (preg_match_all('/<tr>\s*<!-- <td> -->总数<\/td>\s*<!-- <td class="rateok"> -->\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<!-- <td class="ratenormal"> -->\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<!-- <td class="ratebad"> -->\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) { */
-            if (preg_match_all('/<!-- <tr> -->\s*<!-- <td> -->总数<\/td>\s*<!-- <td class="rateok"> -->(.*?)<\/td>\s*<!-- <td class="ratenormal"> -->(.*?)<\/td>\s*<!-- <td class="ratebad"> -->(.*?)<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) {
+            /* if (preg_match_all('/<tr>\s*<td>总数<\/td>\s*<td class="rateok">\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<td class="ratenormal">\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<td class="ratebad">\s*<a.*?>(\d+)<\/a>\s*<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) { */
+            if (preg_match_all('/<tr>\s*<td>总数<\/td>\s*<td class="rateok">(.*?)<\/td>\s*<td class="ratenormal">(.*?)<\/td>\s*<td class="ratebad">(.*?)<\/td>\s*<\/tr>/s', $str, $matches, PREG_SET_ORDER)) {
                 if (count($matches) == 4) {
                     $rs = array();
                     foreach ($matches as $v) {
