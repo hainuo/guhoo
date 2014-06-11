@@ -89,14 +89,9 @@
                                                         <font>
                                                         <gt name="data['utype']" value="0" >
                                                                 支付宝认证
-                                                        </gt>
-                                                        <eq name="data['utype']" value ="0" >
+                                                        <else />
                                                                         未认证
-                                                        </eq>
-                                                        <lt name="data['utype']" value ="0" >
-
-                                                                        未知
-                                                        </lt>
+                                                        </gt>
                                                         </font>
                                                 </li>
 <notempty name='data.zhuying'>
