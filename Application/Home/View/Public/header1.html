@@ -12,15 +12,13 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/main-ico.css" />
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/other.css?v=1.3" />
-<link href="__PUBLIC__/css/htshouye.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/main.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/placeholder.js"></script>
-<script src="__PUBLIC__/js/jquery.js"></script>
-<script src="__PUBLIC__/js/easing.js"></script>
 <eq name="ACTION_NAME" value="getMember">
     <script type="text/javascript" charset="utf-8" src="/Public/js/jquery.SuperSlide.2.1.1.js"></script>
 </eq>
+</head>
 <style>
 .header_logo{position: relative; float: left; top:25px;left:0px;background: url('__PUBLIC__/images/other-i.png') no-repeat scroll 0% 0% transparent; width: 122px; height: 60px;text-indent: -9999px;}
 .content .result{width: 100%;border: #f2f2f2 solid 1px;height: 360px;background: white;font-size:13px;}
@@ -35,7 +33,7 @@
 .result .right .r-c ul{float: left;width: 33%;overflow: hidden;}
 .result .right .r-c span{color: gray;}
 .result .right .r-c li{margin-bottom: 8px;}
-.result .r-c .clf{height:23px;line-height:14px;}
+.result .r-c .clf{height:14px;line-height:14px;}
 .result .right a{color:#246F9B;}
 .result .right a:hover{color:#E07800;}
 .result .right .f-gray li a{color:gray}
@@ -119,23 +117,21 @@ div.header .detail {
     *padding-left: 0px;
 }
 </style>
-</head>
 <body>
-<div id="head"></div>
-<div id="top">
-	<div class="top_mid">
-		<img src="__PUBLIC__/images/htt_03.png" class="logo"/>
-    	<div class="nav">
-    		<ul>           
-        		<li class="xycx<if condition="ACTION_NAME eq 'getMember'" >-hover</if>"   onclick="window.location.href='/'"></li>
-            	<li class="jqcx<if condition="ACTION_NAME eq 'getWeight'" >-hover</if>"  onclick="window.location.href='/getWeight.html'"></li>
-           	 	<li class="pmcx<if condition="ACTION_NAME eq 'getRank'" >-hover</if>"  onclick="window.location.href='/getRank.html'"></li>
-            	<li class="pfcx<eq name='ACTION_NAME' value='getDongtai'>-hover</eq>"  onclick="window.location.href='/getDongtai.html'"></li>
-            	<li class="sxjcx"></li>
-            	<li class="lxwm" onclick="window.open('http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes')"></li>
-            	<li class="kdcx<if condition="ACTION_NAME eq 'getExpress'" >-hover</if>"  onclick="window.location.href='/getExpress.html'"></li>
-            	<li class="lscx<if condition="ACTION_NAME eq 'getHistory'" >-hover</if>" onclick="window.location.href='/getHistory.html'"></li>
-        	</ul>
-   		 </div>
-    </div>
-</div>
+<div class="siteHeader">{:showAd('siteHeader')} </div>
+<div class="header">
+    <div class="logo"><a class="header_logo" href="#">淘宝信誉查询</a></div>
+    <div class="detail">
+		<ul>
+			<!--<li ><a class="header-i i1" href="/">淘宝信誉查询</a></li>-->
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getMember'" > hover <else /> deafult </if> i1" href="/">淘宝信誉查询</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getWeight'" > hover <else /> deafult </if>  i2" href="/getWeight.html">淘宝隐形降权查询</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getRank'" > hover <else /> deafult </if>  i3" href="/getRank.html">淘宝排名查询</a></li>
+			<li ><a class="header-i <eq name='ACTION_NAME' value='getDongtai'>hover <else /> deafult</eq>  i4" href="/getDongtai.html">宝贝动态评分查询</a></li>
+			<li ><a class="header-i deafult  i5" href="#">宝贝上下架时间查询</a></li>
+			<li ><a class="header-i deafult  i6" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes">联系我们</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getExpress'" > hover <else /> deafult </if>  i7" href="/getExpress.html">淘宝快递查询</a></li>
+			<li ><a class="header-i <if condition="ACTION_NAME eq 'getHistory'" > hover <else /> deafult </if>  i8" href="/getHistory.html">卖家查询记录</a></li>
+		</ul>
+	</div>
+ </div>

@@ -35,7 +35,7 @@
 .result .right .r-c ul{float: left;width: 33%;overflow: hidden;}
 .result .right .r-c span{color: gray;}
 .result .right .r-c li{margin-bottom: 8px;}
-.result .r-c .clf{height:23px;line-height:14px;}
+.result .r-c .clf{height:14px;line-height:14px;}
 .result .right a{color:#246F9B;}
 .result .right a:hover{color:#E07800;}
 .result .right .f-gray li a{color:gray}
@@ -127,14 +127,14 @@ div.header .detail {
 		<img src="__PUBLIC__/images/htt_03.png" class="logo"/>
     	<div class="nav">
     		<ul>           
-        		<li class="xycx<if condition="ACTION_NAME eq 'getMember'" >-hover</if>"   onclick="window.location.href='/'"></li>
-            	<li class="jqcx<if condition="ACTION_NAME eq 'getWeight'" >-hover</if>"  onclick="window.location.href='/getWeight.html'"></li>
-           	 	<li class="pmcx<if condition="ACTION_NAME eq 'getRank'" >-hover</if>"  onclick="window.location.href='/getRank.html'"></li>
-            	<li class="pfcx<eq name='ACTION_NAME' value='getDongtai'>-hover</eq>"  onclick="window.location.href='/getDongtai.html'"></li>
-            	<li class="sxjcx"></li>
-            	<li class="lxwm" onclick="window.open('http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes')"></li>
-            	<li class="kdcx<if condition="ACTION_NAME eq 'getExpress'" >-hover</if>"  onclick="window.location.href='/getExpress.html'"></li>
-            	<li class="lscx<if condition="ACTION_NAME eq 'getHistory'" >-hover</if>" onclick="window.location.href='/getHistory.html'"></li>
+        		<li class="xycx<if condition="ACTION_NAME eq 'getMember'" >-hover</if>"   onclick="window.location.href='/getMember.html'"><a href="/getMember.html">淘宝信用查询<a></li>
+            	<li class="jqcx<if condition="ACTION_NAME eq 'getWeight'" >-hover</if>"  onclick="window.location.href='/getWeight.html'"><a href="/getWeight.html"></a></li>
+           	 	<li class="pmcx<if condition="ACTION_NAME eq 'getRank'" >-hover</if>"  onclick="window.location.href='/getRank.html'"><a href="/getRank.html"></a></li>
+            	<li class="pfcx<eq name='ACTION_NAME' value='getDongtai'>-hover</eq>"  onclick="window.location.href='/getDongtai.html'"><a href="/getDongtai.html"></a></li>
+            	<li class="sxjcx"><a href="#"></a></li>
+            	<li class="lxwm" onclick="window.location.href='http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes'"><a  href="http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes"></a></li>
+            	<li class="kdcx<if condition="ACTION_NAME eq 'getExpress'" >-hover</if>"  onclick="window.location.href='/getExpress.html'"><a href="/getExpress.html"></a></li>
+            	<li class="lscx<if condition="ACTION_NAME eq 'getHistory'" >-hover</if>"><a href="/getHistory.html"></a></li>
         	</ul>
    		 </div>
     </div>

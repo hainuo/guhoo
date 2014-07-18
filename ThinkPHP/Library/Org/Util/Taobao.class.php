@@ -565,7 +565,7 @@ class Taobao {
         $num=0;
         else
         $num = s($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.($nowPage-1).'-num');
-var_dump(S($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.($nowPage-1).'-num'));
+// var_dump(S($username.'-'.$key.'-'.$sortType.'-'.$type.'-'.($nowPage-1).'-num'));
         if($rsList)
             foreach($rsList as $k=>$v){//codeList是当前循环内的数据 trueList是整个循环数据code是只查自己时候的数据
                 $codeList= '<tr>';

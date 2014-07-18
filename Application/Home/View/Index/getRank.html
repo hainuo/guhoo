@@ -31,7 +31,7 @@ input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertica
 select {height: 30px;vertical-align: middle;}
 div.k_serach{vertical-align:text-top;font-size: 16px; width: 800px;*width:850px;padding-left: 20px;float: right;bottom: 0px;max-height:50px; }
 .content .detail{padding-top: 50px;}
-div.ranklogo{width: 122px;height: 60px;position: relative;background: url('/Public/images/other-i.png') no-repeat;top: -20px;left: 50px;*left:20px;float: left;}
+div.ranklogo{width: 140px;height: 70px;position: relative;background: url('/Public/images/htt_03.png') no-repeat;top: -20px;left: 50px;*left:20px;float: left;}
 .searchDiv{padding: 0px;margin: 0px;border: 0px;}
 </style>
 
@@ -55,7 +55,7 @@ div.ranklogo{width: 122px;height: 60px;position: relative;background: url('/Publ
 						<option value="price-desc">价格↓</option>
 					</select>
 		            淘宝帐号：<input type="text" id="member" style="width:120px;" value="<empty name='userInfo'>输入淘宝账号<else />{$userInfo.username}</empty>" />
-		            关键词：<input type="text" id="key" style="width:120px;" value="输入商品关键词" />
+		            关键词：<input type="text" id="key" style="width:120px;text-align:left;" value="输入商品关键词" onfocus="this.value=''"  onblur="if(this.value=='') this.value='输入商品关键词'" />
 		            <span style="color:Red;font-weight:bold;">
 				            <input id="chkbType" type="checkbox" checked="checked" />
 				            <label for="chkbType">只列出自己的商品</label>

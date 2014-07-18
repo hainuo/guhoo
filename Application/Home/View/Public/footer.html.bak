@@ -14,7 +14,7 @@
      /*d底部电商动态样式  */
      .txtMarquee-left .bd{background:#E5E3E4 url("/Public/images/htt_40.png") no-repeat  8px center; width:778px; height:34px; margin:0px auto;}
 
-     .txtMarquee-left .bd ul li span{ color:#999;  }
+     .txtMarquee-left .bd ul li span{ color:#999;margin-left:100px;  }
  </style>
 
     <div class="txtMarquee-left">

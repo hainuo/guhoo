@@ -71,3 +71,5 @@ function showNews($limit=10){
     $code.='</ul>';
     echo $code;
 }
+
+?>
