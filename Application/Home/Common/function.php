@@ -61,7 +61,7 @@ function showLastHistory($num = 17)
 }
 function showNews($limit=10){
     $data=D('Article')->order('create_time DESC')->limit($limit)->select();
-    $code="<ul class='infoList'>";
+    $code="<ul >";
     if($data)
         foreach($data as $val){
             $code.='<li><a href="/News/'.$val['id'].'.html" target="_blank" title="'.$val['title'].'">';

@@ -46,7 +46,11 @@ class IndexController extends Controller
 
         $this->seo();
         $this->assign('count', $this->getTotalCount());
-        $this->display();
+        if($userName) {
+            $this->display('getMemberold');
+        }else{
+            $this->display();
+        }
     }
 
     /**
@@ -358,9 +362,9 @@ class IndexController extends Controller
     {//为保证能够及时查看到更改后的标题信息，这里对数据进行了及时更新;
         $config=M('Config')->getField('name,value');
         C($config);
-        $this->assign('title', C(ACTION_NAME . '_title'));
-        $this->assign('keywords', C(ACTION_NAME . '_keyWords'));
-        $this->assign('description', C(ACTION_NAME . '_description'));
+        $this->assign('title', htmlspecialchars_decode( C(ACTION_NAME . '_title')));
+        $this->assign('keywords', htmlspecialchars_decode(C(ACTION_NAME . '_keyWords')));
+        $this->assign('description', htmlspecialchars_decode(C(ACTION_NAME . '_description')));
     }
 
     public function checkUser($userName)

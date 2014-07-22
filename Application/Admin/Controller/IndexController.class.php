@@ -37,7 +37,7 @@ class IndexController extends Controller
             $this->display();
 
         } else {
-            redirect('login.html', 3, "没有登录，即将跳转至登录界面");
+            redirect('/Admin/Index/login.html', 3, "没有登录，即将跳转至登录界面");
         }
     }
 
@@ -55,7 +55,7 @@ class IndexController extends Controller
                     session('password', $password);
                     session('id', session_id());
                     session('logged', true);
-                    $this->success('登陆成功', 'index.html');
+                    $this->success('登陆成功', '/Admin/Index/index.html');
                 } else {
                     $this->error('验证失败');
                 }
@@ -68,12 +68,16 @@ class IndexController extends Controller
 
     public function linkManage()
     {
-        $type = I('get.type');
+        $type = I('post.type');
+        if(!$type)$type=I('get.type');
         $linkModel = D('Link');
-        $id = I('id');
-        $name = I('name');
+        $id = I('get.id');
+        if(!$id)$id = I('post.id');
+        $name = I('get.name');
+        if(!$name)$name=I('post.name');
         $url = I('post.url');
-        $delImg = I('delImg');
+        $delImg = I('get.delImg');
+        if(!$delImg) $delImg=I('post.delImg');
         if (session('name') && session('logged')) //进行登录判断
             switch ($type) {
                 case 'add':
@@ -92,7 +96,7 @@ class IndexController extends Controller
                         if ($info && $result)
                             $this->success('图片上传成功', 'javascript:parent.location.reload();');
                         elseif ($result) {
-                            $this->error('图片失败,请检查/Public/Uploads/link/是否有写权限', 'javascript:parent.location.reload();');
+                            $this->error('你没有选择图片或者图片上传失败,请检查/Public/Uploads/link/是否有写权限', 'javascript:parent.location.reload();');
                         } else
                             $this->error('添加失败', 'javascript:parent.location.reload();');
 
@@ -270,11 +274,15 @@ class IndexController extends Controller
     public function userManage()
     {
         $type = I('get.type');
+        if($type=='')$type=I('post.type');
         $userModel = D('Admin');
-        $userId = I('userId');
+        $userId = I('get.userId');
+        if($userId=='')$userId=I('post.userId');
+
         $userName = I('userName');
         $password = I('post.password');
         $rePassword = I('post.repassword');
+        $this->assign('type',$type);
         if (session('name') && session('logged')) //进行登录判断
             switch ($type) {
                 case 'add':

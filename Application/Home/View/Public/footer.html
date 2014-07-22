@@ -1,34 +1,56 @@
 <div class="beautiful">{:showAd('siteFooter')}</div>
 <eq name="ACTION_NAME" value="getMember">
  <style>
-     .txtMarquee-left{ width:810px;  position:relative;  border:0px solid #ccc;margin: 0px auto; margin-bottom: 10px;}
-     .txtMarquee-left .hd{ overflow:hidden;  height:0px; background:#f4f4f4; padding:0px;  }
-     .txtMarquee-left .hd .prev,.txtMarquee-left .hd .next{ display:block;  width:5px; height:9px; float:right; margin-right:5px;  overflow:hidden; cursor:pointer; background:url("__PUBLIC__/images/icoLeft.gif") no-repeat;}
-     .txtMarquee-left .hd .next{ background:url("__PUBLIC__/images/icoRight.gif") no-repeat;  }
-     .txtMarquee-left .bd{ padding:0px;padding-left: 110px; }
-     .txtMarquee-left .bd .tempWrap{ width:695px !important; }/* 用 !important覆盖SuperSlide自动生成的宽度，这样就可以手动控制可视宽度。 */
-     .txtMarquee-left .bd ul{ overflow:hidden; zoom:1; }
-     .txtMarquee-left .bd ul li{ padding-left:10px;margin-right:20px;  float:left; height:40px; line-height:40px;  text-align:left; _display:inline; width:auto !important; background: url("__PUBLIC__/images/dot.jpg") no-repeat 0px center;  }/* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
-     .txtMarquee-left li a{color: #333;text-decoration: none;font-size: 16px;font-family: '仿宋';font-weight: bold;}
-     .txtMarquee-left li a:hover{color: #808080}
+     .txtMarquee-left{ width:810px;  position:relative;  text-align: center; border:0px solid #ccc;margin: 0px auto; margin-bottom: 10px;}
+     .txtMarquee-left .bd ul{ height:34px;}
+     .txtMarquee-left .bd ul li{color: #545454;text-decoration: none;font-size:12px;font-family: '仿宋';font-weight:normal; padding-left:10px;margin-right:20px;  float:left; height:34px; line-height:24px;  text-align:left; _display:inline; width:auto !important; background: url("__PUBLIC__/images/dot.jpg") no-repeat 0px 8px;  }
+     .txtMarquee-left li a{color: #545454;text-decoration: none;font-size:12px;font-family: '仿宋';font-weight:normal;}
+     .txtMarquee-left li a:hover{color: #848484}
      /*d底部电商动态样式  */
-     .txtMarquee-left .bd{background:#E5E3E4 url("/Public/images/htt_40.png") no-repeat  8px center; width:778px; height:34px; margin:0px auto;}
-
-     .txtMarquee-left .bd ul li span{ color:#999;  }
+     .txtMarquee-left .bd{background:#E5E3E4 url("__PUBLIC__/images/htt_40.png") no-repeat  8px center; width:810px; height:24px;  text-align: left;margin:0px auto;}
+ .scrollNews{
+ width:700px;
+ margin-left: 100px;
+ overflow:hidden;
+}
+.scrollNews ul{width:1800px;  }
+ .scrollNews li{
+ height:60px; float:left; margin-right:5px; display:inline;
+}
  </style>
-
+<script type="text/javascript">
+$(function(){
+        var $this = $(".scrollNews");
+  var scrollTimer;
+  $this.hover(function(){
+     clearInterval(scrollTimer);
+   },function(){
+     scrollTimer = setInterval(function(){
+       scrollNews( $this );
+     }, 3000 );
+  }).trigger("mouseleave");
+});
+function scrollNews(obj){
+   var $self = obj.find("ul:first"); 
+   var lineHeight = $self.find("li:first").width(); //获取宽度，向上滚动则需要获取高度.height()
+   $self.animate({ "marginLeft" : -lineHeight +"px" }, 600 , function(){ //向左滚动，向上滚动则需要改为marginTop,其他方向类似，下同
+         $self.css({marginLeft:0}).find("li:first").appendTo($self); //appendTo能直接移动元素
+   })
+}
+</script>
     <div class="txtMarquee-left">
-        <div class="hd">
-            <a class="next"></a>
-            <a class="prev"></a>
-        </div>
-        <div class="bd">
+        <div class="bd auto">
+        <div class="scrollNews" >
 {:showNews()}
+        </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        jQuery(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:2,interTime:50});
+        $(".auto .nodelist").jCarouselLite({
+            auto: 800,
+            speed: 2000
+        });
     </script>
 
 
@@ -64,7 +86,10 @@
                 </td>
             </tr>
         </table>
-        <div id="bdshare">{:C('baidu_share_code')}</div>
+        <div id="bdshare">
+        <?php $bdshare=C('baidu_share_code');?>
+        {$bdshare|htmlspecialchars_decode}
+        </div>
         <div class="history">
             <ul class="historyUl">
                 <li>最近查询</li>

@@ -53,7 +53,7 @@ img{ border:0px;}
 .top_mid a:hover{ color:#e67817;}
 
 
-#banner{ width:100%; height:350px; background:#97CFDE; margin-bottom:30px;}
+#banner{ width:100%; height:350px; background:#97CFDE; margin-bottom:40px;}
 .bannertu{ margin:0px auto; position:relative; width:1024px; height:350px;}
 .cxk{ width:448px; height:52px;position:absolute; left:279px; top:67px;}
 .sr{ height:52px; width:382px; background:url(/Public/images/htt_32.png) no-repeat; font:600 16px/52px "微软雅黑"; line-height:32px; color:#545454; float:left; border:0px; text-indent:65px; }
@@ -65,11 +65,11 @@ img{ border:0px;}
 .bannertu h2 a{font:100 16px/28px "微软雅黑"; color:#fff;}
 .bannertu h3 a{font:100 16px/28px "微软雅黑"; color:#fff;}
 .mf{ position:absolute; top:140px; left:350px;}
-.ftt{ position:absolute; left:166px; bottom:-47px; width:166px;}
+.ftt{ position:absolute; left:166px; bottom:-47px; width:145px;}
 .htt{ position:absolute; left:435px; bottom:-37px;}
 .att{ position:absolute; right:235px; bottom:-36px;}
 
-.content .logo{background: url('/Public/images/htt_03.png') no-repeat;width: 140px;height: 70px;}
+.content .logo{background: none;width: 140px;height: 70px;}
 /* 查询结果 */
 .result{width: 750px;height: 360px;margin: 20px auto;text-align: center;overflow: hidden;}
 .result .right {text-align: left;}

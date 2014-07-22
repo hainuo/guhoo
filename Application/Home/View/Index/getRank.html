@@ -29,13 +29,13 @@
 input{height: 30px;*height: 25px;font-size: 16px;text-align:center;*padding-top: 3px;vertical-align: middle;color: gray;font-family: "微软雅黑","华文细黑",Arial, Helvetica, sans-serif;font-weight: bold;}
 input#chkbType{width:20px;height:20px;line-height:30px;margin-right:2px; vertical-align:middle;}
 select {height: 30px;vertical-align: middle;}
-div.k_serach{vertical-align:text-top;font-size: 16px; width: 800px;*width:850px;padding-left: 20px;float: right;bottom: 0px;max-height:50px; }
+div.k_serach{vertical-align:text-top;font-size: 16px; /*width: 800px;*width:850px;*//*padding-left: 20px;float: right;*/bottom: 0px;max-height:50px; }
 .content .detail{padding-top: 50px;}
-div.ranklogo{width: 140px;height: 70px;position: relative;background: url('/Public/images/htt_03.png') no-repeat;top: -20px;left: 50px;*left:20px;float: left;}
-.searchDiv{padding: 0px;margin: 0px;border: 0px;}
+div.ranklogo{display: none; width: 140px;height: 70px;position: relative;/*background: url('/Public/images/htt_03.png') no-repeat;*/top: -20px;left: 50px;*left:20px;float: left;background: none;}
+.searchDiv{padding: 0px;margin: 0px;border: 0px;text-align: center;}
+.STYLE1 {color: #FF0000}
+.STYLE2 {color: #808080}
 </style>
-
-
 	<div class="content" >
         <div class="detail">
         	<div class="clf"></div>
@@ -59,7 +59,7 @@ div.ranklogo{width: 140px;height: 70px;position: relative;background: url('/Publ
 		            <span style="color:Red;font-weight:bold;">
 				            <input id="chkbType" type="checkbox" checked="checked" />
 				            <label for="chkbType">只列出自己的商品</label>
-				          </span>
+		          </span>
 		            
 		            <input name="txtPageCount" type="text" value="#" id="txtPageCount" title="最多20页" style="width:30px;" />
 		            页<input id="btnSearch" type="button" value="确定" />
@@ -67,35 +67,37 @@ div.ranklogo{width: 140px;height: 70px;position: relative;background: url('/Publ
 				<div class="ProgressTextBox" id="divProgressTextBox" style="clear:both">
 				    <div class="k_progress" style="width: 200px">
 				        <div class="k_ProgressText" id="divProgressText">
-				            0%
-				        </div>
-				        <div class="k_ProgressItem" style="width: 0%" id="divProgressItem">
-				        </div>
+				            0%				        </div>
+				        <div class="k_ProgressItem" style="width: 0%" id="divProgressItem">				        </div>
 				    </div>
 				    <div class="ProgressState">
-				        待查询共<span id="PageCount">#</span>页 正在提取<span id="PageNow">#</span>页
-				    </div>
+				        待查询共<span id="PageCount">#</span>页 正在提取<span id="PageNow">#</span>页				    </div>
 				    <div class="Action">
 				        <img src="__PUBLIC__/images/pause.gif" id="ActionImg1" alt="暂停" />
-				        <img src="__PUBLIC__/images/stop.gif" id="ActionImg2" alt="停止" />
-				    </div>
-				    <div id="GetResultState">
-				    </div>
+				        <img src="__PUBLIC__/images/stop.gif" id="ActionImg2" alt="停止" />				    </div>
+				    <div id="GetResultState">				    </div>
 				</div>
 			</div>
-			<br clear="all">
-			<div class="c_h">请输入正确的账号！</div>
+			<div align="center"><span class="STYLE1"><br clear="all">
+		    </span>
+		  </div>
+		  <div class="c_h"> 
+			  <p align="center" class="STYLE1">温馨提示：输入淘宝帐号及关键词后，可以选择“排序”的方式进行查询。还可以勾选“只列出自己的商品”来过滤其他店铺的商品。 </p>
+			  <h2>&nbsp;</h2>
+			  <h3 class="STYLE2">宝贝隐形降权一般和以下因素有关：</h3>
+			  <p class="STYLE2">1、有淘宝监控的账号(黑号)购买了这个宝贝，被淘宝判断有刷销量嫌疑！交易之前强烈建议使用淘大客信誉查询工具先查询一下账号是否安全。</p>
+			  <p class="STYLE2">2、浏览量或收藏量与出售笔数不成比例，转化率低。有干净的正常自然流量和自然的成交量后，过一段时间就会恢复！</p>
+		    <p class="STYLE2">3、买家购买这个宝贝时候经常性修改价格或被退换货都有被降权的危险。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="STYLE1"> 宝贝降权了？那是你方法用的不对，请点击导航栏“联系我们”，免获取我们原创的</span><span class="STYLE1">免费教程~</span></p>
+		    <p>&nbsp;</p>
+		  </div>
 			<div class="result">
 				<table class="list" cellpadding="0" cellspacing="0">
 					<thead>
-
 					</thead>
 					<tbody>
-						
 					</tbody>
 				</table>
-				<div class="page">
-									</div>
+				<div class="page">			  </div>
 			</div>
 		</div>
 	</div>

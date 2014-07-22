@@ -16,10 +16,9 @@
 <script type="text/javascript" src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/main.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/placeholder.js"></script>
-<script src="__PUBLIC__/js/jquery.js"></script>
 <script src="__PUBLIC__/js/easing.js"></script>
 <eq name="ACTION_NAME" value="getMember">
-    <script type="text/javascript" charset="utf-8" src="/Public/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jcarousellite_1.0.1.min.js"></script>
 </eq>
 <style>
 .header_logo{position: relative; float: left; top:25px;left:0px;background: url('__PUBLIC__/images/other-i.png') no-repeat scroll 0% 0% transparent; width: 122px; height: 60px;text-indent: -9999px;}
@@ -72,7 +71,7 @@
 .info-block .desc .title {height: 25px;}
 .info-block .title {margin-bottom: 10px;}
 .info-block ul li {margin-bottom: 9px;}
-.info-block .desc ul .xiaofei,.info-block .desc ul .seven,.info-block .desc ul .fake,.info-block .desc ul .thirty,.info-block .desc ul .lightning,.info-block .desc ul .safe,.info-block .desc ul .xb-three {background: url(images/baozheng.png) no-repeat scroll 0 0 transparent;display: inline-block;margin-right: 5px;vertical-align: middle;margin-top: -2px;height: 16px;width: 16px;}
+.info-block .desc ul .xiaofei,.info-block .desc ul .seven,.info-block .desc ul .fake,.info-block .desc ul .thirty,.info-block .desc ul .lightning,.info-block .desc ul .safe,.info-block .desc ul .xb-three {background: url(__PUBLIC__/images/baozheng.png) no-repeat scroll 0 0 transparent;display: inline-block;margin-right: 5px;vertical-align: middle;margin-top: -2px;height: 16px;width: 16px;}
 .info-block .desc ul{margin-left:0px;float:none;}
 .info-block .desc ul li{height:22px;margin-left:0px;float:none;}
 .info-block .desc ul li a{color: #36c;font: 12px/1.5 tahoma,arial,5b8b4f53;}
@@ -124,14 +123,14 @@ div.header .detail {
 <div id="head"></div>
 <div id="top">
 	<div class="top_mid">
-		<img src="__PUBLIC__/images/htt_03.png" class="logo"/>
+		<a href="/" target="_self"><img src="__PUBLIC__/images/htt_03.png" class="logo"/></a>
     	<div class="nav">
     		<ul>           
         		<li class="xycx<if condition="ACTION_NAME eq 'getMember'" >-hover</if>"   onclick="window.location.href='/'"></li>
             	<li class="jqcx<if condition="ACTION_NAME eq 'getWeight'" >-hover</if>"  onclick="window.location.href='/getWeight.html'"></li>
            	 	<li class="pmcx<if condition="ACTION_NAME eq 'getRank'" >-hover</if>"  onclick="window.location.href='/getRank.html'"></li>
             	<li class="pfcx<eq name='ACTION_NAME' value='getDongtai'>-hover</eq>"  onclick="window.location.href='/getDongtai.html'"></li>
-            	<li class="sxjcx"></li>
+            	<li class="sxjcx" onclick="alert('此功能暂未开放,请稍候再试！')"></li>
             	<li class="lxwm" onclick="window.open('http://wpa.qq.com/msgrd?v=3&amp;uin=2665026650&amp;site=fentutu&amp;menu=yes')"></li>
             	<li class="kdcx<if condition="ACTION_NAME eq 'getExpress'" >-hover</if>"  onclick="window.location.href='/getExpress.html'"></li>
             	<li class="lscx<if condition="ACTION_NAME eq 'getHistory'" >-hover</if>" onclick="window.location.href='/getHistory.html'"></li>

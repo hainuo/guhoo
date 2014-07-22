@@ -42,20 +42,32 @@
 .list .pl{color: #666666}
 .result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
 .content .result {margin-top: 0px;}
-
+.content .search{left: 260px;}
+.STYLE1 {color: #FF0000}
+.STYLE2 {color: #808080}
+.STYLE3 {color: #808080; font-weight: bold; }
 </style>
 
 	<div class="content" >
 		<div class="detail">
-			<div class="other-i logo">
-			</div>
+			<div class="other-i logo">			</div>
 			<form class="search" action="/getWeight.html" method="get">
-				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
+<!-- 				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
 				<input class="index-input-s" type="text" id="txtKey" name="username" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
-				<input class="other-i button-s" id = 'btn' type="submit" value=""/>
+				<input class="other-i button-s" id = 'btn' type="submit" value=""/> -->
+<input class="sr" id="txtKey"  name="username" type="text" <?php if($display) echo 'value="'.$data[ 'username']. '"'; else echo 'value="输入淘宝帐号"';?>" />
+      <input type="submit" class="cx" value="查询" />
 			</form>
 			<div class="clf"></div>
-            <div class="c_h">检查宝贝隐性降权有什么作用？</div>
+          <div class="c_h"> 
+              <p align="center" class="STYLE1">温馨提示：在查询框中输入需要查询的淘宝卖家账号(C店或天猫)，点击查询即可显示店铺宝贝权重以及宝贝是否被隐形降权。</p>
+              <p>&nbsp;</p>
+              <h3 align="left" class="STYLE2">宝贝隐形降权一般和以下因素有关: </h3>
+              <p class="STYLE2">1、有淘宝监控的账号(黑号)购买了这个宝贝，被淘宝判断有刷销量嫌疑！交易之前强烈建议使用淘大客信誉查询工具先查询一下账号是否安全。 </p>
+              <p class="STYLE2">2、浏览量或收藏量与出售笔数不成比例，转化率低。有干净的正常自然流量和自然的成交量后，过一段时间就会恢复！ </p>
+              <p class="STYLE2">3、买家购买这个宝贝时候经常性修改价格或被退换货都有被降权的危险。&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="STYLE1">&nbsp;若需要取得免费隐形降权指导，请点击导航栏“联系我们”，免费的哦~</span></p>
+              <h4 align="left" class="STYLE3">&nbsp;</h4>
+          </div>
             <div class="r-info">
 					<!-- 本处可以添加内容，但是需要自定义样式 css中没有配置该段代码的样式 -->
 			</div>
@@ -66,10 +78,11 @@
 				<div class="r-h">
 					<ul><li><span>淘宝帐号：</span><a href="/getMember/username/{$userInfo.username}.html"><font style="color:#0077e9">{$userInfo.username}</font></a></li>
 				<notempty name="userInfo.is_seller">
-					<li>一共<font>{$data['goodsNum']}</font>宝贝</li><li><a href="<empty name='userInfo.url'>{$userInfo.rateurl}<else />{$userInfo.url}</empty>">[进入店铺]</a></li></ul>
-					<ul class="u2"><li><empty name="userInfo.is_buyer">卖<else />买</empty>家好评率：<font>{$userInfo['haopinglv']?$userInfo['haopinglv']:'100%'}</font></li>
+					<li>一共{$data['goodsNum']}宝贝</li><li><a href="<empty name='userInfo.url'>{$userInfo.rateurl}<else />{$userInfo.url}</empty>">[进入店铺]</a></li></ul>
+					<ul class="u2"><li><empty name="userInfo.is_buyer">卖<else />买</empty>
+					  家好评率：{$userInfo['haopinglv']?$userInfo['haopinglv']:'100%'}</li>
 						
-					<li>描述相符：<a href="/getDongtai/username/{$userInfo.username}.html"><font>{$userInfo['dongtai']['miaoshu']['pscore']?$userInfo['dongtai']['miaoshu']['pscore']:5}</font>  分</a></li>
+					<li>描述相符：<a href="/getDongtai/username/{$userInfo.username}.html">{$userInfo['dongtai']['miaoshu']['pscore']?$userInfo['dongtai']['miaoshu']['pscore']:5}  分</a></li>
 				</notempty>	
 					<li><!--高于同行业：<font>74.98%</font>--></li>
 					</ul>
@@ -115,11 +128,9 @@
                             		<egt name="v.index3" value="-50">
                             			<font class="c-down"> 商品可能已被隐性降权 </font>
                             		<else />
-                            			<font class="c-down"> 商品已经被降权 </font>
-                            		</egt>
+                            			<font class="c-down"> 商品已经被降权 </font>                            		</egt>
                             	</egt>
-                            </eq>
-                            </td>
+                            </eq>                            </td>
                         </tr>                    
                         </volist>                  
 
@@ -137,7 +148,7 @@
                 </empty>
 				</table>
 				<div class="page"><!-- 在测试中没有设置好分页显示方式  所以 不设置分页信息 -->
-									</div>
+			  </div>
 			</empty><!-- end userInfo -->
             </div>
 		</div>

@@ -45,19 +45,58 @@
 </table>
 <script type="text/javascript">
     function newArt() {
-        $.ligerDialog.open({ url: '{:U("/Admin/Index/artManage")}?type=new', title: '编辑文章', height: 800, width: 950, });
+var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "新增文章",
+                    left: 80,
+                    top: 80,
+                    width: 950,
+                    height: 750,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U("/Admin/Index/artManage")}?type=new','frame');
     }
     function changeArt(id) {
         if (parseInt(id)) {
-            $.ligerDialog.open({ url: '{:U("/Admin/Index/artManage")}?type=change' + '&id=' + id, title: '编辑文章', height: 800, width: 950, });
+var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "编辑文章",
+                    left: 80,
+                    top: 80,
+                    width: 950,
+                    height: 750,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U("/Admin/Index/artManage")}?type=change' + '&id=' + id,'frame');
         }
-        ;
     }
     function delArt(id) {
         if (parseInt(id)) {
-            $.ligerDialog.open({ url: '{:U("/Admin/Index/artManage")}?type=del' + '&id=' + id, title: '编辑文章', height: 600, width: 550, });
+            if(confirm('你确定要删除这篇文章吗？')){
+var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "删除文章",
+                    left: 80,
+                    top: 80,
+                    width: 300,
+                    height: 300,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U("/Admin/Index/artManage")}?type=del' + '&id=' + id,'frame');                
+            }
         }
-        ;
     }
 </script>
 <br/>
@@ -105,9 +144,21 @@
         <script type="text/javascript">
             function changeAd(id) {
                 if (parseInt(id)) {
-                    $.ligerDialog.open({ url: '{:U("/Admin/Index/adManage")}?type=change' + '&id=' + id, title: '编辑配置', height: 600, width: 550, });
+var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "修改广告",
+                    left: 80,
+                    top: 80,
+                    width: 520,
+                    height: 560,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U("/Admin/Index/adManage")}?type=change' + '&id=' + id,'frame');                    
                 }
-                ;
             }
         </script>
     </empty>
@@ -154,7 +205,7 @@
                 <td width="100px">{$vo.remark}</td>
                 <td>{$vo.name}</td>
                 <td>
-                    <div style="width:350px;word-wrap:break-word;word-break:break-all;">{$vo.value}</div>
+                    <div style="width:350px;word-wrap:break-word;word-break:break-all;">{$vo.value|htmlspecialchars_decode}</div>
                 </td>
                 <td width="40px"><a href="javascript:changeConfig({$vo.id})"><img src="__PUBLIC__/images/edit.png"
                                                                                   alt="" title="" border="0"/></a></td>
@@ -167,9 +218,21 @@
         <script type="text/javascript">
             function changeConfig(id) {
                 if (parseInt(id)) {
-                    $.ligerDialog.open({ url: '{:U("/Admin/Index/configManage")}?type=change' + '&id=' + id, title: '编辑配置', height: 500, width: 550, });
+var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "修改广告",
+                    left: 80,
+                    top: 80,
+                    width: 525,
+                    height: 420,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U("/Admin/Index/configManage")}?type=change' + '&id=' + id, 'frame');
                 }
-                ;
             }
         </script>
     </empty>

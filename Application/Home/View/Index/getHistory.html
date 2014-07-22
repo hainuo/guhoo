@@ -2,6 +2,7 @@
 <style>
 
 .content .result{width: 100%;border: #f2f2f2 solid 1px;height: auto;background: white;position: relative;}
+.content .search{left:250px;}
 .result .even{background-color: #f9f9f9}
 .result .odd{background-color: #fff}
 .result  ul.f-gray{float: left;margin-left: 15px;display: inline;}
@@ -29,8 +30,10 @@
 			<div class="other-i logo">
 			</div>
 			<form class="search" method="get" action="/getWeight.html">
-				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
-				<input class="index-input-s" type="text" id="txtKey" name="username" value="输入淘宝帐号" /><input class="other-i button-s" type="submit" value=""/>
+<!-- 				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
+				<input class="index-input-s" type="text" id="txtKey" name="username" value="输入淘宝帐号" /><input class="other-i button-s" type="submit" value=""/> -->
+<input class="sr" id="txtKey"  name="username" type="text" <?php if($display) echo 'value="'.$data[ 'username']. '"'; else echo 'value="输入淘宝帐号"';?>" />
+      <input type="submit" class="cx" value="查询" />				
 			</form>
 			<div class="clf"></div>
 			<div class="result">

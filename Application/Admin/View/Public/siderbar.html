@@ -12,23 +12,62 @@
             <volist name="users" id="vo">
             <li><a href="#" id="user—{$vo.name}">{$vo.name}&nbsp;&nbsp;&nbsp;<img src="__PUBLIC__/images/edit.png" onclick="changePwd({$vo.id})" alt="修改密码" border="0" class="changPwd"  />   &nbsp;&nbsp;&nbsp;<img src="__PUBLIC__/images/trash.gif" alt="删除用户" onclick="delUser({$vo.id})" border="0" /></a> </li>
             </volist>
-            <li><a href="#" id="addUser">新增用户</a></li>
+            <li><a href="javascript:;" id="addUser">新增用户</a></li>
             <script type="text/javascript">
-				$("#addUser").click(function(event) {
-				 	 $.ligerDialog.open({ height: 400, url: '{:U('/Admin/Index/userManage')}?type=add', width: 550, showMax: true, showToggle: true, showMin: true, isResize: true, slide: false, title: '添加用户' }); 
+
+baidu("#addUser").on("click", function(){
+                var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "添加用户",
+                    left: 80,
+                    top: 80,
+                    width: 520,
+                    height: 376,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U('/Admin/Index/userManage')}?type=add','frame');
 				});
 				function changePwd(id){
 					if (parseInt(id)) {
-						$.ligerDialog.open({
-							width:550,height:400,url:'{:U('/Admin/Index/userManage/')}?type=change'+'&userId='+id,showMin:true,showToggle:true,showMax:true,isResize:true,slide:false,title:'编辑用户'
-						})
-					};
+                        var dialog = new magic.Dialog({
+                            draggable: true,
+                            titleText: "修改用户",
+                            left: 80,
+                            top: 80,
+                            width: 520,
+                            height: 376,
+                            mask: {
+                            enable: true
+                                }
+                        });
+                        dialog.render();
+                dialog.center();
+                        dialog.setContent('{:U('/Admin/Index/userManage')}?type=change'+'&userId='+id,'frame');	
+					}
 				}
 				function delUser(id){
 					if (parseInt(id)) {
-							$.ligerDialog.open({ url: 'about:blank', title:'你确定删除这个用户吗？', height: 50,width: 200, buttons: [ { text: '确定', onclick: function (item, dialog) { dialog.setUrl('{:U("/Admin/Index/userManage")}?type=del'+'&userId='+id) } }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ] });
-
-					};
+                        var dialog = new magic.Dialog({
+                            draggable: true,
+                            titleText: "删除用户",
+                            left: 80,
+                            top: 80,
+                            width: 520,
+                            height: 376,
+                            mask: {
+                            enable: true
+                                }
+                        });
+                       if(confirm("你确定删除这个用户吗？")) {
+                        dialog.render();
+                dialog.center();
+                        dialog.setContent('{:U('/Admin/Index/userManage')}?type=del'+'&userId='+id,'frame');
+                    }
+					}
 				}
             </script>
         </ul>
@@ -45,20 +84,61 @@
             <li><a href="#" id="addLink">新增链接</a></li>
         </ul> 
         <script type="text/javascript">
-        $('#addLink').click(function(event) {
-            $.ligerDialog.open({ url:'{:U('Admin/Index/linkManage/')}?type=add', title:'新增链接',isResize:true,width:550,height:600});
-        });
+baidu("#addLink").on("click", function(){
+                var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "新增链接",
+                    left: 80,
+                    top: 80,
+                    width: 520,
+                    height: 490,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U('Admin/Index/linkManage/')}?type=add','frame');
+                });       
+
         function changeLink(id){
             if (parseInt(id)) {
-                $.ligerDialog.open( { url:'{:U('Admin/Index/linkManage/')}?type=change&id='+id, title:'编辑链接',isResize:true,width:550,height:600});
-            };
+                var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "修改链接",
+                    left: 80,
+                    top: 80,
+                    width: 520,
+                    height: 490,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U('Admin/Index/linkManage/')}?type=change&id='+id,'frame');                
         }
+    }
         function delLink(id){
                     if (parseInt(id)) {
-                            $.ligerDialog.open({ url: 'about:blank', title:'你确定删除这个链接吗？', height: 180,width: 500, buttons: [ { text: '确定', onclick: function (item, dialog) { dialog.setUrl('{:U("/Admin/Index/linkManage")}?type=del&id='+id) } }, { text: '取消', onclick: function (item, dialog) { dialog.close(); } } ] });
-
-                    };
-                }        
+                        if(confirm('你确定删除这个链接吗？')){
+                var dialog = new magic.Dialog({
+                    draggable: true,
+                    titleText: "删除链接",
+                    left: 80,
+                    top: 80,
+                    width: 520,
+                    height: 490,
+                    mask: {
+                            enable: true
+                    }
+                });
+                dialog.render();
+                dialog.center();
+                dialog.setContent('{:U('Admin/Index/linkManage/')}?type=del&id='+id,'frame');
+                        }
+                }
+            }
         </script>
     </notempty>
     {/* <notempty name="configs" >
