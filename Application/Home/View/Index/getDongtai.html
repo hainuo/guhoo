@@ -69,7 +69,7 @@ li {    list-style: none outside none;}
 <!-- 				<i class="other-i ww" style="position: absolute;top:5px;left:5px;"></i>
 				<input class="index-input-s" type="text" id="txtKey" name="username" value="<empty name='userInfo'>输入淘宝帐号<else />{$userInfo.username}</empty>" />
 				<input class="other-i button-s" id = 'btn' type="submit" value=""/> -->
-<input class="sr" id="txtKey"  name="username" type="text" <?php if($display) echo 'value="'.$data[ 'username']. '"'; else echo 'value="输入淘宝帐号"';?>" />
+<input class="sr" id="txtKey"  name="username" type="text" <?php if($userInfo) echo 'value="'.$userInfo[ 'username']. '"'; else echo 'value="输入淘宝帐号"';?>" />
       <input type="submit" class="cx" value="查询" />
 		  </form>
 			<br clear="all" />

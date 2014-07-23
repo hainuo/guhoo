@@ -68,9 +68,11 @@ class IndexController extends Controller
         $userName=$this->detecteEncoding($userName);
         if ($userName && ($userName != '输入淘宝帐号')) {
             $taobao = new \Org\Util\Taobao($userName);
-            $data = $taobao->getXLRank();
-            C($userName . '_totalPage_XLURl', $data->page->totalPage); //总页数  写入配置文件方便读取
-            C($userName . '_pageSize_XLURl', $data->page->pageSize); //每页项目数  写入配置文件方便读取
+            $data = $taobao->getXLRank();//获取页面原始数据  总页数 每页项目数
+           	if(is_object($data)){
+	            C($userName . '_totalPage_XLURl', $data->page->totalPage); //总页数  写入配置文件方便读取
+	            C($userName . '_pageSize_XLURl', $data->page->pageSize); //每页项目数  写入配置文件方便读取
+	        }
             //trace(json_encode($data->page),'跟踪测试data');
             $userInfo = $this->getUserInfo($userName);
             $list=array();
@@ -82,10 +84,11 @@ class IndexController extends Controller
 
                 } else {
                     $cache = S($userName . '-getAllGoods');
-                    if (!empty($cache)) { //设置缓存时间为3天
+                    if (!empty($cache)) { //设置缓存时间为3xiaoshi 
                         //TODO 需要对缓存时间在config文件中进行统一设置为系统常量，方便更改   如不需要，暂不做此处更改
                         //$list=$model->where('username="'.$userName.'"')->order('xl_index ASC')->select();
                         $list = $cache;
+                        echo '调用缓存';
                     } else {
                         $list = $this->getAllGoodS($userName, C($userName . '_totalPage_XLURl'), $data->page->pageSize);
                         //必须保证有userName totalpage，pagesize 后两者全部有淘宝获取，否则出错。  虽然pagesize可能没有用到
@@ -332,9 +335,9 @@ class IndexController extends Controller
         //TODO 优化 数据库和淘宝数据的读取逻辑
         $create_time = $model->where('username="' . $userName . '"')->limit(1)->getfield('create_time');
         $pagesize = $pagesize == C($userName . '_pageSize_XLURl') ? $pagesize : C($userName . '_pageSize_XLURl');
-        //trace($create_time,'create_time');
-        if (empty($create_time) || strtotime($create_time + C('DATA_CACHE_TIME') < time())) {
-            //trace('ssss 重新查询');
+        trace($create_time,'create_time');
+        if (empty($create_time) || (strtotime($create_time) + C('DATA_CACHE_TIME') )< time()) {
+            trace('ssss 重新查询');
             $model->where('username="' . $userName . '"')->delete(); //先删除所有数据库中的相关信息
             $totalpage = C($userName . '_totalPage_XLURl');
             trace($totalpage, '$totalpage 开始');
