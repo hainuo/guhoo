@@ -2,10 +2,10 @@
     header("Content-Type:text/html;charset=utf-8");
     error_reporting( E_ERROR | E_WARNING );
     date_default_timezone_set("Asia/chongqing");
-    include "Uploader.class.php";
+    include "./Uploader.class.php";
     //上传配置
     $config = array(
-        "savePath" => "upload/" ,             //存储文件夹
+        "savePath" => "php/upload/" ,             //存储文件夹  此项被下面的给覆盖掉
         "maxSize" => 1000 ,                   //允许的文件最大尺寸，单位KB
         "allowFiles" => array( ".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp" )  //允许的文件格式
     );

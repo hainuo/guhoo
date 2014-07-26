@@ -5,6 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+if(is_file('./360safe/360webscan.php')){
+    require_once('./360safe/360webscan.php');
+} // 注意文件路径
 header('content-type:text/html; charset=utf-8');
 define('APP_DEBUG',false);
 define('APP_PATH','./Application/');

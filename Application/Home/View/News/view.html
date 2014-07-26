@@ -5,7 +5,7 @@
     #content{width:980px; height:auto; overflow:hidden; margin:0 auto;}
 
     /* extra */
-    #content2{width:auto; height:auto; overflow:hidden; margin:0 auto; border-top:1px #dcdcdc solid; padding-top:15px; }
+    #content2{width:auto; height:auto; overflow:hidden; margin:0 auto; border-top:1px #dcdcdc solid;border-bottom:1px #dcdcdc solid; padding-top:15px;padding-bottom:15px; }
     /* position */
     #position{width:480px; height:auto; overflow:hidden; margin:5 10 5 0;}
     #position p{font-size:12px; color:#6c879b; line-height:24px; float:left;}
@@ -47,10 +47,13 @@
         <div id="help_r">
             <h1>{$data.title}</h1>
             <p style="margin-top:-10px;margin-bottom:10px;font-size:12px;color:#969696;">作者：{$data.username} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间：{$data.create_time}</p><!-- Baidu Button BEGIN -->
-            <div style="float:right;margin-top:-36px;" id="bdshare" class="bdshare_b">{:C('baidu_share_code')}</div>
+            <div style="float:right;margin-top:-36px;" id="bdshare" class="bdshare_b">
+	    <?php $bdshare=C('baidu_share_code');?>
+        {$bdshare|htmlspecialchars_decode}</div>
             <!-- Baidu Button END -->
+            <br clear=all>
             <p></p>
-            {$data.content|htmlspecialchars_decode}
+            {$data.content|stripslashes}
             <empty name="previousData">
                 <div style="text-align:left;font-size:14px;margin-top:10px;">这是最新的一篇</div>
                 <else />

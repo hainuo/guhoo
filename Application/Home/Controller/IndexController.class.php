@@ -232,7 +232,7 @@ class IndexController extends Controller
             $data = $model->where($map)->find();
             if($data){
                $data['create_time']=date('Y-m-d H:i:s',time());//增加对时间的处理
-                $model->where($map)->save($data);
+               // $model->where($map)->save($data);//不对时间进行更新
             }
             $list = $goodModel->where('username="' . $userName . '"')->select();
             if ($list)

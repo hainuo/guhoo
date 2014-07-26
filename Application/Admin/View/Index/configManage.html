@@ -7,7 +7,6 @@
 <!-- jQuery file -->
 <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
 <script src="__PUBLIC__/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
-<link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="__PUBLIC__/css/jquery.validator.css">
 <script type="text/javascript" src="__PUBLIC__/js/jquery.validator.js"></script>
 <script type="text/javascript" src="__PUBLIC__/local/zh_CN.js"></script>
@@ -27,7 +26,7 @@
     <div class="loginheader">
     <div class="logintitle"><a href="#"><empty name='data'> User  Add <else />  更改用户{$data.remark} 的属性 </empty> </a></div>
     </div>
-<form action="__SELF__" method="post" name="user">
+<form action="/Admin/Index/configManage/?type=<empty name='data'>new<else />change&id={$data.id}</empty>" method="post" name="user">
     <div class="loginform">
         <table align="center" cellpadding="0" cellspacing="0" class="l-table-edit">
         <empty name='data'>

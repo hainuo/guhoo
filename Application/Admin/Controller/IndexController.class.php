@@ -358,7 +358,7 @@ class IndexController extends Controller
     {
         $type = I('get.type');
         $title = I('title');
-        $content = I('content');
+        $content = I('content','',false);
         $id = I('get.id');
         $userName = I('userName');
         $data = array('title' => $title, 'content' => $content, 'username' => $userName);
