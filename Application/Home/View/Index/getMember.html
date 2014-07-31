@@ -17,13 +17,49 @@
 
 <notempty name="data">
 <div class="result">
-        <div class="left f-green f-size-14">
+	<?php var_dump($data) ?>
+<?php 
+//半年内的好评  0 一周内 1一月内 2半年内 3半年以前
+$score1=$data['score'][1][0]+$data['score'][1][1]+$data['score'][1][2];
+$score2=$data['score'][2][0]+$data['score'][2][1]+$data['score'][2][2];//半年内包含一月和一周
+$score3=$data['score'][3][0]+$data['score'][3][1]+$data['score'][3][2];
+$scoreAll=$score2+$score3;
+//$bok 不知道啥意思，中间数 用来计算比例  如果半年内好评>0 那么 bok= 信誉除以半年内好评数
+$bok=$scoreAll>0?$data['bscore']/$scoreAll : 0;
+$bbad=$scoreAll>0?(1- $bok): 0;
+if($data['is_seller'])
+	$safeType=0;//安全
+elseif($score1<10 && $bbad<=0.1)
+	$safeType=0;
+elseif ( $score1>=10 && $score1<20 && $bbad<=0.2  )
+	$safeType=1;//一般
+else
+	$safeType=2;//危险
+var_dump($safeType);
+?>
+        <div class="left 
+<?php
+if($safeType=='0') echo 'f-green ';
+elseif($safeType=='1') echo 'f-yellow ';
+else echo 'f-red ';
+?> f-size-14">
                 <div class=" warn-ico">
-                        <i class="other-i warning-green">
+                        <i class="other-i 
+<switch name='safeType'>
+	<case value='0'>warning-green</case>
+	<case value='1'>warning-yellow</case>
+	<case value='2'>warning-red</case>
+</switch>
+                        ">
                         </i>
                 </div>
                 <p>
-                        安全等级：安全
+
+                        安全等级：<switch name='safeType'>
+	<case value='0'>安全</case>
+	<case value='1'>一般</case>
+	<case value='2'>危险</case>
+</switch>
                 </p>
         </div>
         <div class="right">
@@ -68,14 +104,14 @@
                                 <?php  endif;?>
                         </ul>
                         <ul class="f-size-12 f-gray">
-                                <li>
-                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i good"></span><font>好评</font><p style="color: red; font-weight: bold;text-align:center;"><?php echo $data['score'][0][0]+ $data['score'][1][0]+$data['score'][2][0]+$data['score'][3][0];?></p></a>
+                                <li style='display: none;'>
+                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i good"></span><font>好评</font><p style="color: red; font-weight: bold;text-align:center;"><?php echo /*$data['score'][0][0]+ $data['score'][1][0]+*/$data['score'][2][0]+$data['score'][3][0];?></p></a>
                                 </li>
                                 <li>
-                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i normal"></span><font>中评</font><p style="color: #F5CC04; font-weight: bold;text-align:center;"><?php echo $data['score'][0][1]+ $data['score'][1][1]+$data['score'][2][1]+$data['score'][3][1];?></p></a>
+                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i normal"></span><font>中评</font><p style="color: #F5CC04; font-weight: bold;text-align:center;"><?php echo /*$data['score'][0][1]+ */$data['score'][1][1]+$data['score'][2][1]+$data['score'][3][1];?></p></a>
                                 </li>
                                 <li>
-                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i bad"></span><font>差评</font><p style="color: black; font-weight: bold;text-align:center;"><?php echo $data['score'][0][2]+ $data['score'][1][2]+$data['score'][2][2]+$data['score'][3][2];?></p></a>
+                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i bad"></span><font>差评</font><p style="color: black; font-weight: bold;text-align:center;"><?php echo /*$data['score'][0][2]+ $data['score'][1][2]+*/$data['score'][2][2]+$data['score'][3][2];?></p></a>
                                 </li>
                         </ul>
                 </div>
@@ -145,7 +181,7 @@
                                         查看商品：
                                 </span>
                                 <font>
-                                        <a href="/getWeight/username/{$data.username}.html" target="_blank">http://{$Think.server.HTTP_HOST}/getWeight/username/{$data.username}.html</a>
+                                        <a href="/getWeight/username/{$data.username}.html" title="{$data.username}" target="_blank">http://{$Think.server.HTTP_HOST}/getWeight/username/{$data.username}.html</a>
                                 </font>
                         </div>                                        
 </notempty>                                        
