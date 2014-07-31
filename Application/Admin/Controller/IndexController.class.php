@@ -24,16 +24,21 @@ class IndexController extends Controller
             $ads = $adModel->order('id ASC')->select();
             $configs = $configModel->order('id ASC')->select();
             $users = $userModel->order('id ASC')->select();
-            $articles = $artModel->order('create_time DESC')->select();
             $config = M('Config')->getField('name,value');
             C($config); //重新加载一遍配置文件
             C('DATA_CATCH_TIME', '1');
             $this->assign('userName', session('name'));
             $this->assign('users', $users);
             $this->assign('ads', $ads);
-            $this->assign('articles', $articles);
             $this->assign('links', $links);
             $this->assign('configs', $configs);
+            //文章分页相关全部在这里
+	        $count = $artModel->field('id')->count();
+	        $page = new \Think\Page($count, 10); // 实例化分页类 传入总记录数和每页显示的记录数
+			$articles = $artModel->order('create_time desc')->limit($page->firstRow . ',' . $page->listRows)->select();
+			$show = $page->show(); // 分页显示输出
+            $this->assign('articles', $articles);
+			$this->assign('page', $show); // 赋值分页输出            
             $this->display();
 
         } else {

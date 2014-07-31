@@ -15,6 +15,7 @@ class NewsController extends Controller{
     }
     public function view(){
         $id=I('get.id');
+        $p=I('p');
         $artModel=D('Article');
         if($id){
                 $dataList=$artModel->order('create_time DESC')->select();
@@ -28,12 +29,20 @@ class NewsController extends Controller{
                             $nextData=$dataList[$k+1];
                         }
                     }
+                    unset($dataList);
                     $this->assign('data',$data);
                     $this->assign('last',$last);
-                    $this->assign('dataLists',$dataList);
                     $this->assign('nextData',$nextData);
                     $this->assign('previousData',$previousData);
                     $this->assign('count',$this->getTotalCount());
+                    //分页相关全部在这里
+			        $count = $artModel->field('id')->count();
+			        $page = new \Think\Page($count, 25); // 实例化分页类 传入总记录数和每页显示的记录数
+        			$dataLists = $artModel->order('create_time desc')->limit($page->firstRow . ',' . $page->listRows)->select();
+        			$show = $page->show(); // 分页显示输出
+        			$show = str_replace('/view/id', '', $show);
+                    $this->assign('dataLists',$dataLists);
+        			$this->assign('page', $show); // 赋值分页输出
                     $this->seo();
                     $this->display();
             }else

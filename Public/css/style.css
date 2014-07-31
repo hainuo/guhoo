@@ -198,3 +198,8 @@ input.form_submit{float:right; clear:both; margin:0px 5px 0 0px;color:#fff;backg
 input.loginform_reset{float:left;clear:left; margin:0px 5px 0 0px;color:#fff;background: #7dc44e;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;font-family:arial;font-size:12px;font-weight: bold;padding:8px 15px;text-align: center;cursor:pointer; border:none;text-shadow:1px 1px #4c9021;}
 input.loginform_submit{float:right; clear:right; margin:0px 5px 0 0px;color:#fff;background: #7dc44e;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;font-family:arial;font-size:12px;font-weight: bold;padding:8px 15px;text-align: center;cursor:pointer; border:none;text-shadow:1px 1px #4c9021;}
 .footer{height:50px;background-color:#e4e3e0; border-top:1px #fff solid; line-height:50px; padding:0 0 0 20px;}
+
+.page a.prev, .page span.current,.page a.num,.page a.next{
+	display:block;float:left;border:1px solid #eee;background-color:#eee;padding:5px 5px;
+}
+.page span.current{font-weight:blod;font-size:14px;background-color:blue;color:white;}

@@ -14,7 +14,7 @@
 
 /*.list .un{width: 100px;}*/
 /*.list .bscore{width:100px;}*/
-.list .un a{color: #0077e9}
+.list .un a{color: #0077e9;display:block;width:150px;overflow:hidden;}
 .list .un a:hover{color: #f28813}
 
 .list .time {
@@ -22,7 +22,7 @@
 }
 
 .list .pl{color: #666666}
-.result .page{position:absolute;bottom:-20px;text-align: right;width: 100%;}
+.result .page{text-align: right;width: 100%;}
 
 </style>
 	<div class="content" >
@@ -35,12 +35,13 @@
 <input class="sr" id="txtKey"  name="username" type="text" value="输入淘宝帐号" />
       <input type="submit" class="cx" value="查询" />				
 			</form>
+<br clear="all"/>
 			<div class="clf"></div>
 			<div class="result">
 				<table class="list" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>
-							<th>淘宝帐号</th>
+							<th width="150">淘宝帐号</th>
 							<th>卖家信誉</th>
 							<th>买家信誉</th>
 							<th>商品数量</th>
@@ -52,7 +53,7 @@
 <notempty name='list'>
 <volist name='list' id='vo' mod="2">
 <tr class="<eq name="mod" value="2" > odd <else /> even</eq>">
-    <td class="un"><a href="/getMember/username/{$vo.username}.html" target="_blank">{$vo.username}</a></td>
+    <td class="un"><a href="/getMember/username/{$vo.username}.html" title="{$vo.username|addslashes}" target="_blank">{$vo.username|msubstr=0,10,'utf-8',false}</a></td>
 	<td class="bscore">{$vo.sscore}</td>
 	<td class="bscore">{$vo.bscore}</td>
 							<td class="bscore"><a href="/getWeight/username/{$vo.username}.html" target="_blank">{$vo.goodNum}</a></td>

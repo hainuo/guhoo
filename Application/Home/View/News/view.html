@@ -40,9 +40,12 @@
             <h4>电商快讯</h4>
             <ul>
                <volist name="dataLists" id="vo">
-                   <li><a href="/news/{$vo.id}.html">{$vo.title}</a></li>
+                   <li><a href="/news/{$vo.id}.html" title="{$vo.title|addslashes}">{$vo.title|msubstr=0,18}</a></li>
                </volist>
             </ul>
+            	<div class="page">
+					 {$page}
+                </div>
         </div>
         <div id="help_r">
             <h1>{$data.title}</h1>

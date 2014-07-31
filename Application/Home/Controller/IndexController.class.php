@@ -88,7 +88,7 @@ class IndexController extends Controller
                         //TODO 需要对缓存时间在config文件中进行统一设置为系统常量，方便更改   如不需要，暂不做此处更改
                         //$list=$model->where('username="'.$userName.'"')->order('xl_index ASC')->select();
                         $list = $cache;
-                        echo '调用缓存';
+                        //echo '调用缓存';
                     } else {
                         $list = $this->getAllGoodS($userName, C($userName . '_totalPage_XLURl'), $data->page->pageSize);
                         //必须保证有userName totalpage，pagesize 后两者全部有淘宝获取，否则出错。  虽然pagesize可能没有用到
@@ -180,6 +180,7 @@ class IndexController extends Controller
         $list = $model->order('create_time desc')->limit($page->firstRow . ',' . $page->listRows)->select();
         $this->assign('list', $list); // 赋值数据集
         $show = str_replace('/Home/Index', '', $show);
+        $show = str_replace('Index/', '', $show);
         $this->assign('page', $show); // 赋值分页输出
         $this->assign('count', $this->getTotalCount());
         $this->seo();
