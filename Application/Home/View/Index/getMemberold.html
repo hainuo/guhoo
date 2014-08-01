@@ -109,14 +109,14 @@ if($data['is_seller']){
                                                 <?php  endif;?>
                                         </ul>
                                         <ul class="f-size-12 f-gray">
-                                                <li>
-                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i good"></span><font>好评</font><p style="color: red; font-weight: bold;text-align:center;"><?php echo $data['score'][0][0]+ $data['score'][1][0]+$data['score'][2][0]+$data['score'][3][0];?></p></a>
+                                                <li style="display: none;">
+                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i good"></span><font>好评</font><p style="color: red; font-weight: bold;text-align:center;"><?php echo /*$data['score'][0][0]+ $data['score'][1][0]+*/$data['score'][2][0]+$data['score'][3][0];?></p></a>
                                                 </li>
                                                 <li>
-                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i normal"></span><font>中评</font><p style="color: #F5CC04; font-weight: bold;text-align:center;"><?php echo $data['score'][0][1]+ $data['score'][1][1]+$data['score'][2][1]+$data['score'][3][1];?></p></a>
+                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i normal"></span><font>中评</font><p style="color: #F5CC04; font-weight: bold;text-align:center;"><?php echo /*$data['score'][0][1]+ $data['score'][1][1]+*/$data['score'][2][1]+$data['score'][3][1];?></p></a>
                                                 </li>
                                                 <li>
-                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i bad"></span><font>差评</font><p style="color: black; font-weight: bold;text-align:center;"><?php echo $data['score'][0][2]+ $data['score'][1][2]+$data['score'][2][2]+$data['score'][3][2];?></p></a>
+                                                        <a href="{$data['rateurl']}" target="_blank"><span class="other-i bad"></span><font>差评</font><p style="color: black; font-weight: bold;text-align:center;"><?php echo /*$data['score'][0][2]+ $data['score'][1][2]+*/$data['score'][2][2]+$data['score'][3][2];?></p></a>
                                                 </li>
                                         </ul>
                                 </div>
